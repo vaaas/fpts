@@ -36,28 +36,39 @@ export class LazyArray<T> {
 			}
 		}
 	}
+}
 
-	map<U>(f: (x: T) => U): LazyArray<U> {
-		const self = this
-		return new LazyArray((function* () {
-			for (const x of self)
+export function map<A, B>(f: (x: A) => B): (xs: LazyArray<A>) => LazyArray<B> {
+	return function (xs) {
+		return LazyArray.of((function* () {
+			for (const x of xs)
 				yield f(x)
 		})())
 	}
+}
 
-	filter(f: (x: T) => boolean): LazyArray<T> {
-		const self = this
-		return new LazyArray((function* () {
-			for (const x of self)
+export function filter<A>(f: (x: A) => boolean): (xs: LazyArray<A>) => LazyArray<A> {
+	return function (xs) {
+		return LazyArray.of((function* () {
+			for (const x of xs)
 				if (f(x))
 					yield x
 		})())
 	}
+}
 
-	reduce<U>(f: (a: U, b: T) => U, i: U): U {
-		let a = i
-		for (const x of this)
-			a = f(a, x)
-		return a
-	}
+export function foldl<A, B>(f: (a: A) => (b: B) => A, i: A): (xs: LazyArray<B>) => A {
+    return function (xs) {
+        let a = i
+        for (const x of xs) a = f(a)(x)
+        return a
+    }
+}
+
+export function foldr<A, B>(f: (a: A) => (b: B) => B, i: B): (xs: LazyArray<A>) => B {
+    return function (xs) {
+        let a = i
+        for (const x of xs) a = f(x)(a)
+        return a
+    }
 }
