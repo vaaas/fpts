@@ -1,87 +1,89 @@
+import { Unary } from './data'
+
 export function pipe<A, B>(
 	x: A,
-	a: (x: A) => B,
+	a: Unary<A, B>,
 ): B
 export function pipe<A, B, C>(
 	x: A,
-	a: (x: A) => B,
-	b: (x: B) => C,
+	a: Unary<A, B>,
+	b: Unary<B, C>,
 ): C
 export function pipe<A, B, C, D>(
 	x: A,
-	a: (x: A) => B,
-	b: (x: B) => C,
-	c: (x: C) => D,
+	a: Unary<A, B>,
+	b: Unary<B, C>,
+	c: Unary<C, D>,
 ): D
 export function pipe<A, B, C, D, E>(
 	x: A,
-	a: (x: A) => B,
-	b: (x: B) => C,
-	c: (x: C) => D,
-	d: (x: D) => E,
+	a: Unary<A, B>,
+	b: Unary<B, C>,
+	c: Unary<C, D>,
+	d: Unary<D, E>,
 ): E
 export function pipe<A, B, C, D, E, F>(
 	x: A,
-	a: (x: A) => B,
-	b: (x: B) => C,
-	c: (x: C) => D,
-	d: (x: D) => E,
-	e: (x: E) => F,
+	a: Unary<A, B>,
+	b: Unary<B, C>,
+	c: Unary<C, D>,
+	d: Unary<D, E>,
+	e: Unary<E, F>,
 ): F
 export function pipe<A, B, C, D, E, F, G>(
 	x: A,
-	a: (x: A) => B,
-	b: (x: B) => C,
-	c: (x: C) => D,
-	d: (x: D) => E,
-	e: (x: E) => F,
-	f: (x: F) => G,
+	a: Unary<A, B>,
+	b: Unary<B, C>,
+	c: Unary<C, D>,
+	d: Unary<D, E>,
+	e: Unary<E, F>,
+	f: Unary<F, G>,
 ): G
 export function pipe<A, B, C, D, E, F, G, H>(
 	x: A,
-	a: (x: A) => B,
-	b: (x: B) => C,
-	c: (x: C) => D,
-	d: (x: D) => E,
-	e: (x: E) => F,
-	f: (x: F) => G,
-	g: (x: G) => H,
+	a: Unary<A, B>,
+	b: Unary<B, C>,
+	c: Unary<C, D>,
+	d: Unary<D, E>,
+	e: Unary<E, F>,
+	f: Unary<F, G>,
+	g: Unary<G, H>,
 ): H
 export function pipe<A, B, C, D, E, F, G, H, I>(
 	x: A,
-	a: (x: A) => B,
-	b: (x: B) => C,
-	c: (x: C) => D,
-	d: (x: D) => E,
-	e: (x: E) => F,
-	f: (x: F) => G,
-	g: (x: G) => H,
-	h: (x: H) => I,
+	a: Unary<A, B>,
+	b: Unary<B, C>,
+	c: Unary<C, D>,
+	d: Unary<D, E>,
+	e: Unary<E, F>,
+	f: Unary<F, G>,
+	g: Unary<G, H>,
+	h: Unary<H, I>,
 ): I
 export function pipe<A, B, C, D, E, F, G, H, I, J>(
 	x: A,
-	a: (x: A) => B,
-	b: (x: B) => C,
-	c: (x: C) => D,
-	d: (x: D) => E,
-	e: (x: E) => F,
-	f: (x: F) => G,
-	g: (x: G) => H,
-	h: (x: H) => I,
-	i: (x: I) => J,
+	a: Unary<A, B>,
+	b: Unary<B, C>,
+	c: Unary<C, D>,
+	d: Unary<D, E>,
+	e: Unary<E, F>,
+	f: Unary<F, G>,
+	g: Unary<G, H>,
+	h: Unary<H, I>,
+	i: Unary<I, J>,
 ): J
 export function pipe<A, B, C, D, E, F, G, H, I, J, K>(
 	x: A,
-	a: (x: A) => B,
-	b: (x: B) => C,
-	c: (x: C) => D,
-	d: (x: D) => E,
-	e: (x: E) => F,
-	f: (x: F) => G,
-	g: (x: G) => H,
-	h: (x: H) => I,
-	i: (x: I) => J,
-	j: (x: J) => K,
+	a: Unary<A, B>,
+	b: Unary<B, C>,
+	c: Unary<C, D>,
+	d: Unary<D, E>,
+	e: Unary<E, F>,
+	f: Unary<F, G>,
+	g: Unary<G, H>,
+	h: Unary<H, I>,
+	i: Unary<I, J>,
+	j: Unary<J, K>,
 ): K
 export function pipe(x: any, ...fs: Array<any>): any {
 	let a = x
@@ -90,77 +92,77 @@ export function pipe(x: any, ...fs: Array<any>): any {
 }
 
 export function compose<A, B, C>(
-	a: (x: A) => B,
-	b: (x: B) => C,
-): (x: A) => C
+	a: Unary<A, B>,
+	b: Unary<B, C>,
+): Unary<A, C>
 export function compose<A, B, C, D>(
-	a: (x: A) => B,
-	b: (x: B) => C,
-	c: (x: C) => D,
-): (x: A) => D
+	a: Unary<A, B>,
+	b: Unary<B, C>,
+	c: Unary<C, D>,
+): Unary<A, D>
 export function compose<A, B, C, D, E>(
-	a: (x: A) => B,
-	b: (x: B) => C,
-	c: (x: C) => D,
-	d: (x: D) => E,
-): (x: A) => E
+	a: Unary<A, B>,
+	b: Unary<B, C>,
+	c: Unary<C, D>,
+	d: Unary<D, E>,
+): Unary<A, E>
 export function compose<A, B, C, D, E, F>(
-	a: (x: A) => B,
-	b: (x: B) => C,
-	c: (x: C) => D,
-	d: (x: D) => E,
-	e: (x: E) => F,
-): (x: A) => F
+	a: Unary<A, B>,
+	b: Unary<B, C>,
+	c: Unary<C, D>,
+	d: Unary<D, E>,
+	e: Unary<E, F>,
+): Unary<A, F>
 export function compose<A, B, C, D, E, F, G>(
-	a: (x: A) => B,
-	b: (x: B) => C,
-	c: (x: C) => D,
-	d: (x: D) => E,
-	e: (x: E) => F,
-	f: (x: F) => G,
-): (x: A) => G
+	a: Unary<A, B>,
+	b: Unary<B, C>,
+	c: Unary<C, D>,
+	d: Unary<D, E>,
+	e: Unary<E, F>,
+	f: Unary<F, G>,
+): Unary<A, G>
 export function compose<A, B, C, D, E, F, G, H>(
-	a: (x: A) => B,
-	b: (x: B) => C,
-	c: (x: C) => D,
-	d: (x: D) => E,
-	e: (x: E) => F,
-	f: (x: F) => G,
-	g: (x: G) => H,
-): (x: A) => H
+	a: Unary<A, B>,
+	b: Unary<B, C>,
+	c: Unary<C, D>,
+	d: Unary<D, E>,
+	e: Unary<E, F>,
+	f: Unary<F, G>,
+	g: Unary<G, H>,
+): Unary<A, H>
 export function compose<A, B, C, D, E, F, G, H, I>(
-	a: (x: A) => B,
-	b: (x: B) => C,
-	c: (x: C) => D,
-	d: (x: D) => E,
-	e: (x: E) => F,
-	f: (x: F) => G,
-	g: (x: G) => H,
-	h: (x: H) => I,
-): (x: A) => I
+	a: Unary<A, B>,
+	b: Unary<B, C>,
+	c: Unary<C, D>,
+	d: Unary<D, E>,
+	e: Unary<E, F>,
+	f: Unary<F, G>,
+	g: Unary<G, H>,
+	h: Unary<H, I>,
+): Unary<A, I>
 export function compose<A, B, C, D, E, F, G, H, I, J>(
-	a: (x: A) => B,
-	b: (x: B) => C,
-	c: (x: C) => D,
-	d: (x: D) => E,
-	e: (x: E) => F,
-	f: (x: F) => G,
-	g: (x: G) => H,
-	h: (x: H) => I,
-	i: (x: I) => J,
-): (x: A) => J
+	a: Unary<A, B>,
+	b: Unary<B, C>,
+	c: Unary<C, D>,
+	d: Unary<D, E>,
+	e: Unary<E, F>,
+	f: Unary<F, G>,
+	g: Unary<G, H>,
+	h: Unary<H, I>,
+	i: Unary<I, J>,
+): Unary<A, J>
 export function compose<A, B, C, D, E, F, G, H, I, J, K>(
-	a: (x: A) => B,
-	b: (x: B) => C,
-	c: (x: C) => D,
-	d: (x: D) => E,
-	e: (x: E) => F,
-	f: (x: F) => G,
-	g: (x: G) => H,
-	h: (x: H) => I,
-	i: (x: I) => J,
-	j: (x: J) => K,
-): (x: A) => K
+	a: Unary<A, B>,
+	b: Unary<B, C>,
+	c: Unary<C, D>,
+	d: Unary<D, E>,
+	e: Unary<E, F>,
+	f: Unary<F, G>,
+	g: Unary<G, H>,
+	h: Unary<H, I>,
+	i: Unary<I, J>,
+	j: Unary<J, K>,
+): Unary<A, K>
 export function compose(...fs: any): (x: any) => any {
 	return function(x) {
 		let a = x

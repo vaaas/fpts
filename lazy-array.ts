@@ -2,10 +2,6 @@ export class LazyArray<T> {
 	iter: Iterator<T> | undefined;
 	items: Array<T>;
 
-	static of<T>(iter: Iterable<T>): LazyArray<T> {
-		return new LazyArray(iter);
-	}
-
 	constructor(iter: Iterable<T>) {
 		this.iter = iter[Symbol.iterator]()
 		this.items = []
@@ -40,7 +36,7 @@ export class LazyArray<T> {
 
 export function map<A, B>(f: (x: A) => B): (xs: LazyArray<A>) => LazyArray<B> {
 	return function (xs) {
-		return LazyArray.of((function* () {
+		return of((function* () {
 			for (const x of xs)
 				yield f(x)
 		})())
@@ -49,7 +45,7 @@ export function map<A, B>(f: (x: A) => B): (xs: LazyArray<A>) => LazyArray<B> {
 
 export function filter<A>(f: (x: A) => boolean): (xs: LazyArray<A>) => LazyArray<A> {
 	return function (xs) {
-		return LazyArray.of((function* () {
+		return of((function* () {
 			for (const x of xs)
 				if (f(x))
 					yield x
@@ -71,4 +67,8 @@ export function foldr<A, B>(f: (a: A) => (b: B) => B, i: B): (xs: LazyArray<A>) 
         for (const x of xs) a = f(x)(a)
         return a
     }
+}
+
+export function of<T>(iter: Iterable<T>): LazyArray<T> {
+	return new LazyArray(iter);
 }

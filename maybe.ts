@@ -1,36 +1,36 @@
-export const Nothing = Symbol('Nothing')
+import { NoValue } from './data';
 
 export class Maybe<A> {
-	x: A | typeof Nothing;
+	x: A | typeof NoValue;
 
 	static of<A>(x: A) {
 		return new Maybe(x);
 	}
 
 	static nothing<A>(): Maybe<A> {
-		return new Maybe(Nothing) as any as Maybe<A>
+		return new Maybe(NoValue) as any as Maybe<A>
 	}
 
-	constructor(x: A | typeof Nothing) {
+	constructor(x: A | typeof NoValue) {
 		this.x = x
 	}
 
 	map<B>(f: (x: A) => B): Maybe<B> {
-		if (this.x === Nothing)
+		if (this.x === NoValue)
 			return this as any as Maybe<B>
 		else
 			return Maybe.of(f(this.x))
 	}
 
 	bind<B>(f: (x: A) => Maybe<B>): Maybe<B> {
-		if (this.x === Nothing)
+		if (this.x === NoValue)
 			return this as any as Maybe<B>
 		else
 			return f(this.x)
 	}
 
 	get(def: A): A {
-		if (this.x === Nothing)
+		if (this.x === NoValue)
 			return def
 		else
 			return this.x
