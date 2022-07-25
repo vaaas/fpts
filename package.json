@@ -13,6 +13,7 @@
         "./data": "./dist/data.js",
         "./function": "./dist/function.js",
         "./iter": "./dist/iter.js",
-        "./maths": "./dist/maths.js"
+        "./maths": "./dist/maths.js",
+	"./timing": "./dist/timing.js"
     }
 }
