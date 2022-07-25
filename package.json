@@ -7,12 +7,12 @@
     },
 
     "exports": {
-        ".": "./index.ts",
-        "./array": "./array.ts",
-        "./combinators": "./combinator.ts",
-        "./data": "./data.ts",
-        "./function": "./function.ts",
-        "./iter": "./iter.ts",
-        "./maths": "./maths.ts"
+        ".": "./dist/index.js",
+        "./array": "./dist/array.js",
+        "./combinators": "./dist/combinator.js",
+        "./data": "./dist/data.js",
+        "./function": "./dist/function.js",
+        "./iter": "./dist/iter.js",
+        "./maths": "./dist/maths.js"
     }
 }
