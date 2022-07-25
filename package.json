@@ -1,3 +1,18 @@
 {
-    "name": "fpts"
+    "name": "fpts",
+    "version": "1.0.0",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsc"
+    },
+
+    "exports": {
+        ".": "./index.ts",
+        "./array": "./array.ts",
+        "./combinators": "./combinator.ts",
+        "./data": "./data.ts",
+        "./function": "./function.ts",
+        "./iter": "./iter.ts",
+        "./maths": "./maths.ts"
+    }
 }

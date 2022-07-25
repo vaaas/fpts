@@ -1,4 +1,4 @@
-import { NoValue } from 'fpts/data'
+import { NoValue } from "./data"
 
 export function next_tick(f: () => any) {
 	return setTimeout(f, 0)
