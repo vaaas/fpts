@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.W = exports.V = exports.S = exports.T = exports.KI = exports.K = exports.I = exports.L = exports.D = exports.C = exports.B1 = exports.B = void 0;
+exports.W = exports.V = exports.S = exports.T = exports.KI = exports.K = exports.I = exports.L = exports.D1 = exports.D = exports.C = exports.B1 = exports.B = void 0;
 /**
  * Bluebird Combinator
  * Pass an argument C to a unary function B. Before returning the result, pass it through a final filter, A.
@@ -57,6 +57,17 @@ function D(a) {
     };
 }
 exports.D = D;
+/** Dove combinator */
+function D1(a) {
+    return function (b) {
+        return function (c) {
+            return function (d) {
+                return a(c)(b(d));
+            };
+        };
+    };
+}
+exports.D1 = D1;
 /**
  * Lifting combinator.
  * Transform a binary function from A to B so that it is a binary function of C to B.

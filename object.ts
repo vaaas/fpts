@@ -35,6 +35,17 @@ export function filter<A, K extends string>(f: Unary<A, boolean>): (x: Record<K,
     }
 }
 
+export function filterWithKeys<A, K extends string>(f: Unary<[K, A], boolean>): (x: Record<K, A>) => Partial<Record<K, A>> {
+    return function (xs) {
+        const o: Partial<Record<K, A>> = {}
+        for (const x of entries(xs))
+            if (f(x))
+                o[x[0]] = x[1]
+        return o
+    }
+}
+
+
 export function foldl<A, B, K extends string>(f: Binary<B, A, B>, i: B): (xs: Record<K, A>) => B {
     return function(xs) {
         let a = i

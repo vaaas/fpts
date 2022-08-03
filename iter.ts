@@ -1,4 +1,6 @@
+import { D1 } from './combinator'
 import { Unary, Binary } from './data'
+import { add } from './maths'
 
 export function is(x: any): boolean {
 	if (x === null || x === undefined) return false
@@ -34,3 +36,11 @@ export function sort<T>(f: (a: T, b: T) => number): (xs: Iterable<T>) => Array<T
 		return Array.from(xs).sort(f)
 	}
 }
+
+export function alphabetically<T>(x: Iterable<T>): Array<T> {
+	return Array.from(x).sort()
+}
+
+export const sum = foldl(add, 0)
+
+export const sumBy = <T>(f: Unary<T, number>) => foldl(D1(add)(f), 0)

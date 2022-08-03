@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.defaults = exports.foldr = exports.foldl = exports.filter = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
+exports.defaults = exports.foldr = exports.foldl = exports.filterWithKeys = exports.filter = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
 function entries(o) {
     return Object.entries(o);
 }
@@ -32,6 +32,16 @@ function filter(f) {
     };
 }
 exports.filter = filter;
+function filterWithKeys(f) {
+    return function (xs) {
+        const o = {};
+        for (const x of entries(xs))
+            if (f(x))
+                o[x[0]] = x[1];
+        return o;
+    };
+}
+exports.filterWithKeys = filterWithKeys;
 function foldl(f, i) {
     return function (xs) {
         let a = i;

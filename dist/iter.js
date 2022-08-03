@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sort = exports.foldl = exports.filter = exports.map = exports.is = void 0;
+exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.foldl = exports.filter = exports.map = exports.is = void 0;
+const combinator_1 = require("./combinator");
+const maths_1 = require("./maths");
 function is(x) {
     if (x === null || x === undefined)
         return false;
@@ -38,3 +40,10 @@ function sort(f) {
     };
 }
 exports.sort = sort;
+function alphabetically(x) {
+    return Array.from(x).sort();
+}
+exports.alphabetically = alphabetically;
+exports.sum = foldl(maths_1.add, 0);
+const sumBy = (f) => foldl((0, combinator_1.D1)(maths_1.add)(f), 0);
+exports.sumBy = sumBy;

@@ -56,6 +56,17 @@ export function D<A, B, C, D, E>(a: Binary<A, B, C>): (b: Unary<D, A>) => (c: Un
     }
 }
 
+/** Dove combinator */
+export function D1<A, B, C>(a: Binary<A, B, C>): <D>(b: Unary<D, B>) => (c: A) => (d: D) => C {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return a(c)(b(d))
+			}
+		}
+	}
+}
+
 /**
  * Lifting combinator.
  * Transform a binary function from A to B so that it is a binary function of C to B.
