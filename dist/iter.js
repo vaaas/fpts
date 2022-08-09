@@ -1,8 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.foldl = exports.filter = exports.map = exports.is = void 0;
+exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.foldl = exports.filter = exports.map = exports.is = exports.iter = void 0;
 const combinator_1 = require("./combinator");
 const maths_1 = require("./maths");
+function iter(x) {
+    return x[Symbol.iterator]();
+}
+exports.iter = iter;
 function is(x) {
     if (x === null || x === undefined)
         return false;
@@ -47,3 +51,30 @@ exports.alphabetically = alphabetically;
 exports.sum = foldl(maths_1.add, 0);
 const sumBy = (f) => foldl((0, combinator_1.D1)(maths_1.add)(f), 0);
 exports.sumBy = sumBy;
+function by(f) {
+    return function (a, b) {
+        const fa = f(a);
+        const fb = f(b);
+        if (fa < fb)
+            return -1;
+        else if (fa > fb)
+            return 1;
+        else
+            return 0;
+    };
+}
+exports.by = by;
+function first(xs) {
+    const first = iter(xs).next();
+    return first.done
+        ? undefined
+        : first.value;
+}
+exports.first = first;
+function last(xs) {
+    let last = undefined;
+    for (const x of xs)
+        last = x;
+    return last;
+}
+exports.last = last;

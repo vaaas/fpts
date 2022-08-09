@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.by = exports.sort = exports.bind = exports.filter = exports.map = exports.of = exports.last = exports.first = void 0;
+exports.bind = exports.filter = exports.map = exports.of = exports.last = exports.first = void 0;
 function first(xs) {
     return xs[0];
 }
@@ -31,22 +31,3 @@ function bind(f) {
     };
 }
 exports.bind = bind;
-function sort(f) {
-    return function (xs) {
-        return of(xs).sort(f);
-    };
-}
-exports.sort = sort;
-function by(f) {
-    return function (a, b) {
-        const fa = f(a);
-        const fb = f(b);
-        if (fa < fb)
-            return -1;
-        else if (fa > fb)
-            return 1;
-        else
-            return 0;
-    };
-}
-exports.by = by;
