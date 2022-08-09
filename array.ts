@@ -29,19 +29,3 @@ export function bind<A, B>(f: Unary<A, Array<B>>): Unary<Array<A>, Array<B>> {
 		return xs.flatMap(f)
 	}
 }
-
-export function sort<A>(f: (a: A, b: A) => number): Unary<Iterable<A>, Array<A>> {
-	return function(xs) {
-		return of(xs).sort(f)
-	}
-}
-
-export function by<A>(f: Unary<A, number|string>): (a: A, b: A) => -1|0|1 {
-	return function(a, b) {
-		const fa = f(a)
-		const fb = f(b)
-		if (fa < fb) return -1
-		else if (fa > fb) return 1
-		else return 0
-	}
-}
