@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.foldl = exports.filter = exports.map = exports.is = exports.iter = void 0;
+exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.foldl = exports.filter = exports.map = exports.is = exports.iter = void 0;
 const combinator_1 = require("./combinator");
 const maths_1 = require("./maths");
+const string_1 = require("./string");
 function iter(x) {
     return x[Symbol.iterator]();
 }
@@ -78,3 +79,4 @@ function last(xs) {
     return last;
 }
 exports.last = last;
+exports.join = foldl(string_1.concat, '');

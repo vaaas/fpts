@@ -1,6 +1,7 @@
 import { D1 } from './combinator'
 import { Unary, Binary } from './data'
 import { add } from './maths'
+import { concat } from './string'
 
 export function iter<T>(x: Iterable<T>) {
 	return x[Symbol.iterator]()
@@ -72,3 +73,5 @@ export function last<T>(xs: Iterable<T>): T|undefined {
 		last = x
 	return last
 }
+
+export const join = foldl(concat, '')

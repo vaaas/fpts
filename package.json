@@ -1,6 +1,6 @@
 {
     "name": "fpts",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "license": "MIT",
     "scripts": {
         "build": "tsc"
@@ -15,6 +15,7 @@
         "./iter": "./dist/iter.js",
         "./maths": "./dist/maths.js",
         "./object": "./dist/object.js",
+		  "./string": "./dist/string.js",
         "./timing": "./dist/timing.js"
     }
 }
