@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.W = exports.V = exports.S = exports.T = exports.KI = exports.K = exports.I = exports.L = exports.D1 = exports.D = exports.C = exports.B1 = exports.B = void 0;
-/**
- * Bluebird Combinator
+/** Bluebird Combinator
+ *
  * Pass an argument C to a unary function B. Before returning the result, pass it through a final filter, A.
  */
 function B(a) {
@@ -13,8 +13,8 @@ function B(a) {
     };
 }
 exports.B = B;
-/**
- * Blackbird Combinator
+/** Blackbird Combinator
+ *
  * Pass two arguments, C and D, to a binary function B. Before returning the result, pass it through a final filter, A.
  */
 function B1(a) {
@@ -27,8 +27,8 @@ function B1(a) {
     };
 }
 exports.B1 = B1;
-/**
- * Cardinal combinator
+/** Cardinal combinator
+ *
  * Pass arguments B and C to a binary function A, in reverse (flipped).
  */
 function C(a) {
@@ -39,8 +39,8 @@ function C(a) {
     };
 }
 exports.C = C;
-/**
- * Dovekies combinator
+/** Dovekies combinator
+ *
  * Pass arguments D and E to a binary function A.
  * However, before passing them, filter D through the unary function B
  * and E through the unary function C.
@@ -57,7 +57,13 @@ function D(a) {
     };
 }
 exports.D = D;
-/** Dove combinator */
+/** Dove combinator
+ *
+ * pass arguments *C* and *D* to a binary function *A*,
+ * but first filter *D* through through the function *B*
+ *
+ * in other words, applies the filter on only the second argument
+ */
 function D1(a) {
     return function (b) {
         return function (c) {
@@ -68,8 +74,8 @@ function D1(a) {
     };
 }
 exports.D1 = D1;
-/**
- * Lifting combinator.
+/** Lifting combinator.
+ *
  * Transform a binary function from A to B so that it is a binary function of C to B.
  */
 function L(a) {
@@ -82,16 +88,16 @@ function L(a) {
     };
 }
 exports.L = L;
-/**
- * Identity combinator.
+/** Identity combinator.
+ *
  * Simply returns its argument.
  */
 function I(x) {
     return x;
 }
 exports.I = I;
-/**
- * Kestrel combinator (true/car).
+/** Kestrel combinator (true/car).
+ *
  * Always returns the first argument.
  */
 function K(a) {
@@ -100,8 +106,8 @@ function K(a) {
     };
 }
 exports.K = K;
-/**
- * Kite combinator (false/cdr).
+/** Kite combinator (false/cdr).
+ *
  * Always returns the second argument.
  */
 function KI(a) {
@@ -110,8 +116,8 @@ function KI(a) {
     };
 }
 exports.KI = KI;
-/**
- * Thrush combinator.
+/** Thrush combinator.
+ *
  * Accepts an argument for a unary function, then the function.
  */
 function T(x) {
@@ -120,11 +126,13 @@ function T(x) {
     };
 }
 exports.T = T;
-/**
- * Starling prime combinator, AKA phoenix combinator.
+/** Starling prime combinator, AKA phoenix combinator.
+ *
  * Apply argument D to a binary function A twice.
  * The first application is filtered through the unary function B.
  * The second application is filtered through the unary function C.
+ *
+ * In other words, applies the same argument twice, but through different filters.
  */
 function S(a) {
     return function (b) {
@@ -136,8 +144,8 @@ function S(a) {
     };
 }
 exports.S = S;
-/**
- * Vireo combinator AKA pair.
+/** Vireo combinator AKA cons, pair.
+ *
  * Accept two arguments for a binary function, then the binary function.
  */
 function V(a) {
@@ -148,8 +156,8 @@ function V(a) {
     };
 }
 exports.V = V;
-/**
- * Warbler combinator AKA duplicate.
+/** Warbler combinator AKA elementary duplicator
+ *
  * Apply argument B to binary function A twice.
  */
 function W(a) {

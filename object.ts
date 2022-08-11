@@ -4,18 +4,26 @@ export type Entries<T> = Array<{
     [K in keyof T]: [K, T[K]]
 }[keyof T]>
 
+/** return the entries of an object */
 export function entries<T extends Record<string, any>>(o: T): Entries<T> {
     return Object.entries(o)
 }
 
+/** generate an object from its entries */
 export function fromEntries<T extends Record<string, any>>(xs: Entries<T>): T {
     return Object.fromEntries(xs) as T
 }
 
+/** return an array of an object's values */
 export function values<T extends object>(xs: T): Array<T[keyof T]> {
     return Object.values(xs)
 }
 
+/** map implementation for objects
+ *
+ * given a mapping function **A** → **B** and an object of **As**,
+ * return a new object of **Bs**
+ */
 export function map<A, B, K extends string>(f: Unary<A, B>): (x: Record<K, A>) => Record<K, B> {
     return function(xs) {
         const o: Record<string, B> = {}
@@ -25,6 +33,12 @@ export function map<A, B, K extends string>(f: Unary<A, B>): (x: Record<K, A>) =
     }
 }
 
+/** filter implementation for objects
+ *
+ * given a testing function **A** → *boolean* and an object of **As**
+ * return a new object of only the **As** for which the testing function
+ * returns *true*
+ */
 export function filter<A, K extends string>(f: Unary<A, boolean>): (x: Record<K, A>) => Partial<Record<K, A>> {
     return function (xs) {
         const o: Partial<Record<K, A>> = {}
@@ -35,6 +49,14 @@ export function filter<A, K extends string>(f: Unary<A, boolean>): (x: Record<K,
     }
 }
 
+/** filter implentation for objects, based on keys as well as values
+ *
+ * given a testing function **[K, A]** → *boolean* and an object of **As** with keys **Ks**
+ * return a new object of only the **As** for which the testing function
+ * returns *true*
+ *
+ * since the keys are also passed, it is possible to filter based on keys
+ */
 export function filterWithKeys<A, K extends string>(f: Unary<[K, A], boolean>): (x: Record<K, A>) => Partial<Record<K, A>> {
     return function (xs) {
         const o: Partial<Record<K, A>> = {}
@@ -46,6 +68,15 @@ export function filterWithKeys<A, K extends string>(f: Unary<[K, A], boolean>): 
 }
 
 
+/** left fold for objects
+ *
+ * successively apply a binary function **A** → **B** → **A**
+ * to a collection of **Bs**, accumulating the result into **A**
+ *
+ * finally, return the accumulated value
+ *
+ * the initial value is given by **i**
+ */
 export function foldl<A, B, K extends string>(f: Binary<B, A, B>, i: B): (xs: Record<K, A>) => B {
     return function(xs) {
         let a = i
@@ -55,6 +86,15 @@ export function foldl<A, B, K extends string>(f: Binary<B, A, B>, i: B): (xs: Re
     }
 }
 
+/** right fold for objects
+ *
+ * successively apply a binary function **B** → **A** → **A**
+ * to a collection of **Bs**, accumulating the result into **A**
+ *
+ * finally, return the accumulated value
+ *
+ * the initial value is given by **i**
+ */
 export function foldr<A, B, K extends string>(f: Binary<A, B, B>, i: B): (xs: Record<K, A>) => B {
     return function(xs) {
         let a = i

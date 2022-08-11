@@ -1,18 +1,26 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.defaults = exports.foldr = exports.foldl = exports.filterWithKeys = exports.filter = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
+/** return the entries of an object */
 function entries(o) {
     return Object.entries(o);
 }
 exports.entries = entries;
+/** generate an object from its entries */
 function fromEntries(xs) {
     return Object.fromEntries(xs);
 }
 exports.fromEntries = fromEntries;
+/** return an array of an object's values */
 function values(xs) {
     return Object.values(xs);
 }
 exports.values = values;
+/** map implementation for objects
+ *
+ * given a mapping function **A** → **B** and an object of **As**,
+ * return a new object of **Bs**
+ */
 function map(f) {
     return function (xs) {
         const o = {};
@@ -22,6 +30,12 @@ function map(f) {
     };
 }
 exports.map = map;
+/** filter implementation for objects
+ *
+ * given a testing function **A** → *boolean* and an object of **As**
+ * return a new object of only the **As** for which the testing function
+ * returns *true*
+ */
 function filter(f) {
     return function (xs) {
         const o = {};
@@ -32,6 +46,14 @@ function filter(f) {
     };
 }
 exports.filter = filter;
+/** filter implentation for objects, based on keys as well as values
+ *
+ * given a testing function **[K, A]** → *boolean* and an object of **As** with keys **Ks**
+ * return a new object of only the **As** for which the testing function
+ * returns *true*
+ *
+ * since the keys are also passed, it is possible to filter based on keys
+ */
 function filterWithKeys(f) {
     return function (xs) {
         const o = {};
@@ -42,6 +64,15 @@ function filterWithKeys(f) {
     };
 }
 exports.filterWithKeys = filterWithKeys;
+/** left fold for objects
+ *
+ * successively apply a binary function **A** → **B** → **A**
+ * to a collection of **Bs**, accumulating the result into **A**
+ *
+ * finally, return the accumulated value
+ *
+ * the initial value is given by **i**
+ */
 function foldl(f, i) {
     return function (xs) {
         let a = i;
@@ -51,6 +82,15 @@ function foldl(f, i) {
     };
 }
 exports.foldl = foldl;
+/** right fold for objects
+ *
+ * successively apply a binary function **B** → **A** → **A**
+ * to a collection of **Bs**, accumulating the result into **A**
+ *
+ * finally, return the accumulated value
+ *
+ * the initial value is given by **i**
+ */
 function foldr(f, i) {
     return function (xs) {
         let a = i;

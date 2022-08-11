@@ -1,5 +1,13 @@
 import { Unary } from './data'
 
+/** pipeline functions
+ *
+ * given an argument **A** and functions **Fs**,
+ * apply **A** to the first **F**, then the result of **F(A)**,
+ * to the second **F'**, and so on for all functions given
+ *
+ * returns the result of the final function
+ */
 export function pipe<A, B>(
 	x: A,
 	a: Unary<A, B>,
@@ -91,6 +99,13 @@ export function pipe(x: any, ...fs: Array<any>): any {
 	return a
 }
 
+/** compose functions left-to-right
+ *
+ * given two functions, **f** and **g**, create a new function **h**
+ * such that *h(x) = f(g(x))*
+ *
+ * likewise for three, four, ... functions
+ */
 export function compose<A, B, C>(
 	a: Unary<A, B>,
 	b: Unary<B, C>,
