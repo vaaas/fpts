@@ -27,3 +27,9 @@ export function safe_json_parse(x: string): any {
 		return undefined
 	}
 }
+
+/** every component of a tuple sans the first */
+type Tail<T extends any[]> = T extends [any, ...infer U] ? U : never
+
+/** merge a union into an intersection */
+type Intersect<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
