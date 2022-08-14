@@ -33,3 +33,5 @@ export type Tail<T extends any[]> = T extends [any, ...infer U] ? U : never
 
 /** merge a union into an intersection */
 export type Intersect<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
+
+export type ArrayOrItem<T> = T | Array<T>;
