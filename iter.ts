@@ -213,3 +213,43 @@ export const join = foldl(concat, '')
  * if the iterable is empty, always returns an empty string
  */
 export const joinWith = (d: string) => foldl1(concatWith(d), '')
+
+/** test if every member of collection **XS** passes the testing function **F** */
+export function every<T>(f: Unary<T, boolean>): (xs: Iterable<T>) => Boolean {
+	return function(xs) {
+		for (const x of xs)
+			if (!f(x))
+				return false
+		return true
+	}
+}
+
+/** test if at least one member of collection **XS** passes the testing function **F** */
+export function some<T>(f: Unary<T, boolean>): (xs: Iterable<T>) => Boolean {
+	return function(xs) {
+		for (const x of xs)
+			if (f(x))
+				return true
+		return false
+	}
+}
+
+/** test if an argument **X** passes all the functions **FS** */
+export function and<T>(...fs: Unary<T, boolean>[]): (x: T) => Boolean {
+	return function(x) {
+		for (const f of fs)
+			if (!f(x))
+				return false
+		return true
+	}
+}
+
+/** test if an argument **X** passes at least one function of **FS** */
+export function or<T>(...fs: Unary<T, boolean>[]): (x: T) => Boolean {
+	return function(x) {
+		for (const f of fs)
+			if (f(x))
+				return true
+		return false
+	}
+}

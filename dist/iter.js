@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.iter = void 0;
+exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.iter = void 0;
 const combinator_1 = require("./combinator");
 const maths_1 = require("./maths");
 const string_1 = require("./string");
@@ -222,3 +222,43 @@ exports.join = foldl(string_1.concat, '');
  */
 const joinWith = (d) => foldl1((0, string_1.concatWith)(d), '');
 exports.joinWith = joinWith;
+/** test if every member of collection **XS** passes the testing function **F** */
+function every(f) {
+    return function (xs) {
+        for (const x of xs)
+            if (!f(x))
+                return false;
+        return true;
+    };
+}
+exports.every = every;
+/** test if at least one member of collection **XS** passes the testing function **F** */
+function some(f) {
+    return function (xs) {
+        for (const x of xs)
+            if (f(x))
+                return true;
+        return false;
+    };
+}
+exports.some = some;
+/** test if an argument **X** passes all the functions **FS** */
+function and(...fs) {
+    return function (x) {
+        for (const f of fs)
+            if (!f(x))
+                return false;
+        return true;
+    };
+}
+exports.and = and;
+/** test if an argument **X** passes at least one function of **FS** */
+function or(...fs) {
+    return function (x) {
+        for (const f of fs)
+            if (f(x))
+                return true;
+        return false;
+    };
+}
+exports.or = or;
