@@ -15,7 +15,7 @@
         "./iter": "./dist/iter.js",
         "./maths": "./dist/maths.js",
         "./object": "./dist/object.js",
-		  "./string": "./dist/string.js",
+		"./string": "./dist/string.js",
         "./timing": "./dist/timing.js"
     }
 }
