@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.iter = void 0;
+exports.limit = exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.scanr = exports.scanl = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.iter = void 0;
 const combinator_1 = require("./combinator");
 const maths_1 = require("./maths");
 const string_1 = require("./string");
@@ -153,6 +153,44 @@ function foldr1(f, i) {
     };
 }
 exports.foldr1 = foldr1;
+/** left scan for iterables with intermediate results
+ *
+ * successively apply a binary function **A** → **B** → **A**
+ * to a collection of **Bs**, accumulating the result into **A**
+ *
+ * yields each step **A** as an iterable of accumulated values.
+ * the last element is identical to *foldl*.
+ *
+ * the initial value is given by **i**
+ */
+function scanl(f, i) {
+    return function* (xs) {
+        let a = i;
+        yield a;
+        for (const x of xs)
+            yield a = f(a)(x);
+    };
+}
+exports.scanl = scanl;
+/** right scan for iterables with intermediate results
+ *
+ * successively apply a binary function **B** → **A** → **A**
+ * to a collection of **Bs**, accumulating the result into **A**
+ *
+ * yields each step **A** as an iterable of accumulated values.
+ * the last element is identical to *foldr*.
+ *
+ * the initial value is given by **i**
+ */
+function scanr(f, i) {
+    return function* (xs) {
+        let a = i;
+        yield a;
+        for (const x of xs)
+            yield a = f(x)(a);
+    };
+}
+exports.scanr = scanr;
 /** sort an iterable into an array
  *
  * the sorting function (**prev**, **next**) → *number*
@@ -262,3 +300,17 @@ function or(...fs) {
     };
 }
 exports.or = or;
+/** limit iterable to N members */
+function limit(n) {
+    return function* (xs) {
+        let i = 0;
+        for (const x of xs)
+            if (i < n) {
+                yield x;
+                i++;
+            }
+            else
+                break;
+    };
+}
+exports.limit = limit;

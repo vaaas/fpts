@@ -146,6 +146,44 @@ export function foldr1<A>(f: Binary<A, A, A>, i: A): (xs: Iterable<A>) => A {
 	}
 }
 
+/** left scan for iterables with intermediate results
+ *
+ * successively apply a binary function **A** → **B** → **A**
+ * to a collection of **Bs**, accumulating the result into **A**
+ *
+ * yields each step **A** as an iterable of accumulated values.
+ * the last element is identical to *foldl*.
+ *
+ * the initial value is given by **i**
+ */
+export function scanl<A, B>(f: Binary<A, B, A>, i: A): (xs: Iterable<B>) => Iterable<A> {
+	return function* (xs) {
+		let a = i
+		yield a
+		for (const x of xs)
+			yield a = f(a)(x)
+	}
+}
+
+/** right scan for iterables with intermediate results
+ *
+ * successively apply a binary function **B** → **A** → **A**
+ * to a collection of **Bs**, accumulating the result into **A**
+ *
+ * yields each step **A** as an iterable of accumulated values.
+ * the last element is identical to *foldr*.
+ *
+ * the initial value is given by **i**
+ */
+ export function scanr<A, B>(f: Binary<B, A, A>, i: A): (xs: Iterable<B>) => Iterable<A> {
+	return function* (xs) {
+		let a = i
+		yield a
+		for (const x of xs)
+			yield a = f(x)(a)
+	}
+}
+
 /** sort an iterable into an array
  *
  * the sorting function (**prev**, **next**) → *number*
@@ -251,5 +289,17 @@ export function or<T>(...fs: Unary<T, boolean>[]): (x: T) => Boolean {
 			if (f(x))
 				return true
 		return false
+	}
+}
+
+/** limit iterable to N members */
+export function limit(n: number): <T>(xs: Iterable<T>) => Iterable<T> {
+	return function* (xs) {
+		let i = 0
+		for (const x of xs)
+			if (i < n) {
+				yield x
+				i++
+			} else break
 	}
 }
