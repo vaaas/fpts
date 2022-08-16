@@ -303,3 +303,22 @@ export function limit(n: number): <T>(xs: Iterable<T>) => Iterable<T> {
 			} else break
 	}
 }
+
+/** infinitely repeat an iterable */
+export function* repeat<T>(xs: Iterable<T>): Iterable<T> {
+	const arr = []
+	for (const x of xs) {
+		yield x
+		arr.push(x)
+	}
+
+	while (true)
+		yield* arr
+}
+
+/** prepend an index to an iterable */
+export function* enumerate<T>(xs: Iterable<T>): Iterable<[number, T]> {
+	let i = 0
+	for (const x of xs)
+		yield [i++, x]
+}

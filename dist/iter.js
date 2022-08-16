@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.limit = exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.scanr = exports.scanl = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.iter = void 0;
+exports.enumerate = exports.repeat = exports.limit = exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.scanr = exports.scanl = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.iter = void 0;
 const combinator_1 = require("./combinator");
 const maths_1 = require("./maths");
 const string_1 = require("./string");
@@ -314,3 +314,21 @@ function limit(n) {
     };
 }
 exports.limit = limit;
+/** infinitely repeat an iterable */
+function* repeat(xs) {
+    const arr = [];
+    for (const x of xs) {
+        yield x;
+        arr.push(x);
+    }
+    while (true)
+        yield* arr;
+}
+exports.repeat = repeat;
+/** prepend an index to an iterable */
+function* enumerate(xs) {
+    let i = 0;
+    for (const x of xs)
+        yield [i++, x];
+}
+exports.enumerate = enumerate;
