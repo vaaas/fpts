@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.enumerate = exports.repeat = exports.limit = exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.scanr = exports.scanl = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.iter = void 0;
+exports.zipWith = exports.enumerate = exports.repeat = exports.limit = exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.scanr = exports.scanl = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.iter = void 0;
 const combinator_1 = require("./combinator");
 const maths_1 = require("./maths");
 const string_1 = require("./string");
@@ -332,3 +332,25 @@ function* enumerate(xs) {
         yield [i++, x];
 }
 exports.enumerate = enumerate;
+/**
+ * Apply a function to pairs of elements at the same index in two iterables, collecting the results in a new iterable.
+ *
+ * If one iterable is longer, elements will be discarded from the longer iterable.
+ */
+function zipWith(f) {
+    return function (as) {
+        return function* (bs) {
+            const ai = iter(as);
+            const bi = iter(bs);
+            while (true) {
+                const av = ai.next();
+                const bv = bi.next();
+                if (av.done || bv.done)
+                    break;
+                else
+                    yield f(av.value)(bv.value);
+            }
+        };
+    };
+}
+exports.zipWith = zipWith;

@@ -322,3 +322,24 @@ export function* enumerate<T>(xs: Iterable<T>): Iterable<[number, T]> {
 	for (const x of xs)
 		yield [i++, x]
 }
+
+/**
+ * Apply a function to pairs of elements at the same index in two iterables, collecting the results in a new iterable.
+ *
+ * If one iterable is longer, elements will be discarded from the longer iterable.
+ */
+export function zipWith<A, B, C>(f: Binary<A, B, C>): (as: Iterable<A>) => (bs: Iterable<B>) => Iterable<C> {
+	return function (as) {
+		return function* (bs) {
+			const ai = iter(as)
+			const bi = iter(bs)
+			while (true) {
+				const av = ai.next()
+				const bv = bi.next()
+				if (av.done || bv.done)
+					break
+				else yield f(av.value)(bv.value)
+			}
+		}
+	}
+}
