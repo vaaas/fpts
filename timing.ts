@@ -4,6 +4,7 @@ export function next_tick(f: () => any) {
 	return setTimeout(f, 0)
 }
 
+/** throttle a function, so that multiple calls execute at most once per **t** milliseconds */
 export function throttle<T>(f: (x: T) => any, t: number): (x: T) => any {
     let nextValue: T | typeof NoValue = NoValue;
     let id: ReturnType<typeof setTimeout> | undefined;
@@ -22,6 +23,7 @@ export function throttle<T>(f: (x: T) => any, t: number): (x: T) => any {
     })
 }
 
+/** debounce a function, so that multiple calls execute only once after **t** milliseconds of delay */
 export function debounce<T>(f: (x: T) => any, t: number): (x: T) => any {
     let id: ReturnType<typeof setTimeout> | undefined;
     return (function debounce(x: T): void {
