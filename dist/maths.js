@@ -31,7 +31,6 @@ function* Naturals() {
 exports.Naturals = Naturals;
 /** the integers. infinite iterable */
 function* Integers() {
-    yield 0;
     for (let i = 0; true; i = neg(i) + (i > 0 ? 0 : 1))
         yield i;
 }
