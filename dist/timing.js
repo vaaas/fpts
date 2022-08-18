@@ -6,6 +6,7 @@ function next_tick(f) {
     return setTimeout(f, 0);
 }
 exports.next_tick = next_tick;
+/** throttle a function, so that multiple calls execute at most once per **t** milliseconds */
 function throttle(f, t) {
     let nextValue = data_1.NoValue;
     let id;
@@ -24,6 +25,7 @@ function throttle(f, t) {
     });
 }
 exports.throttle = throttle;
+/** debounce a function, so that multiple calls execute only once after **t** milliseconds of delay */
 function debounce(f, t) {
     let id;
     return (function debounce(x) {
