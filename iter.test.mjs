@@ -269,4 +269,62 @@ describe('iter', () => {
             )
         })
     })
+
+    describe('join', () => {
+        it('should join iterables into strings', () => {
+            assert.equal(
+                iter.join(test()),
+                '123'
+            )
+        })
+
+        it('should turn empty iterables into empty strings', () => {
+            assert.equal(
+                iter.join([]),
+                ''
+            )
+        })
+    })
+
+    describe('joinWith', () => {
+        it('should join iterables into string, with delimitter', () => {
+            assert.equal(iter.joinWith('-')(test()), '1-2-3')
+        })
+
+        it('should join empty iterables into an empty string', () => {
+            assert.equal(iter.joinWith('-')([]), '')
+        })
+    })
+
+    describe('every', () => {
+        it('should return true if every member passes the check', () => {
+            assert.equal(
+                iter.every(x => x > 0)(test()),
+                true,
+            )
+        })
+
+        it('should return false if at least one member fails the check', () => {
+            assert.equal(
+                iter.every(even)(test()),
+                false,
+            )
+        })
+    })
+
+    describe('some', () => {
+        it('should return true if some member passes the check', () => {
+            assert.equal(
+                iter.some(x => x === 3)(test()),
+                true,
+            )
+        })
+
+        it('should return false if no members pass the check', () => {
+            assert.equal(
+                iter.some(x => x > 3)(test()),
+                false,
+            )
+        })
+    })
 })
