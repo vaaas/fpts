@@ -126,4 +126,15 @@ describe('object', () => {
             )
         })
     })
+
+    describe('into', () => {
+        it('should update a single object key/value', () => {
+            assert.deepEqual(
+                object.into({})('test')(1),
+                {
+                    test: 1,
+                }
+            )
+        })
+    })
 })

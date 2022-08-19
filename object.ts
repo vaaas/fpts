@@ -116,3 +116,12 @@ export function defaults<T extends object>(x: Partial<T>): (d: T) => T {
         return x as T;
     }
 }
+
+export function into<K extends string|number|symbol, T>(o: Record<K, T>): (k: K) => (x: T) => typeof o {
+    return function (k) {
+        return function (x) {
+            o[k] = x
+            return o
+        }
+    }
+}

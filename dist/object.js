@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.defaults = exports.foldr = exports.foldl = exports.filterWithKeys = exports.filter = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
+exports.into = exports.defaults = exports.foldr = exports.foldl = exports.filterWithKeys = exports.filter = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
 /** return the entries of an object */
 function entries(o) {
     return Object.entries(o);
@@ -113,3 +113,12 @@ function defaults(x) {
     };
 }
 exports.defaults = defaults;
+function into(o) {
+    return function (k) {
+        return function (x) {
+            o[k] = x;
+            return o;
+        };
+    };
+}
+exports.into = into;
