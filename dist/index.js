@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.timing = exports.string = exports.promise = exports.object = exports.maths = exports.iter = exports.function = exports.data = exports.combinator = exports.array = void 0;
+exports.timing = exports.string = exports.result = exports.promise = exports.option = exports.object = exports.maths = exports.iter = exports.function = exports.data = exports.combinator = exports.array = void 0;
 exports.array = require("./array");
 exports.combinator = require("./combinator");
 exports.data = require("./data");
@@ -8,6 +8,8 @@ exports.function = require("./function");
 exports.iter = require("./iter");
 exports.maths = require("./maths");
 exports.object = require("./object");
+exports.option = require("./option");
 exports.promise = require("./promise");
+exports.result = require("./result");
 exports.string = require("./string");
 exports.timing = require("./timing");

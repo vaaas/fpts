@@ -7,6 +7,14 @@ export type AddPrefix<prefix extends string, x extends string> =
 	? `${prefix}${x}`
 	: never
 
+/** function taking zero arguments and returns nothing.
+ * basically used for side effects
+ */
+export type Void = () => void
+
+/** function taking zero arguments, but provides a result */
+export type Nullary<T> = () => T
+
 /** unary function, that maps from **A** to **B** */
 export type Unary<A, B> = (a: A) => B
 

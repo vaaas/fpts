@@ -9,7 +9,6 @@
 
     "exports": {
         ".": "./dist/index.js",
-        "./string": "./dist/string.js",
         "./array": "./dist/array.js",
         "./combinators": "./dist/combinator.js",
         "./data": "./dist/data.js",
@@ -17,7 +16,10 @@
         "./iter": "./dist/iter.js",
         "./maths": "./dist/maths.js",
         "./object": "./dist/object.js",
+        "./option": "./dist/option.js",
         "./promise": "./dist/promise.js",
+        "./result": "./dist/result.js",
+        "./string": "./dist/string.js",
         "./timing": "./dist/timing.js"
     }
 }
