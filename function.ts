@@ -186,7 +186,7 @@ export function compose(...fs: any): (x: any) => any {
 	}
 }
 
-export function mock(f: Function): Function & { calls: any[] } {
+export function spy(f: Function): Function & { calls: any[] } {
     const calls: any[] = [];
     function wrapped() {
         calls.push(arguments);
