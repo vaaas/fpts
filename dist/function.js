@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.compose = exports.pipe = void 0;
+exports.mock = exports.compose = exports.pipe = void 0;
 function pipe(x, ...fs) {
     let a = x;
     for (const f of fs)
@@ -17,3 +17,13 @@ function compose(...fs) {
     };
 }
 exports.compose = compose;
+function mock(f) {
+    const calls = [];
+    function wrapped() {
+        calls.push(arguments);
+        return f(...arguments);
+    }
+    wrapped.calls = calls;
+    return wrapped;
+}
+exports.mock = mock;

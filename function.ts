@@ -185,3 +185,13 @@ export function compose(...fs: any): (x: any) => any {
 		return a
 	}
 }
+
+export function mock(f: Function): Function & { calls: any[] } {
+    const calls: any[] = [];
+    function wrapped() {
+        calls.push(arguments);
+        return f(...arguments);
+    }
+    wrapped.calls = calls;
+    return wrapped;
+}
