@@ -20,7 +20,7 @@ exports.compose = compose;
 function spy(f) {
     const calls = [];
     function wrapped() {
-        calls.push(arguments);
+        calls.push([...arguments]);
         return f(...arguments);
     }
     wrapped.calls = calls;

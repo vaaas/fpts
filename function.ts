@@ -189,7 +189,7 @@ export function compose(...fs: any): (x: any) => any {
 export function spy(f: Function): Function & { calls: any[] } {
     const calls: any[] = [];
     function wrapped() {
-        calls.push(arguments);
+        calls.push([...arguments]);
         return f(...arguments);
     }
     wrapped.calls = calls;
