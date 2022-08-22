@@ -10,7 +10,7 @@
     "exports": {
         ".": "./dist/index.js",
         "./array": "./dist/array.js",
-        "./combinators": "./dist/combinator.js",
+        "./combinator": "./dist/combinator.js",
         "./data": "./dist/data.js",
         "./function": "./dist/function.js",
         "./iter": "./dist/iter.js",
