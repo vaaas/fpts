@@ -7,3 +7,12 @@ export function pop<K>(k: K): <V>(xs: Map<K, V>) => Option<V> {
         return v;
     }
 }
+
+export function set<K>(k: K): <V>(x: V) => (xs: Map<K, V>) => Map<K, V> {
+    return function(x) {
+        return function (xs) {
+            if (xs.has(k)) xs.delete(k)
+            return xs.set(k, x)
+        };
+    };
+}

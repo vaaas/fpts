@@ -24,7 +24,7 @@ export function throttle<T>(f: (x: T) => any, t: number): (x: T) => any {
 }
 
 /** debounce a function, so that multiple calls execute only once after **t** milliseconds of delay */
-export function debounce<T>(f: (x: T) => any, t: number): (x: T) => any {
+export function debounce<T>(f: (x: T) => any, t: number): (x: T) => void {
     let id: ReturnType<typeof setTimeout> | undefined;
     return (function debounce(x: T): void {
         if (id) {
