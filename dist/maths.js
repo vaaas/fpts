@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Grandi = exports.Integers = exports.Naturals = exports.mult = exports.add = exports.neg = exports.randint = void 0;
+exports.clamp = exports.Grandi = exports.Integers = exports.Naturals = exports.mult = exports.add = exports.neg = exports.randint = void 0;
 /** return a random integer in the range [a, b) */
 function randint(a, b) {
     return a + Math.floor(Math.random() * (b - a));
@@ -41,3 +41,14 @@ function* Grandi() {
         yield i;
 }
 exports.Grandi = Grandi;
+function clamp(min, max) {
+    return function (x) {
+        if (x < min)
+            return min;
+        else if (x > max)
+            return max;
+        else
+            return x;
+    };
+}
+exports.clamp = clamp;

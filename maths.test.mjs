@@ -60,4 +60,18 @@ describe('maths', () => {
             )
         })
     })
+
+    describe('clamp', () => {
+        it('should clamp min', () => {
+            assert.equal(maths.clamp(10, 20)(9), 10)
+        })
+
+        it('should clamp max', () => {
+            assert.equal(maths.clamp(10, 20)(21), 20)
+        })
+
+        it('should leave the rest', () => {
+            assert.equal(maths.clamp(10, 20)(15), 15)
+        })
+    })
 })

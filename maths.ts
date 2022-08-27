@@ -36,3 +36,11 @@ export function* Grandi() {
 	for (let i = 1; true; i = neg(i))
 		yield i
 }
+
+export function clamp(min: number, max: number): (x: number) => number {
+	return function(x) {
+		if (x < min) return min;
+		else if (x > max) return max;
+		else return x;
+	}
+}
