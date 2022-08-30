@@ -10,8 +10,8 @@ export function entries<T extends Record<string, any>>(o: T): Entries<T> {
 }
 
 /** generate an object from its entries */
-export function fromEntries<K extends string|symbol, V>(xs: Array<[K, V]>): Record<K, V> {
-    return Object.fromEntries(xs) as Record<K, V>;
+export function fromEntries<T extends Record<any, any>>(xs: Entries<T>): T {
+    return Object.fromEntries(xs) as T;
 }
 
 /** return an array of an object's values */
