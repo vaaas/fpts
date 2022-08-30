@@ -1,6 +1,6 @@
 {
     "name": "fpts",
-    "version": "1.0.16",
+    "version": "1.0.17",
     "license": "MIT",
     "scripts": {
         "build": "tsc",
@@ -12,6 +12,7 @@
         "./array": "./dist/array.js",
         "./combinator": "./dist/combinator.js",
         "./data": "./dist/data.js",
+        "./duad": "./dist/duad.js",
         "./function": "./dist/function.js",
         "./iter": "./dist/iter.js",
         "./map": "./dist/map.js",
