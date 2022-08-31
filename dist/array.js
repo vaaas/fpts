@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.bind = exports.filter = exports.map = exports.of = exports.last = exports.first = void 0;
+exports.unique = exports.bind = exports.filter = exports.map = exports.of = exports.last = exports.first = void 0;
 /** return the first element of an array */
 function first(xs) {
     return xs[0];
@@ -37,3 +37,8 @@ function bind(f) {
     };
 }
 exports.bind = bind;
+/** return iterable without any duplicates */
+function unique(xs) {
+    return Array.from(new Set(xs));
+}
+exports.unique = unique;

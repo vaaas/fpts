@@ -35,3 +35,8 @@ export function bind<A, B>(f: Unary<A, Array<B>>): Unary<Array<A>, Array<B>> {
 		return xs.flatMap(f)
 	}
 }
+
+/** return iterable without any duplicates */
+export function unique<T>(xs: Iterable<T>): Array<T> {
+	return Array.from(new Set(xs))
+}

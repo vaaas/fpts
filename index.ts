@@ -1,7 +1,7 @@
 export * as array from './array'
 export * as combinator from './combinator'
 export * as data from './data'
-export * as duad from './duad';
+export * as duad from './duad'
 export * as function from './function'
 export * as iter from './iter'
 export * as map from './map'
