@@ -343,3 +343,15 @@ export function zipWith<A, B, C>(f: Binary<A, B, C>): (as: Iterable<A>) => (bs: 
 		}
 	}
 }
+
+/** execute a function on each member of a collection
+ *
+ * - `f` — the function to execute
+ * - `xs` — the collection
+ */
+export function each<T>(f: (x: T) => void): (xs: Iterable<T>) => void {
+	return function(xs) {
+		for (const x of xs)
+			f(x)
+	}
+}

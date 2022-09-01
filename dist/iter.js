@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.zipWith = exports.enumerate = exports.repeat = exports.limit = exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.scanr = exports.scanl = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.iter = void 0;
+exports.each = exports.zipWith = exports.enumerate = exports.repeat = exports.limit = exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.scanr = exports.scanl = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.iter = void 0;
 const combinator_1 = require("./combinator");
 const maths_1 = require("./maths");
 const string_1 = require("./string");
@@ -354,3 +354,15 @@ function zipWith(f) {
     };
 }
 exports.zipWith = zipWith;
+/** execute a function on each member of a collection
+ *
+ * - `f` — the function to execute
+ * - `xs` — the collection
+ */
+function each(f) {
+    return function (xs) {
+        for (const x of xs)
+            f(x);
+    };
+}
+exports.each = each;
