@@ -25,3 +25,10 @@ export function bind<A, B>(f: Unary<A, Promise<B>>): (x: Promise<A>) => Promise<
         return x.then(f)
     }
 }
+
+export function then<A, B>(f: Unary<A, B>): (x: Promise<A>) => Promise<B>
+export function then<A, B>(f: Unary<A, Promise<B>>): (x: Promise<A>) => Promise<B> {
+    return function(x) {
+        return x.then(f);
+    }
+}
