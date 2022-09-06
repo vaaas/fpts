@@ -74,4 +74,22 @@ describe('string', () => {
             assert.equal(string.str(x), 'yo')
         })
     })
+
+    describe('rep', () => {
+        it('should repeat string n times', () => {
+            assert.equal(string.rep('*')(10), '**********')
+        })
+
+        it('should repeat string of more than 1 character', () => {
+            assert.equal(string.rep('yo')(2), 'yoyo')
+        })
+
+        it('returns empty string if repetitions are zero', () => {
+            assert.equal(string.rep('long string')(0), '')
+        })
+
+        it('returns empty string if part string is zero', () => {
+            assert.equal(string.rep('')(999), '');
+        })
+    })
 })

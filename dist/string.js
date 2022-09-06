@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.startsWith = exports.str = exports.concatWith = exports.concat = void 0;
+exports.rep = exports.startsWith = exports.str = exports.concatWith = exports.concat = void 0;
 /** join two strings into a single string */
 const concat = (a) => (b) => a + b;
 exports.concat = concat;
@@ -19,3 +19,11 @@ exports.str = str;
  */
 const startsWith = (p) => (x) => x.startsWith(p);
 exports.startsWith = startsWith;
+/** return a string that repeats `part` `n` times */
+const rep = (part) => (n) => {
+    let s = '';
+    for (let i = 0; i < n; i++)
+        s += part;
+    return s;
+};
+exports.rep = rep;

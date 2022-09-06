@@ -15,3 +15,11 @@ export const str = (x: any) => x+''
  * - `x` — the string
  */
 export const startsWith = (p: string) => (x: string) => x.startsWith(p);
+
+/** return a string that repeats `part` `n` times */
+export const rep = (part: string) => (n: number): string => {
+    let s = ''
+    for (let i = 0; i < n; i++)
+        s += part
+    return s
+}
