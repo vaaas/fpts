@@ -355,3 +355,23 @@ export function each<T>(f: (x: T) => void): (xs: Iterable<T>) => void {
 			f(x)
 	}
 }
+
+/** partition iterable in two halves depending on a boolean function
+ *
+ * elements for which the function returns true are inserted to the right
+ *
+ * elements for which the function returns false are inserted to the left
+ */
+export function partition<A, L, R>(f: Unary<A, boolean>): (xs: Iterable<A>) => [L[], R[]] {
+	return function(xs) {
+		const ls: L[] = []
+		const rs: R[] = []
+
+		for (const x of xs)
+			if (f(x))
+				rs.push(x as any as R)
+			else
+				ls.push(x as any as L)
+		return [ls, rs]
+	}
+}
