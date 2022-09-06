@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.into = exports.defaults = exports.foldr = exports.foldl = exports.filterWithKeys = exports.filter = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
+exports.defined = exports.into = exports.defaults = exports.foldr = exports.foldl = exports.filterWithKeys = exports.filter = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
 /** return the entries of an object */
 function entries(o) {
     return Object.entries(o);
@@ -122,3 +122,12 @@ function into(o) {
     };
 }
 exports.into = into;
+/** filter out keys of an object whose values are undefined */
+function defined(x) {
+    const y = {};
+    for (const [k, v] of entries(x))
+        if (v !== undefined)
+            y[k] = v;
+    return y;
+}
+exports.defined = defined;

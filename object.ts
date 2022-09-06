@@ -125,3 +125,12 @@ export function into<R extends Record<string|number|symbol, any>>(o: R): <K exte
         }
     }
 }
+
+/** filter out keys of an object whose values are undefined */
+export function defined<T extends Record<any, any>>(x: T): Partial<T> {
+    const y: Partial<T> = {};
+    for (const [k, v] of entries(x))
+        if (v !== undefined)
+            y[k] = v
+    return y;
+}

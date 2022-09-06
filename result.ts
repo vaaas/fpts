@@ -1,4 +1,4 @@
-import { Nullary, Unary, Binary } from './data'
+import { Unary, Binary } from './data'
 
 /** the result type is either a value or an error.
  * in other words, it defines the Either monad as a type union.
@@ -83,4 +83,18 @@ export function lift2<A, B, C>(f: Binary<A, B, C>): (a: Result<A>) => (b: Result
                 return f(a)(b)
         }
     }
+}
+
+/** extract from an iterable of results all the correct results as an array
+ *
+ * if at least one is an error, return that error and abort execution prematurely as an optimisation
+ */
+export function every<T>(xs: Iterable<Result<T>>): Array<T> | Error {
+    const ys: T[] = []
+    for (const x of xs)
+        if (x instanceof Error)
+            return x
+        else
+            ys.push(x)
+    return ys
 }

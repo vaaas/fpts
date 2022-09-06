@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.lift2 = exports.unwrap = exports.isNothing = exports.isError = exports.fold = exports.apply = exports.bind = exports.map = void 0;
+exports.every = exports.lift2 = exports.unwrap = exports.isNothing = exports.isError = exports.fold = exports.apply = exports.bind = exports.map = void 0;
 /** given a transformation **A** → **B**
  * apply it to a result **A** only if it isn't an error
  * such that it becomes a result of **B**
@@ -80,3 +80,17 @@ function lift2(f) {
     };
 }
 exports.lift2 = lift2;
+/** extract from an iterable of results all the correct results as an array
+ *
+ * if at least one is an error, return that error and abort execution prematurely as an optimisation
+ */
+function every(xs) {
+    const ys = [];
+    for (const x of xs)
+        if (x instanceof Error)
+            return x;
+        else
+            ys.push(x);
+    return ys;
+}
+exports.every = every;
