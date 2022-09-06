@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sleep = exports.next_tick = exports.next_frame = void 0;
+exports.bind = exports.map = exports.sleep = exports.next_tick = exports.next_frame = void 0;
 function next_frame() {
     return new Promise((yes) => {
         requestAnimationFrame(() => yes());
@@ -15,3 +15,15 @@ function sleep(n) {
     return new Promise(yes => setTimeout(() => yes(), n));
 }
 exports.sleep = sleep;
+function map(f) {
+    return function (x) {
+        return x.then(f);
+    };
+}
+exports.map = map;
+function bind(f) {
+    return function (x) {
+        return x.then(f);
+    };
+}
+exports.bind = bind;
