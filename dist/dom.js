@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.$$ = exports.$ = exports.qss = exports.qs = void 0;
+const qs = (q) => (x) => x.querySelector(q);
+exports.qs = qs;
+const qss = (q) => (x) => x.querySelectorAll(q);
+exports.qss = qss;
+const $ = (q) => document.querySelector(q);
+exports.$ = $;
+const $$ = (q) => document.querySelectorAll(q);
+exports.$$ = $$;
