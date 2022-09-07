@@ -186,6 +186,10 @@ export function compose(...fs: any): (x: any) => any {
 	}
 }
 
+/** spy on a function's calls, recording them
+ *
+ * calls can be accessed through the `.calls` property
+ */
 export function spy(f: Function): Function & { calls: any[] } {
     const calls: any[] = [];
     function wrapped() {
@@ -194,4 +198,13 @@ export function spy(f: Function): Function & { calls: any[] } {
     }
     wrapped.calls = calls;
     return wrapped;
+}
+
+/** only allow a function to be executed once. future calls will return `undefined` */
+export function once<A extends Array<any>, B>(f: (...xs: A) => B) {
+	let inner = (...xs: A) => {
+		inner = () => undefined as any as B;
+		return f(...xs);
+	};
+	return inner;
 }

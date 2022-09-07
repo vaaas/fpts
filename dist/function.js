@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.spy = exports.compose = exports.pipe = void 0;
+exports.once = exports.spy = exports.compose = exports.pipe = void 0;
 function pipe(x, ...fs) {
     let a = x;
     for (const f of fs)
@@ -17,6 +17,10 @@ function compose(...fs) {
     };
 }
 exports.compose = compose;
+/** spy on a function's calls, recording them
+ *
+ * calls can be accessed through the `.calls` property
+ */
 function spy(f) {
     const calls = [];
     function wrapped() {
@@ -27,3 +31,12 @@ function spy(f) {
     return wrapped;
 }
 exports.spy = spy;
+/** only allow a function to be executed once. future calls will return `undefined` */
+function once(f) {
+    let inner = (...xs) => {
+        inner = () => undefined;
+        return f(...xs);
+    };
+    return inner;
+}
+exports.once = once;
