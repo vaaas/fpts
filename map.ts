@@ -16,3 +16,15 @@ export function set<K>(k: K): <V>(x: V) => (xs: Map<K, V>) => Map<K, V> {
         };
     };
 }
+
+export function of<A, B>(xs: Iterable<[A, B]>): Map<A, B> {
+    return new Map(xs);
+}
+
+export function values<A, B>(xs: Map<A, B>): Iterable<B> {
+    return xs.values();
+}
+
+export function keys<A, B>(xs: Map<A, B>): Iterable<A> {
+    return xs.keys();
+}

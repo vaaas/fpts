@@ -1,4 +1,8 @@
 import { Unary } from './data'
+import { prefix } from './duad'
+import { map as imap } from './iter'
+import { of as mof, values } from './map'
+import { compose } from './function'
 
 /** return the first element of an array */
 export function first<T>(xs: Array<T>): T|undefined {
@@ -39,4 +43,12 @@ export function bind<A, B>(f: Unary<A, Array<B>>): Unary<Array<A>, Array<B>> {
 /** return iterable without any duplicates */
 export function unique<T>(xs: Iterable<T>): Array<T> {
 	return Array.from(new Set(xs))
+}
+
+/** return iterable without any duplicates
+ *
+ * the key by which an iterable is defined as a duplicate is provided by the function `f`
+ */
+export function uniqueBy<A, B>(f: Unary<A, B>): (xs: Iterable<A>) => Array<A> {
+	return compose(imap(prefix(f)), mof, values, of);
 }

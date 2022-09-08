@@ -1,6 +1,6 @@
 {
     "name": "fpts",
-    "version": "1.0.29",
+    "version": "1.0.30",
     "license": "MIT",
     "scripts": {
         "build": "tsc",
@@ -16,6 +16,7 @@
         "./duad": "./dist/duad.js",
         "./function": "./dist/function.js",
         "./iter": "./dist/iter.js",
+        "./logging": "./dist/logging.js",
         "./map": "./dist/map.js",
         "./maths": "./dist/maths.js",
         "./object": "./dist/object.js",

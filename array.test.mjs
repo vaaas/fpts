@@ -139,4 +139,21 @@ describe('array', () => {
             )
         })
     })
+
+    describe('uniqueBy', () => {
+        it('should remove duplicates by key', () => {
+            const xs = [1,2,3,4,1].map((x, i) => ({x, i}))
+            const result = array.uniqueBy(x => x.x)(xs)
+            assert.equal(result.length, 4)
+            assert.deepEqual(
+                result,
+                [
+                    { x: 1, i: 4 },
+                    { x: 2, i: 1 },
+                    { x: 3, i: 2 },
+                    { x: 4, i: 3 },
+                ]
+            )
+        })
+    })
 })

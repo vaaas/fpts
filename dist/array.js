@@ -1,6 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unique = exports.bind = exports.filter = exports.map = exports.of = exports.last = exports.first = void 0;
+exports.uniqueBy = exports.unique = exports.bind = exports.filter = exports.map = exports.of = exports.last = exports.first = void 0;
+const duad_1 = require("./duad");
+const iter_1 = require("./iter");
+const map_1 = require("./map");
+const function_1 = require("./function");
 /** return the first element of an array */
 function first(xs) {
     return xs[0];
@@ -42,3 +46,11 @@ function unique(xs) {
     return Array.from(new Set(xs));
 }
 exports.unique = unique;
+/** return iterable without any duplicates
+ *
+ * the key by which an iterable is defined as a duplicate is provided by the function `f`
+ */
+function uniqueBy(f) {
+    return (0, function_1.compose)((0, iter_1.map)((0, duad_1.prefix)(f)), map_1.of, map_1.values, of);
+}
+exports.uniqueBy = uniqueBy;
