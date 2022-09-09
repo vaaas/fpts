@@ -93,3 +93,17 @@ export function lift2<A, B, C>(f: Binary<A, B, C>): (a: Option<A>) => (b: Option
         }
     }
 }
+
+/** extract from an iterable of options all the actual values as an array
+ *
+ * if at least one is undefined, return undefined prematurely as an optimisation
+ */
+ export function every<T>(xs: Iterable<Option<T>>): Option<Array<T>> {
+    const ys: T[] = []
+    for (const x of xs)
+        if (isNothing(x))
+            return x
+        else
+            ys.push(x)
+    return ys
+}

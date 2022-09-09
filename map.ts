@@ -28,3 +28,9 @@ export function values<A, B>(xs: Map<A, B>): Iterable<B> {
 export function keys<A, B>(xs: Map<A, B>): Iterable<A> {
     return xs.keys();
 }
+
+export function get<A, B>(k: A): (xs: Map<A, B>) => Option<B> {
+    return function (xs) {
+        return xs.get(k)
+    }
+}

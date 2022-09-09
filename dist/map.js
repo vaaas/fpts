@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.keys = exports.values = exports.of = exports.set = exports.pop = void 0;
+exports.get = exports.keys = exports.values = exports.of = exports.set = exports.pop = void 0;
 function pop(k) {
     return function (xs) {
         const v = xs.get(k);
@@ -31,3 +31,9 @@ function keys(xs) {
     return xs.keys();
 }
 exports.keys = keys;
+function get(k) {
+    return function (xs) {
+        return xs.get(k);
+    };
+}
+exports.get = get;

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.lift2 = exports.unwrap = exports.isNothing = exports.isJust = exports.maybe_ = exports.maybe = exports.apply = exports.bind = exports.map = void 0;
+exports.every = exports.lift2 = exports.unwrap = exports.isNothing = exports.isJust = exports.maybe_ = exports.maybe = exports.apply = exports.bind = exports.map = void 0;
 /** given a transformation **A** → **B**
  * apply it to an optional **A** only if it isn't undefined
  * such that it becomes an optional **B**
@@ -89,3 +89,17 @@ function lift2(f) {
     };
 }
 exports.lift2 = lift2;
+/** extract from an iterable of options all the actual values as an array
+ *
+ * if at least one is undefined, return undefined prematurely as an optimisation
+ */
+function every(xs) {
+    const ys = [];
+    for (const x of xs)
+        if (isNothing(x))
+            return x;
+        else
+            ys.push(x);
+    return ys;
+}
+exports.every = every;

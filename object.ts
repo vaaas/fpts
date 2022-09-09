@@ -134,3 +134,9 @@ export function defined<T extends Record<any, any>>(x: T): Partial<T> {
             y[k] = v
     return y;
 }
+
+export function get<R extends Record<string|symbol, any>, K extends keyof R>(k: K): (x: R) => R[K] {
+    return function (x) {
+        return x[k]
+    }
+}
