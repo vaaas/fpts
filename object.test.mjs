@@ -89,7 +89,7 @@ describe('object', () => {
     describe('filterWithKeys', () => {
         it('should remove keys and values', () => {
             assert.deepEqual(
-                object.filterWithKeys(x => x[0][0] !== '!')({a: 1, '!a': 2}),
+                object.filterWithKeys(k => v => k[0] !== '!')({a: 1, '!a': 2}),
                 {a:1}
             )
         })

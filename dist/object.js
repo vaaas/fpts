@@ -58,7 +58,7 @@ function filterWithKeys(f) {
     return function (xs) {
         const o = {};
         for (const x of entries(xs))
-            if (f(x))
+            if (f(x[0])(x[1]))
                 o[x[0]] = x[1];
         return o;
     };

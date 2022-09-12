@@ -57,11 +57,11 @@ export function filter<A, K extends string>(f: Unary<A, boolean>): (x: Record<K,
  *
  * since the keys are also passed, it is possible to filter based on keys
  */
-export function filterWithKeys<A, K extends string>(f: Unary<[K, A], boolean>): (x: Record<K, A>) => Partial<Record<K, A>> {
+export function filterWithKeys<A, K extends string>(f: Binary<K, A, boolean>): (x: Record<K, A>) => Partial<Record<K, A>> {
     return function (xs) {
         const o: Partial<Record<K, A>> = {}
         for (const x of entries(xs))
-            if (f(x))
+            if (f(x[0])(x[1]))
                 o[x[0]] = x[1]
         return o
     }
