@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.uniqueBy = exports.unique = exports.bind = exports.filter = exports.map = exports.of = exports.last = exports.first = void 0;
+exports.tail = exports.uniqueBy = exports.unique = exports.bind = exports.filter = exports.map = exports.of = exports.last = exports.first = void 0;
 const duad_1 = require("./duad");
 const iter_1 = require("./iter");
 const map_1 = require("./map");
@@ -54,3 +54,8 @@ function uniqueBy(f) {
     return (0, function_1.compose)((0, iter_1.map)((0, duad_1.prefix)(f)), map_1.of, map_1.values, of);
 }
 exports.uniqueBy = uniqueBy;
+/** return every element of an array except the first */
+function tail(xs) {
+    return xs.slice(1);
+}
+exports.tail = tail;

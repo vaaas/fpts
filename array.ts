@@ -52,3 +52,8 @@ export function unique<T>(xs: Iterable<T>): Array<T> {
 export function uniqueBy<A, B>(f: Unary<A, B>): (xs: Iterable<A>) => Array<A> {
 	return compose(imap(prefix(f)), mof, values, of);
 }
+
+/** return every element of an array except the first */
+export function tail<T>(xs: T[]): T[] {
+	return xs.slice(1);
+}

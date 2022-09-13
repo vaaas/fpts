@@ -22,4 +22,66 @@ describe('map', () => {
             assert.equal(result, undefined)
         })
     })
+
+    describe('groupBy', () => {
+        it('should group values with keys provided by function', () => {
+            const xs = [
+                { test: 1, best: 'a' },
+                { test: 2, best: 'a' },
+                { test: 1, best: 'b' },
+                { test: 2, best: 'b' },
+            ]
+
+            const result = map.groupBy(x => x.test)(xs)
+            assert.deepEqual(Array.from(result), [
+                [1, [
+                    { test: 1, best: 'a' },
+                    { test: 1, best: 'b' },
+                ]],
+                [2, [
+                    { test: 2, best: 'a' },
+                    { test: 2, best: 'b' },
+                ]],
+            ])
+        })
+    })
+
+    describe('groupByN', () => {
+        it('should recursively group values', () => {
+            const xs = [
+                { test: 1, best: 'a', rest: true },
+                { test: 1, best: 'a', rest: false },
+                { test: 2, best: 'a', rest: true },
+                { test: 2, best: 'a', rest: false },
+                { test: 1, best: 'b', rest: true },
+                { test: 1, best: 'b', rest: false },
+                { test: 2, best: 'b', rest: true },
+                { test: 2, best: 'b', rest: false },
+            ]
+
+            const result = map.groupByN(x => x.test, x => x.best)(xs)
+            assert.deepEqual(Array.from(result).map(x => [x[0], Array.from(x[1])]), [
+                [1, [
+                    ['a', [
+                        { test: 1, best: 'a', rest: true },
+                        { test: 1, best: 'a', rest: false },
+                    ]],
+                    ['b', [
+                        { test: 1, best: 'b', rest: true },
+                        { test: 1, best: 'b', rest: false },
+                    ]]
+                ]],
+                [2, [
+                    ['a', [
+                        { test: 2, best: 'a', rest: true },
+                        { test: 2, best: 'a', rest: false },
+                    ]],
+                    ['b', [
+                        { test: 2, best: 'b', rest: true },
+                        { test: 2, best: 'b', rest: false },
+                    ]]
+                ]],
+            ])
+        })
+    })
 })
