@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.clamp = exports.Grandi = exports.Integers = exports.Naturals = exports.mult = exports.add = exports.neg = exports.randint = void 0;
+exports.seq = exports.clamp = exports.Grandi = exports.Integers = exports.Naturals = exports.mult = exports.add = exports.neg = exports.randint = void 0;
 /** return a random integer in the range [a, b) */
 function randint(a, b) {
     return a + Math.floor(Math.random() * (b - a));
@@ -52,3 +52,9 @@ function clamp(min, max) {
     };
 }
 exports.clamp = clamp;
+/** create a sequence of integers starting from min and ending in max (inclusive) */
+function* seq(min, max) {
+    for (let i = min; i <= max; i++)
+        yield i;
+}
+exports.seq = seq;

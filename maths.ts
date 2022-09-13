@@ -44,3 +44,8 @@ export function clamp(min: number, max: number): (x: number) => number {
 		else return x;
 	}
 }
+
+/** create a sequence of integers starting from min and ending in max (inclusive) */
+export function* seq(min: number, max: number): Iterable<Number> {
+	for (let i = min; i <= max; i++) yield i
+}
