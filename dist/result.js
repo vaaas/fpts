@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.every = exports.lift2 = exports.unwrap = exports.isNothing = exports.isError = exports.fold = exports.apply = exports.bind = exports.map = void 0;
+exports.pipe = exports.every = exports.lift2 = exports.unwrap = exports.isNothing = exports.isError = exports.fold = exports.apply = exports.bind = exports.map = void 0;
 /** given a transformation **A** → **B**
  * apply it to a result **A** only if it isn't an error
  * such that it becomes a result of **B**
@@ -94,3 +94,13 @@ function every(xs) {
     return ys;
 }
 exports.every = every;
+function pipe(x, ...fs) {
+    let a = x;
+    for (const f of fs) {
+        a = f(a);
+        if (a instanceof Error)
+            return a;
+    }
+    return a;
+}
+exports.pipe = pipe;

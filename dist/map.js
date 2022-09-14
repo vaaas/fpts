@@ -1,7 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.groupByN = exports.update = exports.groupBy = exports.get = exports.keys = exports.values = exports.of = exports.set = exports.pop = void 0;
+exports.groupByN = exports.groupBy = exports.update = exports.get = exports.keys = exports.values = exports.invert = exports.ofK = exports.ofVN = exports.ofV = exports.of = exports.set = exports.pop = void 0;
 const array_1 = require("./array");
+/** UNSAFE!
+ *
+ * remove a key from a map and return its value, if it exists
+ */
 function pop(k) {
     return function (xs) {
         const v = xs.get(k);
@@ -10,6 +14,10 @@ function pop(k) {
     };
 }
 exports.pop = pop;
+/** UNSAFE!
+ *
+ * set a key to a value in a map
+ */
 function set(k) {
     return function (x) {
         return function (xs) {
@@ -20,24 +28,87 @@ function set(k) {
     };
 }
 exports.set = set;
+/** make a map out of any iterable of tuples */
 function of(xs) {
     return new Map(xs);
 }
 exports.of = of;
+/** make a map out of any iterable of values
+ *
+ * keys are retrieved by the provided function
+ */
+function ofV(f) {
+    return function (xs) {
+        const m = new Map();
+        for (const x of xs)
+            m.set(f(x), x);
+        return m;
+    };
+}
+exports.ofV = ofV;
+function ofVN(...fs) {
+    return function (xs) {
+        if (fs.length === 1)
+            return ofV(fs[0])(xs);
+        // @ts-ignore
+        return update(ofVN(...(0, array_1.tail)(fs)))(ofV(fs[0])(xs));
+    };
+}
+exports.ofVN = ofVN;
+/** make a map out of any iterable of keys
+ *
+ * values are retrievedd by the provided function
+ */
+function ofK(f) {
+    return function (xs) {
+        const m = new Map();
+        for (const x of xs)
+            m.set(x, f(x));
+        return m;
+    };
+}
+exports.ofK = ofK;
+/** make a map's keys its values and vice versa */
+function invert(xs) {
+    const m = new Map();
+    for (const [k, v] of xs)
+        m.set(v, k);
+    return m;
+}
+exports.invert = invert;
+/** retrieve all of a map's values as an iterable */
 function values(xs) {
     return xs.values();
 }
 exports.values = values;
+/** retrieve all of a map's keys as an iterable */
 function keys(xs) {
     return xs.keys();
 }
 exports.keys = keys;
+/** get a value out of a map using a key */
 function get(k) {
     return function (xs) {
         return xs.get(k);
     };
 }
 exports.get = get;
+/** **UNSAFE**
+ *
+ * given a mapping from **A** to **B**, update a Map of **As** into a Map of **Bs** **in place**
+ */
+function update(f) {
+    return function (xs) {
+        for (const [k, v] of xs)
+            xs.set(k, f(v));
+        return xs;
+    };
+}
+exports.update = update;
+/** group an iterable of **As** into a Map of **As**, where the keys are the values they are grouped under
+ *
+ * the key is provided by a key function **f**
+ */
 function groupBy(f) {
     return function (xs) {
         const groups = new Map();
@@ -52,18 +123,6 @@ function groupBy(f) {
     };
 }
 exports.groupBy = groupBy;
-/** **UNSAFE**
- *
- * given a mapping from **A** to **B**, update a Map of **As** into a Map of **Bs** **in place**
- */
-function update(f) {
-    return function (xs) {
-        for (const [k, v] of xs)
-            xs.set(k, f(v));
-        return xs;
-    };
-}
-exports.update = update;
 function groupByN(...fs) {
     return function (xs) {
         if (fs.length === 1)

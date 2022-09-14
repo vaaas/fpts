@@ -107,3 +107,102 @@ export function lift2<A, B, C>(f: Binary<A, B, C>): (a: Option<A>) => (b: Option
             ys.push(x)
     return ys
 }
+
+/** pipe an argument through a number of functions
+ *
+ * if any of the functions return undefined, exit immediately, returning undefined as an optimisation
+ */
+export function pipe<A, B>(
+	x: A,
+	a: Unary<A, Option<B>>,
+): Option<B>
+export function pipe<A, B, C>(
+	x: A,
+	a: Unary<A, Option<B>>,
+	b: Unary<B, Option<C>>,
+): Option<C>
+export function pipe<A, B, C, D>(
+	x: A,
+	a: Unary<A, Option<B>>,
+	b: Unary<B, Option<C>>,
+	c: Unary<C, Option<D>>,
+): Option<D>
+export function pipe<A, B, C, D, E>(
+	x: A,
+	a: Unary<A, Option<B>>,
+	b: Unary<B, Option<C>>,
+	c: Unary<C, Option<D>>,
+	d: Unary<D, Option<E>>,
+): Option<E>
+export function pipe<A, B, C, D, E, F>(
+	x: A,
+	a: Unary<A, Option<B>>,
+	b: Unary<B, Option<C>>,
+	c: Unary<C, Option<D>>,
+	d: Unary<D, Option<E>>,
+	e: Unary<E, Option<F>>,
+): Option<F>
+export function pipe<A, B, C, D, E, F, G>(
+	x: A,
+	a: Unary<A, Option<B>>,
+	b: Unary<B, Option<C>>,
+	c: Unary<C, Option<D>>,
+	d: Unary<D, Option<E>>,
+	e: Unary<E, Option<F>>,
+	f: Unary<F, Option<G>>,
+): Option<G>
+export function pipe<A, B, C, D, E, F, G, H>(
+	x: A,
+	a: Unary<A, Option<B>>,
+	b: Unary<B, Option<C>>,
+	c: Unary<C, Option<D>>,
+	d: Unary<D, Option<E>>,
+	e: Unary<E, Option<F>>,
+	f: Unary<F, Option<G>>,
+	g: Unary<G, Option<H>>,
+): Option<H>
+export function pipe<A, B, C, D, E, F, G, H, I>(
+	x: A,
+	a: Unary<A, Option<B>>,
+	b: Unary<B, Option<C>>,
+	c: Unary<C, Option<D>>,
+	d: Unary<D, Option<E>>,
+	e: Unary<E, Option<F>>,
+	f: Unary<F, Option<G>>,
+	g: Unary<G, Option<H>>,
+	h: Unary<H, Option<I>>,
+): Option<I>
+export function pipe<A, B, C, D, E, F, G, H, I, J>(
+	x: A,
+	a: Unary<A, Option<B>>,
+	b: Unary<B, Option<C>>,
+	c: Unary<C, Option<D>>,
+	d: Unary<D, Option<E>>,
+	e: Unary<E, Option<F>>,
+	f: Unary<F, Option<G>>,
+	g: Unary<G, Option<H>>,
+	h: Unary<H, Option<I>>,
+	i: Unary<I, Option<J>>,
+): Option<J>
+export function pipe<A, B, C, D, E, F, G, H, I, J, K>(
+	x: A,
+	a: Unary<A, Option<B>>,
+	b: Unary<B, Option<C>>,
+	c: Unary<C, Option<D>>,
+	d: Unary<D, Option<E>>,
+	e: Unary<E, Option<F>>,
+	f: Unary<F, Option<G>>,
+	g: Unary<G, Option<H>>,
+	h: Unary<H, Option<I>>,
+	i: Unary<I, Option<J>>,
+	j: Unary<J, Option<K>>,
+): Option<K>
+export function pipe(x: any, ...fs: Array<Unary<any, Option<any>>>): any {
+	let a = x
+	for (const f of fs) {
+		a = f(a)
+		if (a === undefined)
+			return a
+	}
+	return a
+}

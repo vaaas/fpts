@@ -98,3 +98,102 @@ export function every<T>(xs: Iterable<Result<T>>): Array<T> | Error {
             ys.push(x)
     return ys
 }
+
+/** pipe an argument through a number of functions
+ *
+ * if any of the functions return an error, exit immediately, returning the first error as an optimisation
+ */
+export function pipe<A, B>(
+	x: A,
+	a: Unary<A, Result<B>>,
+): Result<B>
+export function pipe<A, B, C>(
+	x: A,
+	a: Unary<A, Result<B>>,
+	b: Unary<B, Result<C>>,
+): Result<C>
+export function pipe<A, B, C, D>(
+	x: A,
+	a: Unary<A, Result<B>>,
+	b: Unary<B, Result<C>>,
+	c: Unary<C, Result<D>>,
+): Result<D>
+export function pipe<A, B, C, D, E>(
+	x: A,
+	a: Unary<A, Result<B>>,
+	b: Unary<B, Result<C>>,
+	c: Unary<C, Result<D>>,
+	d: Unary<D, Result<E>>,
+): Result<E>
+export function pipe<A, B, C, D, E, F>(
+	x: A,
+	a: Unary<A, Result<B>>,
+	b: Unary<B, Result<C>>,
+	c: Unary<C, Result<D>>,
+	d: Unary<D, Result<E>>,
+	e: Unary<E, Result<F>>,
+): Result<F>
+export function pipe<A, B, C, D, E, F, G>(
+	x: A,
+	a: Unary<A, Result<B>>,
+	b: Unary<B, Result<C>>,
+	c: Unary<C, Result<D>>,
+	d: Unary<D, Result<E>>,
+	e: Unary<E, Result<F>>,
+	f: Unary<F, Result<G>>,
+): Result<G>
+export function pipe<A, B, C, D, E, F, G, H>(
+	x: A,
+	a: Unary<A, Result<B>>,
+	b: Unary<B, Result<C>>,
+	c: Unary<C, Result<D>>,
+	d: Unary<D, Result<E>>,
+	e: Unary<E, Result<F>>,
+	f: Unary<F, Result<G>>,
+	g: Unary<G, Result<H>>,
+): Result<H>
+export function pipe<A, B, C, D, E, F, G, H, I>(
+	x: A,
+	a: Unary<A, Result<B>>,
+	b: Unary<B, Result<C>>,
+	c: Unary<C, Result<D>>,
+	d: Unary<D, Result<E>>,
+	e: Unary<E, Result<F>>,
+	f: Unary<F, Result<G>>,
+	g: Unary<G, Result<H>>,
+	h: Unary<H, Result<I>>,
+): Result<I>
+export function pipe<A, B, C, D, E, F, G, H, I, J>(
+	x: A,
+	a: Unary<A, Result<B>>,
+	b: Unary<B, Result<C>>,
+	c: Unary<C, Result<D>>,
+	d: Unary<D, Result<E>>,
+	e: Unary<E, Result<F>>,
+	f: Unary<F, Result<G>>,
+	g: Unary<G, Result<H>>,
+	h: Unary<H, Result<I>>,
+	i: Unary<I, Result<J>>,
+): Result<J>
+export function pipe<A, B, C, D, E, F, G, H, I, J, K>(
+	x: A,
+	a: Unary<A, Result<B>>,
+	b: Unary<B, Result<C>>,
+	c: Unary<C, Result<D>>,
+	d: Unary<D, Result<E>>,
+	e: Unary<E, Result<F>>,
+	f: Unary<F, Result<G>>,
+	g: Unary<G, Result<H>>,
+	h: Unary<H, Result<I>>,
+	i: Unary<I, Result<J>>,
+	j: Unary<J, Result<K>>,
+): Result<K>
+export function pipe(x: any, ...fs: Array<Unary<any, Result<any>>>): any {
+	let a = x
+	for (const f of fs) {
+		a = f(a)
+		if (a instanceof Error)
+			return a
+	}
+	return a
+}

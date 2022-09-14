@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.then = exports.bind = exports.map = exports.sleep = exports.next_tick = exports.next_frame = void 0;
+exports.pipe = exports.then = exports.bind = exports.map = exports.sleep = exports.next_tick = exports.next_frame = void 0;
 function next_frame() {
     return new Promise((yes) => {
         requestAnimationFrame(() => yes());
@@ -33,3 +33,10 @@ function then(f) {
     };
 }
 exports.then = then;
+async function pipe(x, ...fs) {
+    let a = x;
+    for (const f of fs)
+        a = await f(a);
+    return a;
+}
+exports.pipe = pipe;
