@@ -93,7 +93,7 @@ export function pipe<A, B, C, D, E, F, G, H, I, J, K>(
 	i: Unary<I, J>,
 	j: Unary<J, K>,
 ): K
-export function pipe(x: any, ...fs: Array<any>): any {
+export function pipe(x: any, ...fs: Array<Unary<any, any>>): any {
 	let a = x
 	for (const f of fs) a = f(a)
 	return a
@@ -178,7 +178,7 @@ export function compose<A, B, C, D, E, F, G, H, I, J, K>(
 	i: Unary<I, J>,
 	j: Unary<J, K>,
 ): Unary<A, K>
-export function compose(...fs: any): (x: any) => any {
+export function compose(...fs: Array<Unary<any, any>>): (x: any) => any {
 	return function(x) {
 		let a = x
 		for (const f of fs) a = f(a)
