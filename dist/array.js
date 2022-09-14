@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.tail = exports.uniqueBy = exports.unique = exports.bind = exports.filter = exports.map = exports.of = exports.last = exports.first = void 0;
+exports.joinWith = exports.tail = exports.uniqueBy = exports.unique = exports.bind = exports.filter = exports.map = exports.of = exports.last = exports.first = void 0;
 const duad_1 = require("./duad");
 const iter_1 = require("./iter");
 const map_1 = require("./map");
@@ -59,3 +59,9 @@ function tail(xs) {
     return xs.slice(1);
 }
 exports.tail = tail;
+function joinWith(s) {
+    return function (xs) {
+        return xs.join(s);
+    };
+}
+exports.joinWith = joinWith;

@@ -20,6 +20,13 @@ export function mult(a: number): (b: number) => number {
 	}
 }
 
+/** divide two numbers */
+export function div(a: number): (b: number) => number {
+	return function(b) {
+		return b/a
+	}
+}
+
 /** the natural numbers. infinite iterable */
 export function* Naturals() {
 	for (let i = 0; true; i++) yield i

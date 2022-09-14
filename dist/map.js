@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.groupByN = exports.groupBy = exports.update = exports.get = exports.keys = exports.values = exports.invert = exports.ofK = exports.ofVN = exports.ofV = exports.of = exports.set = exports.pop = void 0;
+exports.groupByN = exports.groupBy = exports.update = exports.get = exports.keys = exports.values = exports.invert = exports.ofKV = exports.ofK = exports.ofVN = exports.ofV = exports.of = exports.set = exports.pop = void 0;
 const array_1 = require("./array");
 /** UNSAFE!
  *
@@ -57,7 +57,7 @@ function ofVN(...fs) {
 exports.ofVN = ofVN;
 /** make a map out of any iterable of keys
  *
- * values are retrievedd by the provided function
+ * values are retrieved by the provided function
  */
 function ofK(f) {
     return function (xs) {
@@ -68,6 +68,19 @@ function ofK(f) {
     };
 }
 exports.ofK = ofK;
+/** make a map out of any iterable
+ *
+ * keys are retrieved by the first function, and values by the second
+ */
+function ofKV(f, g) {
+    return function (xs) {
+        const m = new Map();
+        for (const x of xs)
+            m.set(f(x), g(x));
+        return m;
+    };
+}
+exports.ofKV = ofKV;
 /** make a map's keys its values and vice versa */
 function invert(xs) {
     const m = new Map();

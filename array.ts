@@ -57,3 +57,9 @@ export function uniqueBy<A, B>(f: Unary<A, B>): (xs: Iterable<A>) => Array<A> {
 export function tail<T>(xs: T[]): T[] {
 	return xs.slice(1);
 }
+
+export function joinWith(s: string): (xs: Array<string>) => string {
+	return function (xs) {
+		return xs.join(s)
+	}
+}

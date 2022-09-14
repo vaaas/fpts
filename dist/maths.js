@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.seq = exports.clamp = exports.Grandi = exports.Integers = exports.Naturals = exports.mult = exports.add = exports.neg = exports.randint = void 0;
+exports.seq = exports.clamp = exports.Grandi = exports.Integers = exports.Naturals = exports.div = exports.mult = exports.add = exports.neg = exports.randint = void 0;
 /** return a random integer in the range [a, b) */
 function randint(a, b) {
     return a + Math.floor(Math.random() * (b - a));
@@ -23,6 +23,13 @@ function mult(a) {
     };
 }
 exports.mult = mult;
+/** divide two numbers */
+function div(a) {
+    return function (b) {
+        return b / a;
+    };
+}
+exports.div = div;
 /** the natural numbers. infinite iterable */
 function* Naturals() {
     for (let i = 0; true; i++)
