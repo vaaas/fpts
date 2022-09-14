@@ -80,13 +80,26 @@ export function ofVN(...fs: Array<Unary<any, any>>): (xs: Iterable<any>) => Map<
 
 /** make a map out of any iterable of keys
  *
- * values are retrievedd by the provided function
+ * values are retrieved by the provided function
  */
 export function ofK<K, V>(f: Unary<K, V>): (xs: Iterable<K>) => Map<K, V> {
 	return function (xs) {
 		const m = new Map<K, V>()
 		for (const x of xs)
 			m.set(x, f(x))
+		return m
+	}
+}
+
+/** make a map out of any iterable
+ *
+ * keys are retrieved by the first function, and values by the second
+ */
+export function ofKV<T, K, V>(f: Unary<T, K>, g: Unary<T, V>): (xs: Iterable<T>) => Map<K, V> {
+	return function (xs) {
+		const m = new Map<K, V>()
+		for (const x of xs)
+			m.set(f(x), g(x))
 		return m
 	}
 }
