@@ -84,4 +84,42 @@ describe('map', () => {
             ])
         })
     })
+
+    describe('ofVN', () => {
+        it('should create recursive maps', () => {
+            const xs = [
+                { test: 1, best: 'a', rest: true },
+                { test: 1, best: 'a', rest: false },
+                { test: 2, best: 'a', rest: true },
+                { test: 2, best: 'a', rest: false },
+                { test: 1, best: 'b', rest: true },
+                { test: 1, best: 'b', rest: false },
+                { test: 2, best: 'b', rest: true },
+                { test: 2, best: 'b', rest: false },
+            ];
+            const result = map.ofVN(x => x.test, x => x.best, x => x.rest)(xs);
+            assert.deepEqual(Array.from(result).map(x => [x[0], Array.from(x[1]).map(x => [x[0], Array.from(x[1])])]), [
+                [1, [
+                    ['a', [
+                        [true, { test: 1, best: 'a', rest: true }],
+                        [false, { test: 1, best: 'a', rest: false }],
+                    ]],
+                    ['b', [
+                        [true, { test: 1, best: 'b', rest: true }],
+                        [false, { test: 1, best: 'b', rest: false }],
+                    ]]
+                ]],
+                [2, [
+                    ['a', [
+                        [true, { test: 2, best: 'a', rest: true }],
+                        [false, { test: 2, best: 'a', rest: false }],
+                    ]],
+                    ['b', [
+                        [true, { test: 2, best: 'b', rest: true }],
+                        [false, { test: 2, best: 'b', rest: false }],
+                    ]]
+                ]],
+            ]);
+        })
+    })
 })

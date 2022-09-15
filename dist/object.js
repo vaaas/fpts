@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.get = exports.defined = exports.into = exports.defaults = exports.foldr = exports.foldl = exports.filterWithKeys = exports.filter = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
+exports.merge = exports.get = exports.defined = exports.into = exports.defaults = exports.foldr = exports.foldl = exports.filterWithKeys = exports.filter = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
 /** return the entries of an object */
 function entries(o) {
     return Object.entries(o);
@@ -137,3 +137,10 @@ function get(k) {
     };
 }
 exports.get = get;
+/** merge two objects into one object */
+function merge(a) {
+    return function (b) {
+        return { ...a, ...b };
+    };
+}
+exports.merge = merge;

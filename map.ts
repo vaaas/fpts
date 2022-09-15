@@ -73,8 +73,9 @@ export function ofVN(...fs: Array<Unary<any, any>>): (xs: Iterable<any>) => Map<
 	return function (xs) {
 		if (fs.length === 1)
 			return ofV(fs[0]!)(xs)
-		// @ts-ignore
-		return update(ofVN(...tail(fs)))(ofV(fs[0]!)(xs))
+		else
+			// @ts-ignore
+			return update(ofVN(...tail(fs)))(groupBy(fs[0]!)(xs))
 	}
 }
 

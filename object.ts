@@ -140,3 +140,10 @@ export function get<R extends Record<string|symbol, any>, K extends keyof R>(k: 
         return x[k]
     }
 }
+
+/** merge two objects into one object */
+export function merge<T extends Record<string, any>>(a: Partial<T>): (b: T) => T {
+    return function (b) {
+        return { ...a, ...b }
+    }
+}
