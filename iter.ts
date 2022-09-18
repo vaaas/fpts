@@ -2,6 +2,7 @@ import { D1 } from './combinator'
 import { Unary, Binary } from './data'
 import { add } from './maths'
 import { concat, concatWith } from './string'
+import { Option } from './option'
 
 /** get the iterator of any iterable
  * like python's iter
@@ -373,5 +374,15 @@ export function partition<A, L, R>(f: Unary<A, boolean>): (xs: Iterable<A>) => [
 			else
 				ls.push(x as any as L)
 		return [ls, rs]
+	}
+}
+
+/** search a collection for the first item for which a function returns true */
+export function find<T>(f: Unary<T, boolean>): (x: Iterable<T>) => Option<T> {
+	return function(xs) {
+		for (const x of xs)
+			if (f(x))
+				return x
+		return undefined
 	}
 }

@@ -48,14 +48,11 @@ function ofV(f) {
 exports.ofV = ofV;
 function ofVN(...fs) {
     return function (xs) {
-        if (fs.length === 1) {
+        if (fs.length === 1)
             return ofV(fs[0])(xs);
-        }
-        else {
-            console.log('!!!', groupBy(fs[0])(xs));
+        else
             // @ts-ignore
             return update(ofVN(...(0, array_1.tail)(fs)))(groupBy(fs[0])(xs));
-        }
     };
 }
 exports.ofVN = ofVN;
