@@ -1,5 +1,5 @@
 import { D1 } from './combinator'
-import { Unary, Binary } from './data'
+import { Unary, UnaryP, Binary } from './data'
 import { add } from './maths'
 import { concat, concatWith } from './string'
 import { Option } from './option'
@@ -49,7 +49,7 @@ export function bind<A, B>(f: Unary<A, Iterable<B>>): (xs: Iterable<A>) => Itera
  * generate a new collection of **As** that only contains the elements
  * for which the testing function returns *true*
  */
-export function filter<A>(f: Unary<A, boolean>): (xs: Iterable<A>) => Iterable<A> {
+export function filter<A, B extends A>(f: UnaryP<A, B> | Unary<A, boolean>): (xs: Iterable<A>) => Iterable<B> {
 	return function* (xs) {
 		for (const x of xs)
 			if (f(x))

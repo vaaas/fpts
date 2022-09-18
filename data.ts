@@ -18,6 +18,9 @@ export type Nullary<T> = () => T
 /** unary function, that maps from **A** to **B** */
 export type Unary<A, B> = (a: A) => B
 
+/** unary predicate */
+export type UnaryP<A, B extends A> = (a: A) => a is B
+
 /** binary function, that combines **A** and **B** into **C** */
 export type Binary<A, B, C> = (a: A) => (b: B) => C
 
