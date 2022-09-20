@@ -16,7 +16,7 @@ export function fromEntries<T extends Record<any, any>>(xs: Entries<T>): T {
 
 /** return an array of an object's values */
 export function values<T extends object>(xs: T): Array<T[keyof T]> {
-    return Object.values(xs)
+	return Object.values(xs)
 }
 
 /** map implementation for objects
