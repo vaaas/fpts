@@ -140,6 +140,15 @@ describe('array', () => {
         })
     })
 
+    describe('unique', () => {
+        it('should remove duplicate items in array', () => {
+            assert.deepEqual(
+                array.unique([1,1,1,2,2,3]),
+                [1,2,3]
+            )
+        })
+    })
+
     describe('uniqueBy', () => {
         it('should remove duplicates by key', () => {
             const xs = [1,2,3,4,1].map((x, i) => ({x, i}))
@@ -153,6 +162,52 @@ describe('array', () => {
                     { x: 3, i: 2 },
                     { x: 4, i: 3 },
                 ]
+            )
+        })
+    })
+
+    describe('tail', () => {
+        it('should remove the last items of an array', () => {
+            assert.deepEqual(
+                array.tail([1,2,3]),
+                [2,3]
+            )
+        })
+
+        it('should return empty array if array has only one item', () => {
+            assert.deepEqual(
+                array.tail([1]),
+                []
+            )
+        })
+
+        it('should return empty array if array is empty', () => {
+            assert.deepEqual(
+                array.tail([]),
+                []
+            )
+        })
+    })
+
+    describe('joinWith', () => {
+        it('should join all items with delimitter', () => {
+            assert.equal(
+                array.joinWith('-')([1,2,3]),
+                '1-2-3'
+            )
+        })
+
+        it('should join singletons without delimitter', () => {
+            assert.equal(
+                array.joinWith('-')([1]),
+                '1'
+            )
+        })
+
+        it('should produce empty string from empty arrays', () => {
+            assert.equal(
+                array.joinWith('-')([]),
+                ''
             )
         })
     })
