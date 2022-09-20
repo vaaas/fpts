@@ -202,9 +202,13 @@ export function spy(f: Function): Function & { calls: any[] } {
 
 /** only allow a function to be executed once. future calls will return `undefined` */
 export function once<A extends Array<any>, B>(f: (...xs: A) => B) {
-	let inner = (...xs: A) => {
-		inner = () => undefined as any as B;
-		return f(...xs);
-	};
-	return inner;
+	let called = false
+	return function(...xs: A) {
+		if (called)
+			return undefined
+		else {
+			called = true
+			return f(...xs)
+		}
+	}
 }

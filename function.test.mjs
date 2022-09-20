@@ -47,4 +47,15 @@ describe('function', () => {
             )
         })
     })
+
+    describe('once', () => {
+        it('should only allow a function to be called once', () => {
+            const test = fn.spy(() => true)
+            const once_test = fn.once(test)
+            once_test()
+            const result = once_test()
+            assert.equal(result, undefined)
+            assert.equal(test.calls.length, 1)
+        })
+    })
 })

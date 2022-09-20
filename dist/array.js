@@ -59,6 +59,7 @@ function tail(xs) {
     return xs.slice(1);
 }
 exports.tail = tail;
+/** join all elements of an array into a string, separated by a delimitter */
 function joinWith(s) {
     return function (xs) {
         return xs.join(s);

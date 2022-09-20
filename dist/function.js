@@ -33,10 +33,14 @@ function spy(f) {
 exports.spy = spy;
 /** only allow a function to be executed once. future calls will return `undefined` */
 function once(f) {
-    let inner = (...xs) => {
-        inner = () => undefined;
-        return f(...xs);
+    let called = false;
+    return function (...xs) {
+        if (called)
+            return undefined;
+        else {
+            called = true;
+            return f(...xs);
+        }
     };
-    return inner;
 }
 exports.once = once;
