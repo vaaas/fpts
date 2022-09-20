@@ -34,6 +34,12 @@ describe('maths', () => {
         })
     })
 
+    describe('div', () => {
+        it('should perform division', () => {
+            assert.equal(maths.div(2)(1), 0.5)
+        })
+    })
+
     describe('Naturals', () => {
         it('should yield the natural numbers', () => {
             assert.deepEqual(
@@ -74,4 +80,13 @@ describe('maths', () => {
             assert.equal(maths.clamp(10, 20)(15), 15)
         })
     })
+
+     describe('seq', () => {
+        it('should produce a sequence of numbers', () => {
+            assert.deepEqual(
+                Array.from(maths.seq(5, 10)),
+                [5, 6, 7, 8, 9, 10]
+            )
+        })
+     })
 })
