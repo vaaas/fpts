@@ -1,4 +1,4 @@
-import { Unary, Binary } from './data'
+import { Unary, Binary, Ternary } from './data'
 
 export type Entries<T> = Array<{
 	[K in keyof T]: [K, T[K]]
@@ -86,6 +86,15 @@ export function foldl<A, B, K extends string>(f: Binary<B, A, B>, i: B): (xs: Re
 	}
 }
 
+export function foldlWithKeys<A, B, K extends string>(f: Ternary<B, K, A, B>, i: B): (xs: Record<K, A>) => B {
+	return function (xs) {
+		let a = i
+		for (const [k, v] of entries(xs))
+			a = f(a)(k)(v)
+		return a
+	}
+}
+
 /** right fold for objects
  *
  * successively apply a binary function **B** → **A** → **A**
@@ -100,6 +109,15 @@ export function foldr<A, B, K extends string>(f: Binary<A, B, B>, i: B): (xs: Re
 		let a = i
 		for (const x of values(xs))
 			a = f(x)(a)
+		return a
+	}
+}
+
+export function foldrWithKeys<A, B, K extends string>(f: Ternary<K, A, B, B>, i: B): (xs: Record<K, A>) => B {
+	return function (xs) {
+		let a = i
+		for (const [k, v] of entries(xs))
+			a = f(k)(v)(a)
 		return a
 	}
 }

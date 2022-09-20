@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.len = exports.merge = exports.get = exports.defined = exports.into = exports.defaults = exports.foldr = exports.foldl = exports.filterWithKeys = exports.filter = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
+exports.len = exports.merge = exports.get = exports.defined = exports.into = exports.defaults = exports.foldrWithKeys = exports.foldr = exports.foldlWithKeys = exports.foldl = exports.filterWithKeys = exports.filter = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
 /** return the entries of an object */
 function entries(o) {
     return Object.entries(o);
@@ -82,6 +82,15 @@ function foldl(f, i) {
     };
 }
 exports.foldl = foldl;
+function foldlWithKeys(f, i) {
+    return function (xs) {
+        let a = i;
+        for (const [k, v] of entries(xs))
+            a = f(a)(k)(v);
+        return a;
+    };
+}
+exports.foldlWithKeys = foldlWithKeys;
 /** right fold for objects
  *
  * successively apply a binary function **B** → **A** → **A**
@@ -100,6 +109,15 @@ function foldr(f, i) {
     };
 }
 exports.foldr = foldr;
+function foldrWithKeys(f, i) {
+    return function (xs) {
+        let a = i;
+        for (const [k, v] of entries(xs))
+            a = f(k)(v)(a);
+        return a;
+    };
+}
+exports.foldrWithKeys = foldrWithKeys;
 /**
  * Set defaults on an object IN PLACE
  * returns the mutated object
