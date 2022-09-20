@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.merge = exports.get = exports.defined = exports.into = exports.defaults = exports.foldr = exports.foldl = exports.filterWithKeys = exports.filter = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
+exports.len = exports.merge = exports.get = exports.defined = exports.into = exports.defaults = exports.foldr = exports.foldl = exports.filterWithKeys = exports.filter = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
 /** return the entries of an object */
 function entries(o) {
     return Object.entries(o);
@@ -144,3 +144,8 @@ function merge(a) {
     };
 }
 exports.merge = merge;
+/** returns the number of entries any record has */
+function len(x) {
+    return Object.keys(x).length;
+}
+exports.len = len;

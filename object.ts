@@ -147,3 +147,8 @@ export function merge<T extends Record<string, any>>(a: Partial<T>): (b: T) => T
         return { ...a, ...b }
     }
 }
+
+/** returns the number of entries any record has */
+export function len(x: Record<any, any>): number {
+    return Object.keys(x).length
+}

@@ -137,4 +137,20 @@ describe('object', () => {
             )
         })
     })
+
+    describe('len', () => {
+        it('should return an object\'s length', () => {
+            assert.equal(
+                object.len({ a: 1 }),
+                1
+            )
+        })
+
+        it('should consider objects to have zero length', () => {
+            assert.equal(
+                object.len({}),
+                0
+            )
+        })
+    })
 })
