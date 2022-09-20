@@ -1,6 +1,7 @@
 import * as iter from './dist/iter.js'
 import { describe, it } from 'node:test'
 import * as assert from 'assert'
+import { spy } from './dist/function.js'
 
 const str = x => x + ''
 
@@ -324,6 +325,151 @@ describe('iter', () => {
             assert.equal(
                 iter.some(x => x > 3)(test()),
                 false,
+            )
+        })
+    })
+
+    describe('and', () => {
+        it('should return true if an argument passes all functions', () => {
+            assert.equal(
+                iter.and(x => x > 0, x => x > 1, x => x > 2)(3),
+                true
+            )
+        })
+
+        it('should return false if an argument fails to pass any function', () => {
+            assert.equal(
+                iter.and(x => x > 0, x => x > 1, x => x > 2)(2),
+                false
+            )
+        })
+    })
+
+    describe('or', () => {
+        it('should return true if an argument passes any function', () => {
+            assert.equal(
+                iter.or(x => x > 0, x => x > 1, x => x > 2)(1),
+                true
+            )
+        })
+
+        it('should return false if an argument fails to pass every function', () => {
+            assert.equal(
+                iter.or(x => x > 0, x => x > 1, x => x > 2)(0),
+                false
+            )
+        })
+    })
+
+    describe('limit', () => {
+        it('should allow only the first N items in an iterable', () => {
+            assert.deepEqual(
+                Array.from(iter.limit(3)([1,2,3,4])),
+                [1,2,3]
+            )
+        })
+
+        it('should return the iterable unchanged if the limit is larger than its length', () => {
+            assert.deepEqual(
+                Array.from(iter.limit(10)([1,2])),
+                [1, 2]
+            )
+        })
+
+        it('should return empty iterable if the limit is zero', () => {
+            assert.deepEqual(
+                Array.from(iter.limit(0)([1,2,3])),
+                []
+            )
+        })
+
+        it('should return empty iterable if the iterable it already empty', () => {
+            assert.deepEqual(
+                Array.from(iter.limit(10)([])),
+                []
+            )
+        })
+    })
+
+    describe('repeat', () => {
+        it('should infinitely repeat iterable', () => {
+            assert.deepEqual(
+                Array.from(iter.limit(10)(iter.repeat([1,2,3]))),
+                [1,2,3,1,2,3,1,2,3,1]
+            )
+        })
+
+        it('should repeat the same value if the iterable has only one value', () => {
+            assert.deepEqual(
+                Array.from(iter.limit(10)(iter.repeat([1]))),
+                [1,1,1,1,1,1,1,1,1,1]
+            )
+        })
+    })
+
+    describe('enumerate', () => {
+        it('should prepend an index to an iterable', () => {
+            assert.deepEqual(
+                Array.from(iter.enumerate([1,2,3])),
+                [[0,1], [1,2], [2,3]]
+            )
+        })
+    })
+
+    describe('zipWith', () => {
+        it('should combine two iterables with a function', () => {
+            assert.deepEqual(
+                Array.from(iter.zipWith(a => b => a + b)([1,2,3])(['1','2','3'])),
+                ['11', '22', '33']
+
+            )
+        })
+
+        it('should end early if the first iterable is shorter', () => {
+            assert.deepEqual(
+                Array.from(iter.zipWith(a => b => a + b)([1])(['1','2','3'])),
+                ['11']
+
+            )
+        })
+
+        it('should end early if the second iterable is shorter', () => {
+            assert.deepEqual(
+                Array.from(iter.zipWith(a => b => a + b)([1,2,3])(['1'])),
+                ['11']
+            )
+        })
+    })
+
+    describe('each', () => {
+        it('should call function once for each element', () => {
+            const test = spy(x => x)
+            iter.each(test)([1,2,3])
+            assert.deepEqual(test.calls, [[1], [2], [3]])
+        })
+    })
+
+    describe('partition', () => {
+        it('should split iterable in two based on predicate function', () => {
+            assert.deepEqual(
+                iter.partition(x => x % 2 == 0)([0,1,2,3]),
+                [[1, 3], [0, 2]]
+            )
+        })
+    })
+
+    describe('find', () => {
+        it('should search iterable for an item and return it', () => {
+            assert.deepEqual(
+                iter.find(x => x === 'test')([1, 2, 'test', 4]),
+                'test'
+            )
+        })
+
+        it('should return undefined if the item is not found', () => {
+            assert.deepEqual(
+                iter.find(x => x === 'test')([1,2,3,4,5]),
+                undefined
             )
         })
     })
