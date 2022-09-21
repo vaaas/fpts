@@ -30,7 +30,7 @@ export function mapr<A, B, C>(f: Unary<B, C>): (x: [A, B]) => [A, C] {
 	}
 }
 
-export function map2<A, B, C, D>(f: Unary<A, C>): (g: Unary<B, D>) => (x: [A, B]) => [C, D] {
+export function map2<A, C>(f: Unary<A, C>): <B, D>(g: Unary<B, D>) => (x: [A, B]) => [C, D] {
 	return function(g) {
 		return function(x) {
 			return [f(left(x)), g(right(x))]
