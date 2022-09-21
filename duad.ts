@@ -17,14 +17,14 @@ export function suffix<A, B>(f: Unary<A, B>): (x: A) => [A, B] {
 }
 
 /** map for duads for the left value */
-export function mapl<A, B, C>(f: Unary<A, C>): (x: [A, B]) => [C, B] {
+export function mapl<A, C>(f: Unary<A, C>): <B>(x: [A, B]) => [C, B] {
 	return function(x) {
 		return [f(left(x)), right(x)]
 	}
 }
 
 /** map for duads for the right value */
-export function mapr<A, B, C>(f: Unary<B, C>): (x: [A, B]) => [A, C] {
+export function mapr<B, C>(f: Unary<B, C>): <A>(x: [A, B]) => [A, C] {
 	return function(x) {
 		return [left(x), f(right(x))]
 	}
@@ -53,13 +53,13 @@ export function right<A, B>(x: [A, B]): B {
 	return x[1]
 }
 
-export function leftAs<A, B, C>(f: Unary<A, C>): (x: [A, B]) => C {
+export function leftAs<A, C>(f: Unary<A, C>): <B>(x: [A, B]) => C {
 	return function(x) {
 		return f(left(x))
 	}
 }
 
-export function rightAs<A, B, C>(f: Unary<B, C>): (x: [A, B]) => C {
+export function rightAs<B, C>(f: Unary<B, C>): <A>(x: [A, B]) => C {
 	return function(x) {
 		return f(right(x))
 	}
