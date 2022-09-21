@@ -16,16 +16,6 @@ export function suffix<A, B>(f: Unary<A, B>): (x: A) => [A, B] {
 	}
 }
 
-/** map for duads
- *
- * transform a duad [A, B] into a duad [C, D] through a binary function f
- */
-export function map<A, B, C, D>(f: Binary<A, B, [C, D]>): (x: [A, B]) => [C, D] {
-	return function(x) {
-		return f(left(x))(right(x))
-	}
-}
-
 /** map for duads for the left value */
 export function mapl<A, B, C>(f: Unary<A, C>): (x: [A, B]) => [C, B] {
 	return function(x) {
@@ -37,6 +27,14 @@ export function mapl<A, B, C>(f: Unary<A, C>): (x: [A, B]) => [C, B] {
 export function mapr<A, B, C>(f: Unary<B, C>): (x: [A, B]) => [A, C] {
 	return function(x) {
 		return [left(x), f(right(x))]
+	}
+}
+
+export function map2<A, B, C, D>(f: Unary<A, C>): (g: Unary<B, D>) => (x: [A, B]) => [C, D] {
+	return function(g) {
+		return function(x) {
+			return [f(left(x)), g(right(x))]
+		}
 	}
 }
 
