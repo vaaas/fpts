@@ -111,6 +111,18 @@ describe('object', () => {
         })
     })
 
+    describe('foldrWithKeys', () => {
+        it('should combine on the right with keys', () => {
+            assert.equal(
+                object.foldrWithKeys(k => v => a => a + k + v, '')({
+                    'test': 1,
+                    'best': 2,
+                }),
+                'test1best2'
+            )
+        })
+    })
+
     describe('foldl', () => {
         it('should combine on the left', () => {
             assert.equal(
@@ -123,6 +135,18 @@ describe('object', () => {
             assert.equal(
                 object.foldl(concat, '')({}),
                 ''
+            )
+        })
+    })
+
+    describe('foldrWithKeys', () => {
+        it('should combine on the left with keys', () => {
+            assert.equal(
+                object.foldlWithKeys(a => k=> v => a + k + v, '')({
+                    'test': 1,
+                    'best': 2,
+                }),
+                'test1best2'
             )
         })
     })
