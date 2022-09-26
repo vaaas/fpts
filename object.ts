@@ -1,3 +1,4 @@
+import { K } from './combinator';
 import { Unary, Binary, Ternary } from './data'
 
 export type Entries<T> = Array<{
@@ -187,4 +188,13 @@ export function merge<T extends Record<string, any>>(a: Partial<T>): (b: T) => T
 /** returns the number of entries any record has */
 export function len(x: Record<any, any>): number {
 	return Object.keys(x).length
+}
+
+export function ofK<K extends string, V>(f: Unary<K, V>): (xs: Iterable<K>) => Record<K, V> {
+	return function (xs) {
+		const o: Partial<Record<K, V>> = {}
+		for (const x of xs)
+			o[x] = f(x)
+		return o as any
+	}
 }

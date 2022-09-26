@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.len = exports.merge = exports.get = exports.defined = exports.into = exports.defaults = exports.foldrWithKeys = exports.foldr = exports.foldlWithKeys = exports.foldl = exports.filterWithKeys = exports.filter = exports.each2 = exports.map2 = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
+exports.ofK = exports.len = exports.merge = exports.get = exports.defined = exports.into = exports.defaults = exports.foldrWithKeys = exports.foldr = exports.foldlWithKeys = exports.foldl = exports.filterWithKeys = exports.filter = exports.each2 = exports.map2 = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
 /** return the entries of an object */
 function entries(o) {
     return Object.entries(o);
@@ -185,3 +185,12 @@ function len(x) {
     return Object.keys(x).length;
 }
 exports.len = len;
+function ofK(f) {
+    return function (xs) {
+        const o = {};
+        for (const x of xs)
+            o[x] = f(x);
+        return o;
+    };
+}
+exports.ofK = ofK;
