@@ -33,6 +33,24 @@ export function map<A, B, K extends string>(f: Unary<A, B>): (x: Record<K, A>) =
 	}
 }
 
+export function map2<K1 extends string, K2 extends string>(f: Unary<K1, K2>) {
+	return function<V1, V2>(g: Unary<V1, V2>) {
+		return function (xs: Record<K1, V1>): Record<K2, V2> {
+			const o: Partial<Record<K2, V2>> = {}
+			for (const [k, v] of entries(xs))
+				o[f(k)] = g(v)
+			return o as any
+		}
+	}
+}
+
+export function each2<K extends string, V>(f: Binary<K, V, any>): (xs: Record<K, V>) => void {
+	return function (xs) {
+		for (const [k, v] of entries(xs))
+			f(k)(v)
+	}
+}
+
 /** filter implementation for objects
  *
  * given a testing function **A** → *boolean* and an object of **As**
