@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ofK = exports.len = exports.merge = exports.get = exports.defined = exports.into = exports.defaults = exports.foldrWithKeys = exports.foldr = exports.foldlWithKeys = exports.foldl = exports.filterWithKeys = exports.filter = exports.each2 = exports.map2 = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
+exports.ofK = exports.len = exports.merge = exports.get = exports.defined = exports.into = exports.defaults = exports.foldrWithKeys = exports.foldr = exports.foldlWithKeys = exports.foldl = exports.filterWithKeys = exports.filter = exports.eachWithKeys = exports.map2 = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
 /** return the entries of an object */
 function entries(o) {
     return Object.entries(o);
@@ -41,13 +41,13 @@ function map2(f) {
     };
 }
 exports.map2 = map2;
-function each2(f) {
+function eachWithKeys(f) {
     return function (xs) {
         for (const [k, v] of entries(xs))
             f(k)(v);
     };
 }
-exports.each2 = each2;
+exports.eachWithKeys = eachWithKeys;
 /** filter implementation for objects
  *
  * given a testing function **A** → *boolean* and an object of **As**

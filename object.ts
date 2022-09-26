@@ -45,7 +45,7 @@ export function map2<K1 extends string, K2 extends string>(f: Unary<K1, K2>) {
 	}
 }
 
-export function each2<K extends string, V>(f: Binary<K, V, any>): (xs: Record<K, V>) => void {
+export function eachWithKeys<K extends string, V>(f: Binary<K, V, any>): (xs: Record<K, V>) => void {
 	return function (xs) {
 		for (const [k, v] of entries(xs))
 			f(k)(v)
