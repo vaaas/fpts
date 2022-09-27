@@ -169,7 +169,7 @@ describe('map', () => {
 
     describe('ofKV', () => {
         it('should create map of keys, with keys and values by function', () => {
-            const result = map.ofKV(x => x+'', x => x+1)([1,2,3])
+            const result = map.ofKV(x => x+'')(x => x+1)([1,2,3])
             assert.equal(result.constructor, Map)
             assert.equal(result.size, 3)
             assert.equal(result.get('1'), 2)

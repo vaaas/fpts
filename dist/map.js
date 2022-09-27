@@ -73,12 +73,14 @@ exports.ofK = ofK;
  *
  * keys are retrieved by the first function, and values by the second
  */
-function ofKV(f, g) {
-    return function (xs) {
-        const m = new Map();
-        for (const x of xs)
-            m.set(f(x), g(x));
-        return m;
+function ofKV(f) {
+    return function (g) {
+        return function (xs) {
+            const m = new Map();
+            for (const x of xs)
+                m.set(f(x), g(x));
+            return m;
+        };
     };
 }
 exports.ofKV = ofKV;

@@ -96,12 +96,14 @@ export function ofK<K, V>(f: Unary<K, V>): (xs: Iterable<K>) => Map<K, V> {
  *
  * keys are retrieved by the first function, and values by the second
  */
-export function ofKV<T, K, V>(f: Unary<T, K>, g: Unary<T, V>): (xs: Iterable<T>) => Map<K, V> {
-	return function (xs) {
-		const m = new Map<K, V>()
-		for (const x of xs)
-			m.set(f(x), g(x))
-		return m
+export function ofKV<T, K>(f: Unary<T, K>) {
+	return function<V>(g: Unary<T, V>) {
+		return function (xs: Iterable<T>): Map<K, V> {
+			const m = new Map<K, V>()
+			for (const x of xs)
+				m.set(f(x), g(x))
+			return m
+		}
 	}
 }
 

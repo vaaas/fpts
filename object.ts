@@ -198,3 +198,23 @@ export function ofK<K extends string, V>(f: Unary<K, V>): (xs: Iterable<K>) => R
 		return o as any
 	}
 }
+
+export function ofV<K extends string, V>(f: Unary<V, K>): (xs: Iterable<V>) => Record<K, V> {
+	return function (xs) {
+		const o: Partial<Record<K, V>> = {}
+		for (const x of xs)
+			o[f(x)] = x
+		return o as any
+	}
+}
+
+export function ofKV<T, K extends string>(f: Unary<T, K>) {
+	return function<V>(g: Unary<T, V>) {
+		return function(xs: Iterable<T>): Record<K, V> {
+			const o: Partial<Record<K, V>> = {}
+			for (const x of xs)
+				o[f(x)] = g(x)
+			return o as any
+		}
+	}
+}
