@@ -193,3 +193,23 @@ export function groupByN<V>(...fs: Array<Unary<V, any>>): (xs: Iterable<V>) => M
             return update(groupByN(...tail(fs)))(groupBy(fs[0]!)(xs));
 	}
 }
+
+export function map<A, B>(f: Unary<A, B>) {
+	return function <K>(xs: Map<K, A>): Map<K, B> {
+		const m: Map<K, B> = new Map()
+		for (const [k, v] of xs)
+			m.set(k, f(v))
+		return m
+	}
+}
+
+export function map2<K1, K2>(f: Unary<K1, K2>) {
+	return function <V1, V2>(g: Unary<V1, V2>) {
+		return function (xs: Map<K1, V1>): Map<K2, V2> {
+			const m: Map<K2, V2> = new Map()
+			for (const [k, v] of xs)
+				m.set(f(k), g(v))
+			return m
+		}
+	}
+}

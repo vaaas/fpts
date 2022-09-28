@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.groupByN = exports.groupBy = exports.update = exports.get = exports.keys = exports.values = exports.invert = exports.ofKV = exports.ofK = exports.ofVN = exports.ofV = exports.of = exports.set = exports.pop = void 0;
+exports.map2 = exports.map = exports.groupByN = exports.groupBy = exports.update = exports.get = exports.keys = exports.values = exports.invert = exports.ofKV = exports.ofK = exports.ofVN = exports.ofV = exports.of = exports.set = exports.pop = void 0;
 const array_1 = require("./array");
 /** UNSAFE!
  *
@@ -149,3 +149,23 @@ function groupByN(...fs) {
     };
 }
 exports.groupByN = groupByN;
+function map(f) {
+    return function (xs) {
+        const m = new Map();
+        for (const [k, v] of xs)
+            m.set(k, f(v));
+        return m;
+    };
+}
+exports.map = map;
+function map2(f) {
+    return function (g) {
+        return function (xs) {
+            const m = new Map();
+            for (const [k, v] of xs)
+                m.set(f(k), g(v));
+            return m;
+        };
+    };
+}
+exports.map2 = map2;
