@@ -386,3 +386,14 @@ export function find<T>(f: Unary<T, boolean>): (x: Iterable<T>) => Option<T> {
 		return undefined
 	}
 }
+
+/** search a collection for the index of first item for which a function returns true */
+export function findIndex<T>(f: Unary<T, boolean>): (x: Iterable<T>) => Option<number> {
+	return function(xs) {
+		let i = 0
+		for (const x of xs)
+			if (f(x)) return i
+			else i++
+		return undefined
+	}
+}
