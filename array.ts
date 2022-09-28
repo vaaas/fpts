@@ -58,6 +58,11 @@ export function tail<T>(xs: T[]): T[] {
 	return xs.slice(1);
 }
 
+/** return every element of an array excepd the last */
+export function head<T>(xs: T[]): T[] {
+	return xs.slice(0, -1);
+}
+
 /** join all elements of an array into a string, separated by a delimitter */
 export function joinWith(s: string): (xs: Array<string>) => string {
 	return function (xs) {

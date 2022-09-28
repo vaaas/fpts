@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.joinWith = exports.tail = exports.uniqueBy = exports.unique = exports.bind = exports.filter = exports.map = exports.of = exports.last = exports.first = void 0;
+exports.joinWith = exports.head = exports.tail = exports.uniqueBy = exports.unique = exports.bind = exports.filter = exports.map = exports.of = exports.last = exports.first = void 0;
 const duad_1 = require("./duad");
 const iter_1 = require("./iter");
 const map_1 = require("./map");
@@ -59,6 +59,11 @@ function tail(xs) {
     return xs.slice(1);
 }
 exports.tail = tail;
+/** return every element of an array excepd the last */
+function head(xs) {
+    return xs.slice(0, -1);
+}
+exports.head = head;
 /** join all elements of an array into a string, separated by a delimitter */
 function joinWith(s) {
     return function (xs) {
