@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.seq = exports.clamp = exports.Grandi = exports.Integers = exports.Naturals = exports.div = exports.mult = exports.add = exports.neg = exports.randint = void 0;
+exports.eq = exports.lte = exports.lt = exports.gte = exports.gt = exports.seq = exports.clamp = exports.Grandi = exports.Integers = exports.Naturals = exports.div = exports.mult = exports.add = exports.neg = exports.randint = void 0;
 /** return a random integer in the range [a, b) */
 function randint(a, b) {
     return a + Math.floor(Math.random() * (b - a));
@@ -65,3 +65,13 @@ function* seq(min, max) {
         yield i;
 }
 exports.seq = seq;
+const gt = (a) => (b) => b > a;
+exports.gt = gt;
+const gte = (a) => (b) => b >= a;
+exports.gte = gte;
+const lt = (a) => (b) => b < a;
+exports.lt = lt;
+const lte = (a) => (b) => b <= a;
+exports.lte = lte;
+const eq = (a) => (b) => a === b;
+exports.eq = eq;

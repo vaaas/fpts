@@ -2,6 +2,7 @@ import * as iter from './dist/iter.js'
 import { describe, it } from 'node:test'
 import * as assert from 'assert'
 import { spy } from './dist/function.js'
+import { gt } from './dist/maths.js'
 
 const str = x => x + ''
 
@@ -470,6 +471,42 @@ describe('iter', () => {
             assert.deepEqual(
                 iter.find(x => x === 'test')([1,2,3,4,5]),
                 undefined
+            )
+        })
+    })
+
+    describe('optimum', () => {
+        it('should find the optimal value', () => {
+            assert.equal(
+                iter.optimum(gt)([1, 2, 3]),
+                3,
+            )
+        })
+
+        it('should returned undefined on empty collection', () => {
+            assert.equal(
+                iter.optimum(gt)([]),
+                undefined,
+            )
+        })
+    })
+
+    describe('optimumBy', () => {
+        it('should find the optimal value', () => {
+            assert.deepEqual(
+                iter.optimumBy(x => x.x)(gt)([
+                    { x: 1 },
+                    { x: 2 },
+                    { x: 3 },
+                ]),
+                { x: 3 },
+            )
+        })
+
+        it('should returned undefined on empty collection', () => {
+            assert.equal(
+                iter.optimumBy(x => x.x)(gt)([]),
+                undefined,
             )
         })
     })

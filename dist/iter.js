@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.findIndex = exports.find = exports.partition = exports.each = exports.zipWith = exports.enumerate = exports.repeat = exports.limit = exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.scanr = exports.scanl = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.iter = void 0;
+exports.optimumBy = exports.optimum = exports.findIndex = exports.find = exports.partition = exports.each = exports.zipWith = exports.enumerate = exports.repeat = exports.limit = exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.scanr = exports.scanl = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.iter = void 0;
 const combinator_1 = require("./combinator");
 const maths_1 = require("./maths");
 const string_1 = require("./string");
@@ -408,3 +408,43 @@ function findIndex(f) {
     };
 }
 exports.findIndex = findIndex;
+function optimum(f) {
+    return function (xs) {
+        const it = iter(xs);
+        let v = it.next();
+        if (v.done)
+            return undefined;
+        let max = v.value;
+        v = it.next();
+        while (!v.done) {
+            if (f(max)(v.value))
+                max = v.value;
+            v = it.next();
+        }
+        return max;
+    };
+}
+exports.optimum = optimum;
+function optimumBy(map) {
+    return function (comp) {
+        return function (xs) {
+            const it = iter(xs);
+            let v = it.next();
+            if (v.done)
+                return undefined;
+            let max = v.value;
+            let maxv = map(v.value);
+            v = it.next();
+            while (!v.done) {
+                const nv = map(v.value);
+                if (comp(maxv)(nv)) {
+                    max = v.value;
+                    maxv = nv;
+                }
+                v = it.next();
+            }
+            return max;
+        };
+    };
+}
+exports.optimumBy = optimumBy;

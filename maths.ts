@@ -56,3 +56,13 @@ export function clamp(min: number, max: number): (x: number) => number {
 export function* seq(min: number, max: number): Iterable<number> {
 	for (let i = min; i <= max; i++) yield i
 }
+
+export const gt = (a: number) => (b: number) => b > a
+
+export const gte = (a: number) => (b: number) => b >= a
+
+export const lt = (a: number) => (b: number) => b < a
+
+export const lte = (a: number) => (b: number) => b <= a
+
+export const eq = (a: any) => (b: any) => a === b

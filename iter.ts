@@ -397,3 +397,41 @@ export function findIndex<T>(f: Unary<T, boolean>): (x: Iterable<T>) => Option<n
 		return undefined
 	}
 }
+
+export function optimum<A>(f: Binary<A, A, boolean>): (xs: Iterable<A>) => Option<A> {
+	return function (xs) {
+		const it = iter(xs)
+		let v = it.next()
+		if (v.done) return undefined
+		let max = v.value
+		v = it.next()
+		while (!v.done) {
+			if (f(max)(v.value))
+				max = v.value
+			v = it.next()
+		}
+		return max
+	}
+}
+
+export function optimumBy<A, B>(map: Unary<A, B>) {
+	return function (comp: Binary<B, B, boolean>) {
+		return function (xs: Iterable<A>): Option<A> {
+			const it = iter(xs)
+			let v = it.next()
+			if (v.done) return undefined
+			let max = v.value
+			let maxv = map(v.value)
+			v = it.next()
+			while (!v.done) {
+				const nv = map(v.value)
+				if (comp(maxv)(nv)) {
+					max = v.value
+					maxv = nv
+				}
+				v = it.next()
+			}
+			return max
+		}
+	}
+}
