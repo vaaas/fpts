@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.optimumBy = exports.optimum = exports.findIndex = exports.find = exports.partition = exports.each = exports.zipWith = exports.enumerate = exports.repeat = exports.limit = exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.scanr = exports.scanl = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.iter = void 0;
+exports.all = exports.any = exports.optimumBy = exports.optimum = exports.findIndex = exports.find = exports.partition = exports.each = exports.zipWith = exports.enumerate = exports.repeat = exports.limit = exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.scanr = exports.scanl = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.iter = void 0;
 const combinator_1 = require("./combinator");
 const maths_1 = require("./maths");
 const string_1 = require("./string");
@@ -448,3 +448,19 @@ function optimumBy(map) {
     };
 }
 exports.optimumBy = optimumBy;
+/** returns true if any element is truthy */
+function any(xs) {
+    for (const x of xs)
+        if (x)
+            return true;
+    return false;
+}
+exports.any = any;
+/** returns true if every element is truthy */
+function all(xs) {
+    for (const x of xs)
+        if (!x)
+            return false;
+    return true;
+}
+exports.all = all;

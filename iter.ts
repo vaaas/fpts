@@ -435,3 +435,19 @@ export function optimumBy<A, B>(map: Unary<A, B>) {
 		}
 	}
 }
+
+/** returns true if any element is truthy */
+export function any(xs: Iterable<any>): Boolean {
+	for (const x of xs)
+		if (x)
+			return true
+	return false
+}
+
+/** returns true if every element is truthy */
+export function all(xs: Iterable<any>): Boolean {
+	for (const x of xs)
+		if (!x)
+			return false
+	return true
+}
