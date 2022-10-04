@@ -66,3 +66,9 @@ export const lt = (a: number) => (b: number) => b < a
 export const lte = (a: number) => (b: number) => b <= a
 
 export const eq = (a: any) => (b: any) => a === b
+
+export const proximate =
+	(e: number) =>
+	(a: number) =>
+	(b: number): boolean =>
+	Math.abs(a - b) <= e

@@ -89,4 +89,20 @@ describe('maths', () => {
             )
         })
      })
+
+     describe('proximate', () => {
+        it('should consider proximate numbers to be equal', () => {
+            assert.equal(
+                maths.proximate(0.1)(0.3)(0.39999),
+                true,
+            )
+        })
+
+        it('should consider non-proximate numbers to be unequal', () => {
+            assert.equal(
+                maths.proximate(0.1)(0.3)(0.1999),
+                false,
+            )
+        })
+     })
 })

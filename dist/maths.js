@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.eq = exports.lte = exports.lt = exports.gte = exports.gt = exports.seq = exports.clamp = exports.Grandi = exports.Integers = exports.Naturals = exports.div = exports.mult = exports.add = exports.neg = exports.randint = void 0;
+exports.proximate = exports.eq = exports.lte = exports.lt = exports.gte = exports.gt = exports.seq = exports.clamp = exports.Grandi = exports.Integers = exports.Naturals = exports.div = exports.mult = exports.add = exports.neg = exports.randint = void 0;
 /** return a random integer in the range [a, b) */
 function randint(a, b) {
     return a + Math.floor(Math.random() * (b - a));
@@ -75,3 +75,5 @@ const lte = (a) => (b) => b <= a;
 exports.lte = lte;
 const eq = (a) => (b) => a === b;
 exports.eq = eq;
+const proximate = (e) => (a) => (b) => Math.abs(a - b) <= e;
+exports.proximate = proximate;
