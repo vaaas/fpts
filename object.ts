@@ -1,4 +1,3 @@
-import { K } from './combinator';
 import { Unary, Binary, Ternary } from './data'
 
 export type Entries<T> = Array<{
@@ -25,8 +24,8 @@ export function values<T extends object>(xs: T): Array<T[keyof T]> {
  * given a mapping function **A** → **B** and an object of **As**,
  * return a new object of **Bs**
  */
-export function map<A, B, K extends string>(f: Unary<A, B>): (x: Record<K, A>) => Record<K, B> {
-	return function(xs) {
+export function map<A, B>(f: Unary<A, B>) {
+	return function<K extends string>(xs: Record<K, A>): Record<K, B> {
 		const o: Record<string, B> = {}
 		for (const [k, v] of entries(xs))
 			o[k] = f(v)
@@ -42,6 +41,15 @@ export function map2<K1 extends string, K2 extends string>(f: Unary<K1, K2>) {
 				o[f(k)] = g(v)
 			return o as any
 		}
+	}
+}
+
+export function mapKeys<A extends string, B extends string>(f: Unary<A, B>) {
+	return function<V>(xs: Record<A, V>): Record<B, V> {
+		const o: Record<string, V> = {}
+		for (const [k, v] of entries(xs))
+			o[f(k)] = v
+		return o
 	}
 }
 
