@@ -12,3 +12,11 @@ export const map = <A, B>(f: Unary<A, B>) => (xs: Set<A>): Set<B> => {
 		n.add(f(x))
 	return n
 }
+
+export const diff = <T>(as: Set<T>) => (bs: Set<T>): Set<T> => {
+	const n = new Set<T>()
+	for (const x of as)
+		if (!bs.has(x))
+			n.add(x)
+	return n
+}

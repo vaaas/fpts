@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.map = exports.outside = exports.inside = exports.of = void 0;
+exports.diff = exports.map = exports.outside = exports.inside = exports.of = void 0;
 const of = (x) => new Set(x);
 exports.of = of;
 const inside = (xs) => (x) => xs.has(x);
@@ -14,3 +14,11 @@ const map = (f) => (xs) => {
     return n;
 };
 exports.map = map;
+const diff = (as) => (bs) => {
+    const n = new Set();
+    for (const x of as)
+        if (!bs.has(x))
+            n.add(x);
+    return n;
+};
+exports.diff = diff;
