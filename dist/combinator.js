@@ -78,15 +78,7 @@ exports.D1 = D1;
  *
  * Transform a binary function from A to B so that it is a binary function of C to B.
  */
-function L(a) {
-    return function (b) {
-        return function (c) {
-            return function (d) {
-                return a(b(c))(b(d));
-            };
-        };
-    };
-}
+const L = (a) => (b) => (c) => (d) => a(b(c))(b(d));
 exports.L = L;
 /** Identity combinator.
  *

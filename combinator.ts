@@ -77,15 +77,12 @@ export function D1<A, B, C>(a: Binary<A, B, C>): <D>(b: Unary<D, B>) => (c: A) =
  *
  * Transform a binary function from A to B so that it is a binary function of C to B.
  */
-export function L<A, B, C>(a: Binary<A, A, B>): (b: Unary<C, A>) => (c: C) => (d: C) => B {
-    return function (b) {
-        return function (c) {
-            return function (d) {
-                return a(b(c))(b(d))
-            }
-        }
-    }
-}
+export const L =
+	<A, B>(a: Binary<A, A, B>) =>
+	<C>(b: Unary<C, A>) =>
+	(c: C) =>
+	(d: C): B =>
+	a(b(c))(b(d))
 
 /** Identity combinator.
  *
