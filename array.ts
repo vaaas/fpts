@@ -69,3 +69,7 @@ export function joinWith(s: string): (xs: Array<string>) => string {
 		return xs.join(s)
 	}
 }
+
+export function dup<T>(x: T): [T, T] {
+	return [x, x]
+}
