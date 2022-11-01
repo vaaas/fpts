@@ -364,7 +364,7 @@ export function each<T>(f: (x: T) => void): (xs: Iterable<T>) => void {
  * elements for which the function returns false are inserted to the left
  */
 export function partition<A, B extends A>(f: UnaryP<A, B>): (xs: Iterable<A>) => [Array<Exclude<A, B>>, B[]];
-export function partition<A, L, R>(f: Unary<A, boolean>): (xs: Iterable<A>) => [L[], R[]]
+export function partition<A, L, R>(f: Unary<A, boolean>): (xs: Iterable<A>) => [L[], R[]];
 export function partition<T>(f: Unary<T, boolean>): (xs: T[]) => [T[], T[]] {
 	return function(xs) {
 		const ls: T[] = []
