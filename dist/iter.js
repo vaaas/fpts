@@ -366,12 +366,6 @@ function each(f) {
     };
 }
 exports.each = each;
-/** partition iterable in two halves depending on a boolean function
- *
- * elements for which the function returns true are inserted to the right
- *
- * elements for which the function returns false are inserted to the left
- */
 function partition(f) {
     return function (xs) {
         const ls = [];
