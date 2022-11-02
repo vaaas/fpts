@@ -126,7 +126,7 @@ export function keys<A, B>(xs: Map<A, B>): Iterable<A> {
 }
 
 /** get a value out of a map using a key */
-export function get<A, B>(k: A): (xs: Map<A, B>) => Option<B> {
+export function get<K, A extends K>(k: A): <B>(xs: Map<K, B>) => Option<B> {
     return function (xs) {
         return xs.get(k)
     }
