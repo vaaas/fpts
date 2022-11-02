@@ -1,17 +1,18 @@
 import { Unary } from './data';
 import { Option } from './option';
 import { tail } from './array';
+import { K } from './combinator';
 
 /** UNSAFE!
  *
  * remove a key from a map and return its value, if it exists
  */
 export function pop<K>(k: K): <V>(xs: Map<K, V>) => Option<V> {
-    return function (xs) {
-        const v = xs.get(k);
-        xs.delete(k);
-        return v;
-    }
+	return function (xs) {
+		const v = xs.get(k);
+		xs.delete(k);
+		return v;
+	}
 }
 
 /** UNSAFE!
@@ -19,17 +20,17 @@ export function pop<K>(k: K): <V>(xs: Map<K, V>) => Option<V> {
  * set a key to a value in a map
  */
 export function set<K>(k: K): <V>(x: V) => (xs: Map<K, V>) => Map<K, V> {
-    return function(x) {
-        return function (xs) {
-            if (xs.has(k)) xs.delete(k)
-            return xs.set(k, x)
-        };
-    };
+	return function(x) {
+		return function (xs) {
+			if (xs.has(k)) xs.delete(k)
+			return xs.set(k, x)
+		};
+	};
 }
 
 /** make a map out of any iterable of tuples */
 export function of<A, B>(xs: Iterable<[A, B]>): Map<A, B> {
-    return new Map(xs);
+	return new Map(xs);
 }
 
 /** make a map out of any iterable of values
@@ -117,19 +118,19 @@ export function invert<K, V>(xs: Map<K, V>): Map<V, K> {
 
 /** retrieve all of a map's values as an iterable */
 export function values<A, B>(xs: Map<A, B>): Iterable<B> {
-    return xs.values();
+	return xs.values();
 }
 
 /** retrieve all of a map's keys as an iterable */
 export function keys<A, B>(xs: Map<A, B>): Iterable<A> {
-    return xs.keys();
+	return xs.keys();
 }
 
 /** get a value out of a map using a key */
 export function get<K, A extends K>(k: A): <B>(xs: Map<K, B>) => Option<B> {
-    return function (xs) {
-        return xs.get(k)
-    }
+	return function (xs) {
+		return xs.get(k)
+	}
 }
 
 /** **UNSAFE**
@@ -137,11 +138,11 @@ export function get<K, A extends K>(k: A): <B>(xs: Map<K, B>) => Option<B> {
  * given a mapping from **A** to **B**, update a Map of **As** into a Map of **Bs** **in place**
  */
 export function update<K, A, B>(f: Unary<A, B>): (xs: Map<K, A>) => Map<K, B> {
-    return function (xs) {
-        for (const [k, v] of xs)
-            (xs as any as Map<K, B>).set(k, f(v));
-        return xs as any as Map<K, B>;
-    }
+	return function (xs) {
+		for (const [k, v] of xs)
+			(xs as any as Map<K, B>).set(k, f(v));
+		return xs as any as Map<K, B>;
+	}
 }
 
 /** group an iterable of **As** into a Map of **As**, where the keys are the values they are grouped under
@@ -187,10 +188,10 @@ export function groupByN<V, K1, K2, K3, K4, K5>
 export function groupByN<V>(...fs: Array<Unary<V, any>>): (xs: Iterable<V>) => Map<any, any> {
 	return function(xs) {
 		if (fs.length === 1)
-            return groupBy(fs[0]!)(xs);
-        else
-            // @ts-ignore
-            return update(groupByN(...tail(fs)))(groupBy(fs[0]!)(xs));
+			return groupBy(fs[0]!)(xs);
+		else
+			// @ts-ignore
+			return update(groupByN(...tail(fs)))(groupBy(fs[0]!)(xs));
 	}
 }
 
@@ -213,3 +214,13 @@ export function map2<K1, K2>(f: Unary<K1, K2>) {
 		}
 	}
 }
+
+export const inside =
+	<K, V>(xs: Map<K, V>) =>
+	(x: K): boolean =>
+	xs.has(x)
+
+export const outside =
+	<K, V>(xs: Map<K, V>) =>
+	(x: K): boolean =>
+	!xs.has(x)
