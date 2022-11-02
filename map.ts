@@ -1,7 +1,6 @@
 import { Unary } from './data';
 import { Option } from './option';
 import { tail } from './array';
-import { K } from './combinator';
 
 /** UNSAFE!
  *
