@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dup = exports.joinWith = exports.head = exports.tail = exports.uniqueBy = exports.unique = exports.bind = exports.filter = exports.map = exports.of = exports.middle = exports.last = exports.first = void 0;
+exports.reverseI = exports.dup = exports.joinWith = exports.head = exports.tail = exports.uniqueBy = exports.unique = exports.bind = exports.filter = exports.map = exports.of = exports.middle = exports.last = exports.first = void 0;
 const duad_1 = require("./duad");
 const iter_1 = require("./iter");
 const map_1 = require("./map");
@@ -79,3 +79,8 @@ function dup(x) {
     return [x, x];
 }
 exports.dup = dup;
+function* reverseI(xs) {
+    for (let i = xs.length - 1; i >= 0; i--)
+        yield xs[i];
+}
+exports.reverseI = reverseI;

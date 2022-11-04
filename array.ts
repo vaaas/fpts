@@ -77,3 +77,8 @@ export function joinWith(s: string): (xs: Array<string>) => string {
 export function dup<T>(x: T): [T, T] {
 	return [x, x]
 }
+
+export function* reverseI<T>(xs: T[]): Iterable<T> {
+    for (let i = xs.length - 1; i >= 0; i--)
+        yield xs[i]!;
+}
