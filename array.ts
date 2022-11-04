@@ -14,6 +14,10 @@ export function last<T>(xs: Array<T>): T|undefined {
 	return xs[xs.length-1]
 }
 
+export function middle<T>(xs: Array<T>): T|undefined {
+    return xs[xs.length >> 1];
+}
+
 /** creates a new array from an iterable */
 export function of<T>(xs: Iterable<T>): Array<T> {
 	return Array.from(xs)

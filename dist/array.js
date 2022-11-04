@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dup = exports.joinWith = exports.head = exports.tail = exports.uniqueBy = exports.unique = exports.bind = exports.filter = exports.map = exports.of = exports.last = exports.first = void 0;
+exports.dup = exports.joinWith = exports.head = exports.tail = exports.uniqueBy = exports.unique = exports.bind = exports.filter = exports.map = exports.of = exports.middle = exports.last = exports.first = void 0;
 const duad_1 = require("./duad");
 const iter_1 = require("./iter");
 const map_1 = require("./map");
@@ -15,6 +15,10 @@ function last(xs) {
     return xs[xs.length - 1];
 }
 exports.last = last;
+function middle(xs) {
+    return xs[xs.length >> 1];
+}
+exports.middle = middle;
 /** creates a new array from an iterable */
 function of(xs) {
     return Array.from(xs);
