@@ -453,3 +453,8 @@ export function all(xs: Iterable<any>): boolean {
 			return false
 	return true
 }
+
+export function* flatten<T>(xs: Iterable<Iterable<T>>): Iterable<T> {
+    for (const ys of xs)
+        yield* ys
+}
