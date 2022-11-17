@@ -4,7 +4,7 @@ import { Unary, Binary } from './data'
  *
  * Pass an argument C to a unary function B. Before returning the result, pass it through a final filter, A.
  */
-export function B<A, B, C>(a: Unary<B, C>): (b: Unary<A, B>) => (c: A) => C {
+export function B<B, C>(a: Unary<B, C>): <A>(b: Unary<A, B>) => (c: A) => C {
     return function (b) {
         return function(c) {
             return a(b(c));
@@ -16,7 +16,7 @@ export function B<A, B, C>(a: Unary<B, C>): (b: Unary<A, B>) => (c: A) => C {
  *
  * Pass two arguments, C and D, to a binary function B. Before returning the result, pass it through a final filter, A.
  */
-export function B1<A, B, C, D>(a: Unary<C, D>): (b: Binary<A, B, C>) => (c: A) => (d: B) => D {
+export function B1<C, D>(a: Unary<C, D>): <A, B>(b: Binary<A, B, C>) => (c: A) => (d: B) => D {
     return function (b) {
         return function (c) {
             return function (d) {

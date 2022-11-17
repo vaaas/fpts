@@ -237,3 +237,10 @@ export const outside =
 	<K, V>(xs: Map<K, V>) =>
 	(x: K): boolean =>
 	!xs.has(x)
+
+export function copy<K, V>(xs: Map<K, V>): Map<K, V> {
+    const ys = new Map<K, V>()
+    for (const pair of xs)
+        ys.set(pair[0], pair[1])
+    return ys
+}
