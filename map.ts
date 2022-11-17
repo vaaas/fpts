@@ -139,6 +139,13 @@ export function unsafeGet<K>(k: K): <V>(xs: Map<K, V>) => V {
     }
 }
 
+/** get a value out of a map using a key unsafely (ignoring undefined checks) */
+export function unsafeGetFrom<K, V>(xs: Map<K, V>) {
+    return function(k: K) {
+        return xs.get(k)!
+    }
+}
+
 /** **UNSAFE**
  *
  * given a mapping from **A** to **B**, update a Map of **As** into a Map of **Bs** **in place**
