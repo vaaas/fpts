@@ -454,6 +454,7 @@ export function all(xs: Iterable<any>): boolean {
 	return true
 }
 
+/** flattens an iterable of iterables into a continuous iterable */
 export function* flatten<T>(xs: Iterable<Iterable<T>>): Iterable<T> {
     for (const ys of xs)
         yield* ys

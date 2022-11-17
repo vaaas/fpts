@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.outside = exports.inside = exports.map2 = exports.map = exports.groupByN = exports.groupBy = exports.update = exports.get = exports.keys = exports.values = exports.invert = exports.ofKV = exports.ofK = exports.ofVN = exports.ofV = exports.of = exports.set = exports.pop = void 0;
+exports.outside = exports.inside = exports.map2 = exports.map = exports.groupByN = exports.groupBy = exports.update = exports.unsafeGet = exports.get = exports.keys = exports.values = exports.invert = exports.ofKV = exports.ofK = exports.ofVN = exports.ofV = exports.of = exports.set = exports.pop = void 0;
 const array_1 = require("./array");
 /** UNSAFE!
  *
@@ -109,6 +109,13 @@ function get(k) {
     };
 }
 exports.get = get;
+/** get a value out of a map using a key unsafely (ignoring undefined checks) */
+function unsafeGet(k) {
+    return function (xs) {
+        return xs.get(k);
+    };
+}
+exports.unsafeGet = unsafeGet;
 /** **UNSAFE**
  *
  * given a mapping from **A** to **B**, update a Map of **As** into a Map of **Bs** **in place**

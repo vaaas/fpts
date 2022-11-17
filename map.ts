@@ -132,6 +132,13 @@ export function get<K, A extends K>(k: A): <B>(xs: Map<K, B>) => Option<B> {
 	}
 }
 
+/** get a value out of a map using a key unsafely (ignoring undefined checks) */
+export function unsafeGet<K>(k: K): <V>(xs: Map<K, V>) => V {
+    return function (xs) {
+        return xs.get(k)!
+    }
+}
+
 /** **UNSAFE**
  *
  * given a mapping from **A** to **B**, update a Map of **As** into a Map of **Bs** **in place**

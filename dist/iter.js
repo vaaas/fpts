@@ -458,6 +458,7 @@ function all(xs) {
     return true;
 }
 exports.all = all;
+/** flattens an iterable of iterables into a continuous iterable */
 function* flatten(xs) {
     for (const ys of xs)
         yield* ys;
