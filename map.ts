@@ -253,3 +253,11 @@ export function copy<K, V>(xs: Map<K, V>): Map<K, V> {
         ys.set(pair[0], pair[1])
     return ys
 }
+
+export function concat_ip<A, B>(xs: Map<A, B>) {
+    return function (ys: Map<A, B>) {
+        for (const [k, v] of xs.entries())
+            ys.set(k, v)
+        return ys
+    }
+}

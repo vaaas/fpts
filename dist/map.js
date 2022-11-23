@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.copy = exports.outside = exports.inside = exports.mapKeys = exports.map2 = exports.map = exports.groupByN = exports.groupBy = exports.update = exports.unsafeGetFrom = exports.unsafeGet = exports.get = exports.keys = exports.values = exports.invert = exports.ofKV = exports.ofK = exports.ofVN = exports.ofV = exports.of = exports.set = exports.pop = void 0;
+exports.concat_ip = exports.copy = exports.outside = exports.inside = exports.mapKeys = exports.map2 = exports.map = exports.groupByN = exports.groupBy = exports.update = exports.unsafeGetFrom = exports.unsafeGet = exports.get = exports.keys = exports.values = exports.invert = exports.ofKV = exports.ofK = exports.ofVN = exports.ofV = exports.of = exports.set = exports.pop = void 0;
 const array_1 = require("./array");
 /** UNSAFE!
  *
@@ -203,3 +203,11 @@ function copy(xs) {
     return ys;
 }
 exports.copy = copy;
+function concat_ip(xs) {
+    return function (ys) {
+        for (const [k, v] of xs.entries())
+            ys.set(k, v);
+        return ys;
+    };
+}
+exports.concat_ip = concat_ip;
