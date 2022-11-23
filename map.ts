@@ -228,6 +228,15 @@ export function map2<K1, K2>(f: Unary<K1, K2>) {
 	}
 }
 
+export function mapKeys<A, B>(f: Unary<A, B>) {
+    return function<V>(xs: Map<A, V>): Map<B, V> {
+        const ys = new Map<B, V>
+        for (const [k, v] of xs.entries())
+            ys.set(f(k), v)
+        return ys
+    }
+}
+
 export const inside =
 	<K, V>(xs: Map<K, V>) =>
 	(x: K): boolean =>

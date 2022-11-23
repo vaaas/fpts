@@ -37,3 +37,22 @@ export function debounce<T>(f: (x: T) => any, t: number): (x: T) => void {
         }, t)
     })
 }
+
+/** debounce a function, so that multiple calls execute only once when time is available */
+export function microtask<T extends Array<any>>(f: (...xs: T) => void) {
+    let running: boolean = false;
+    let args: T | never[] = [];
+    return function later(...xs: T): void {
+        if (running) {
+            args = xs
+            return
+        }
+        running = true
+        args = xs
+        queueMicrotask(() => {
+            f(...args as T)
+            args = []
+            running = false
+        })
+    }
+}

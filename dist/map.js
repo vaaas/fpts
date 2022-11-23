@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.copy = exports.outside = exports.inside = exports.map2 = exports.map = exports.groupByN = exports.groupBy = exports.update = exports.unsafeGetFrom = exports.unsafeGet = exports.get = exports.keys = exports.values = exports.invert = exports.ofKV = exports.ofK = exports.ofVN = exports.ofV = exports.of = exports.set = exports.pop = void 0;
+exports.copy = exports.outside = exports.inside = exports.mapKeys = exports.map2 = exports.map = exports.groupByN = exports.groupBy = exports.update = exports.unsafeGetFrom = exports.unsafeGet = exports.get = exports.keys = exports.values = exports.invert = exports.ofKV = exports.ofK = exports.ofVN = exports.ofV = exports.of = exports.set = exports.pop = void 0;
 const array_1 = require("./array");
 /** UNSAFE!
  *
@@ -183,6 +183,15 @@ function map2(f) {
     };
 }
 exports.map2 = map2;
+function mapKeys(f) {
+    return function (xs) {
+        const ys = new Map;
+        for (const [k, v] of xs.entries())
+            ys.set(f(k), v);
+        return ys;
+    };
+}
+exports.mapKeys = mapKeys;
 const inside = (xs) => (x) => xs.has(x);
 exports.inside = inside;
 const outside = (xs) => (x) => !xs.has(x);

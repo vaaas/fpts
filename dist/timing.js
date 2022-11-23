@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.debounce = exports.throttle = exports.next_tick = void 0;
+exports.microtask = exports.debounce = exports.throttle = exports.next_tick = void 0;
 const data_1 = require("./data");
 function next_tick(f) {
     return setTimeout(f, 0);
@@ -40,3 +40,22 @@ function debounce(f, t) {
     });
 }
 exports.debounce = debounce;
+/** debounce a function, so that multiple calls execute only once when time is available */
+function microtask(f) {
+    let running = false;
+    let args = [];
+    return function later(...xs) {
+        if (running) {
+            args = xs;
+            return;
+        }
+        running = true;
+        args = xs;
+        queueMicrotask(() => {
+            f(...args);
+            args = [];
+            running = false;
+        });
+    };
+}
+exports.microtask = microtask;
