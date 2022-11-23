@@ -15,3 +15,7 @@ export function suffix<A, B>(f: Unary<A, B>): (x: A) => [A, B] {
 		return [x, f(x)]
 	}
 }
+
+export function flip<A, B>(x: [A, B]): [B, A] {
+    return [x[1], x[0]];
+}
