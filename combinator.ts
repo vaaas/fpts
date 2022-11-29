@@ -171,3 +171,10 @@ export function Wu<A, B, C>(a: (a: A, b: B) => C) {
         return a(b, b)
     }
 }
+
+/** spread combinator */
+export function spread<A extends Array<any>, B>(f: (...xs: A) => B) {
+    return function (xs: A): B {
+        return f(...xs)
+    }
+}

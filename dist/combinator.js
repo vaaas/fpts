@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Wu = exports.W = exports.V = exports.S = exports.T = exports.KI = exports.K = exports.I = exports.L = exports.D1 = exports.D = exports.C = exports.B1 = exports.B = void 0;
+exports.spread = exports.Wu = exports.W = exports.V = exports.S = exports.T = exports.KI = exports.K = exports.I = exports.L = exports.D1 = exports.D = exports.C = exports.B1 = exports.B = void 0;
 /** Bluebird Combinator
  *
  * Pass an argument C to a unary function B. Before returning the result, pass it through a final filter, A.
@@ -168,3 +168,10 @@ function Wu(a) {
     };
 }
 exports.Wu = Wu;
+/** spread combinator */
+function spread(f) {
+    return function (xs) {
+        return f(...xs);
+    };
+}
+exports.spread = spread;
