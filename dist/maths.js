@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.proximate = exports.eq = exports.lte = exports.lt = exports.gte = exports.gt = exports.seq = exports.clamp = exports.Grandi = exports.Integers = exports.Naturals = exports.div = exports.mult = exports.add = exports.neg = exports.randint = void 0;
+exports.proximate = exports.eq = exports.lte = exports.lt = exports.gte = exports.gt = exports.seq = exports.clamp = exports.Grandi = exports.Integers = exports.Naturals = exports.div = exports.mult = exports.add = exports.sign = exports.neg = exports.randint = void 0;
 /** return a random integer in the range [a, b) */
 function randint(a, b) {
     return a + Math.floor(Math.random() * (b - a));
@@ -9,6 +9,16 @@ exports.randint = randint;
 /** flip the sign of a number */
 function neg(x) { return -1 * x; }
 exports.neg = neg;
+/** return the sign of a number */
+function sign(x) {
+    if (x < 0)
+        return -1;
+    else if (x > 0)
+        return 1;
+    else
+        return 0;
+}
+exports.sign = sign;
 /** add two numbers */
 function add(a) {
     return function (b) {

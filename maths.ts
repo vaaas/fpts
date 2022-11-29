@@ -6,6 +6,13 @@ export function randint(a: number, b: number) {
 /** flip the sign of a number */
 export function neg(x: number): number { return -1 * x }
 
+/** return the sign of a number */
+export function sign(x: number): -1 | 0 | 1 {
+    if (x < 0) return -1;
+    else if (x > 0) return 1;
+    else return 0;
+}
+
 /** add two numbers */
 export function add(a: number): (b: number) => number {
 	return function(b) {
