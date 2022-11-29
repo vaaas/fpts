@@ -20,3 +20,11 @@ export const diff = <T>(as: Set<T>) => (bs: Set<T>): Set<T> => {
 			n.add(x)
 	return n
 }
+
+export const filter = <T>(f: Unary<T, boolean>) => (xs: Set<T>): Set<T> => {
+    const ys = new Set<T>()
+    for (const x of xs)
+        if (f(x))
+            ys.add(x)
+    return ys
+}

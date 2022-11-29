@@ -1,6 +1,6 @@
 {
     "name": "fpts",
-    "version": "1.0.64",
+    "version": "1.0.65",
     "license": "MIT",
     "scripts": {
         "build": "tsc",
