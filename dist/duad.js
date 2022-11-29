@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.flip = exports.suffix = exports.prefix = exports.duad = exports.of = void 0;
+exports.mapl = exports.mapr = exports.flip = exports.suffix = exports.prefix = exports.duad = exports.of = void 0;
 const of = (a, b) => [a, b];
 exports.of = of;
 const duad = (a) => (b) => [a, b];
@@ -21,3 +21,15 @@ function flip(x) {
     return [x[1], x[0]];
 }
 exports.flip = flip;
+function mapr(f) {
+    return function (xs) {
+        return [xs[0], f(xs[1])];
+    };
+}
+exports.mapr = mapr;
+function mapl(f) {
+    return function (xs) {
+        return [f(xs[0]), xs[1]];
+    };
+}
+exports.mapl = mapl;
