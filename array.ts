@@ -82,3 +82,9 @@ export function* reverseI<T>(xs: T[]): Iterable<T> {
     for (let i = xs.length - 1; i >= 0; i--)
         yield xs[i]!;
 }
+
+export function* pairs<A, B>(as: A[], bs: B[]): Iterable<[A, B]> {
+    for (const a of as)
+        for (const b of bs)
+            yield [a, b]
+}
