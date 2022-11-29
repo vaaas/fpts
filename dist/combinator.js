@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.W = exports.V = exports.S = exports.T = exports.KI = exports.K = exports.I = exports.L = exports.D1 = exports.D = exports.C = exports.B1 = exports.B = void 0;
+exports.Wu = exports.W = exports.V = exports.S = exports.T = exports.KI = exports.K = exports.I = exports.L = exports.D1 = exports.D = exports.C = exports.B1 = exports.B = void 0;
 /** Bluebird Combinator
  *
  * Pass an argument C to a unary function B. Before returning the result, pass it through a final filter, A.
@@ -158,3 +158,13 @@ function W(a) {
     };
 }
 exports.W = W;
+/** Uncurried implementation of Warbler, AKA elementary duplicator
+ *
+ * Apply argument B to binary function A twice.
+ */
+function Wu(a) {
+    return function (b) {
+        return a(b, b);
+    };
+}
+exports.Wu = Wu;

@@ -161,3 +161,13 @@ export function W<A, B>(a: Binary<A, A, B>): (b: A) => B {
         return a(b)(b)
     }
 }
+
+/** Uncurried implementation of Warbler, AKA elementary duplicator
+ *
+ * Apply argument B to binary function A twice.
+ */
+export function Wu<A, B, C>(a: (a: A, b: B) => C) {
+    return function (b: A & B) {
+        return a(b, b)
+    }
+}
