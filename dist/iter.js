@@ -402,6 +402,15 @@ function findIndex(f) {
     };
 }
 exports.findIndex = findIndex;
+/** find the optimal value in an iterable (typically minimum or maximum)
+ *
+ * the definition of optimality is defermined by repeated application of a comparison function.
+ *
+ * returns undefined on empty iterables
+ *
+ * - `f` — the comparison function. use `maths/gt` for maximum, and `maths/lt` for minimum
+ * - `xs` — the iterable
+ */
 function optimum(f) {
     return function (xs) {
         const it = iter(xs);
@@ -419,6 +428,18 @@ function optimum(f) {
     };
 }
 exports.optimum = optimum;
+/** find the optimal value in an iterable (typically minimum or maximum)
+ *
+ * the definition of optimality is defermined by repeated application of a comparison function.
+ *
+ * before comparing, first map the elements of the iterables through a mapping function to get proper values
+ *
+ * returns undefined on empty iterables
+ *
+ * - `map` — the function determining how we get values to be compared out of the elements of the iterables
+ * - `f` — the comparison function. use `maths/gt` for maximum, and `maths/lt` for minimum
+ * - `xs` — the iterable
+ */
 function optimumBy(map) {
     return function (comp) {
         return function (xs) {

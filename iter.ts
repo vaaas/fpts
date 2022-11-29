@@ -400,6 +400,15 @@ export function findIndex<T>(f: Unary<T, boolean>): (x: Iterable<T>) => Option<n
 	}
 }
 
+/** find the optimal value in an iterable (typically minimum or maximum)
+ *
+ * the definition of optimality is defermined by repeated application of a comparison function.
+ *
+ * returns undefined on empty iterables
+ *
+ * - `f` — the comparison function. use `maths/gt` for maximum, and `maths/lt` for minimum
+ * - `xs` — the iterable
+ */
 export function optimum<A>(f: Binary<A, A, boolean>): (xs: Iterable<A>) => Option<A> {
 	return function (xs) {
 		const it = iter(xs)
@@ -416,6 +425,18 @@ export function optimum<A>(f: Binary<A, A, boolean>): (xs: Iterable<A>) => Optio
 	}
 }
 
+/** find the optimal value in an iterable (typically minimum or maximum)
+ *
+ * the definition of optimality is defermined by repeated application of a comparison function.
+ *
+ * before comparing, first map the elements of the iterables through a mapping function to get proper values
+ *
+ * returns undefined on empty iterables
+ *
+ * - `map` — the function determining how we get values to be compared out of the elements of the iterables
+ * - `f` — the comparison function. use `maths/gt` for maximum, and `maths/lt` for minimum
+ * - `xs` — the iterable
+ */
 export function optimumBy<A, B>(map: Unary<A, B>) {
 	return function (comp: Binary<B, B, boolean>) {
 		return function (xs: Iterable<A>): Option<A> {
