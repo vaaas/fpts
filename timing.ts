@@ -42,7 +42,7 @@ export function debounce<T>(f: (x: T) => any, t: number): (x: T) => void {
 export function microtask<T extends Array<any>>(f: (...xs: T) => void) {
     let running: boolean = false;
     let args: T | never[] = [];
-    return function later(...xs: T): void {
+    return function microtask(...xs: T): void {
         if (running) {
             args = xs
             return
@@ -50,6 +50,24 @@ export function microtask<T extends Array<any>>(f: (...xs: T) => void) {
         running = true
         args = xs
         queueMicrotask(() => {
+            f(...args as T)
+            args = []
+            running = false
+        })
+    }
+}
+
+export function on_next_frame<T extends Array<any>>(f: (...xs: T) => void) {
+    let running: boolean = false;
+    let args: T | never[] = [];
+    return function on_next_frame(...xs: T): void {
+        if (running) {
+            args = xs
+            return
+        }
+        running = true
+        args = xs
+        requestAnimationFrame(() => {
             f(...args as T)
             args = []
             running = false

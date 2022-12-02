@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.microtask = exports.debounce = exports.throttle = exports.next_tick = void 0;
+exports.on_next_frame = exports.microtask = exports.debounce = exports.throttle = exports.next_tick = void 0;
 const data_1 = require("./data");
 function next_tick(f) {
     return setTimeout(f, 0);
@@ -44,7 +44,7 @@ exports.debounce = debounce;
 function microtask(f) {
     let running = false;
     let args = [];
-    return function later(...xs) {
+    return function microtask(...xs) {
         if (running) {
             args = xs;
             return;
@@ -59,3 +59,21 @@ function microtask(f) {
     };
 }
 exports.microtask = microtask;
+function on_next_frame(f) {
+    let running = false;
+    let args = [];
+    return function on_next_frame(...xs) {
+        if (running) {
+            args = xs;
+            return;
+        }
+        running = true;
+        args = xs;
+        requestAnimationFrame(() => {
+            f(...args);
+            args = [];
+            running = false;
+        });
+    };
+}
+exports.on_next_frame = on_next_frame;
