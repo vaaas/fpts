@@ -480,3 +480,18 @@ export function* flatten<T>(xs: Iterable<Iterable<T>>): Iterable<T> {
     for (const ys of xs)
         yield* ys
 }
+
+export function batch(n: number) {
+    return function* batch<T>(xs: Iterable<T>): Iterable<Array<T>> {
+        let group = []
+        for (const x of xs) {
+            group.push(x)
+            if (group.length === n) {
+                yield group
+                group = []
+            }
+        }
+        if (group.length)
+            yield group
+    };
+}
