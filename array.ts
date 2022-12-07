@@ -88,3 +88,5 @@ export function* pairs<A, B>(as: A[], bs: B[]): Iterable<[A, B]> {
         for (const b of bs)
             yield [a, b]
 }
+
+export const inside = <T>(xs: T[]) => (x: T): boolean => xs.includes(x)
