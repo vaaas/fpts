@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.on_next_frame = exports.microtask = exports.debounce = exports.throttle = exports.next_tick = void 0;
+exports.once = exports.on_next_frame = exports.microtask = exports.debounce = exports.throttle = exports.next_tick = void 0;
 const data_1 = require("./data");
 function next_tick(f) {
     return setTimeout(f, 0);
@@ -77,3 +77,17 @@ function on_next_frame(f) {
     };
 }
 exports.on_next_frame = on_next_frame;
+function once(f) {
+    let running = false;
+    return function once(...xs) {
+        if (running)
+            return;
+        running = true;
+        const x = f(...xs);
+        if (x instanceof Promise)
+            x.finally(() => running = false);
+        else
+            running = false;
+    };
+}
+exports.once = once;

@@ -74,3 +74,16 @@ export function on_next_frame<T extends Array<any>>(f: (...xs: T) => void) {
         })
     }
 }
+
+export function once<T extends Array<any>>(f: (...xs: T) => void | Promise<void>) {
+    let running: boolean = false;
+    return function once(...xs: T): void {
+        if (running) return
+        running = true
+        const x = f(...xs)
+        if (x instanceof Promise)
+            x.finally(() => running = false)
+        else
+            running = false;
+    }
+}
