@@ -9,6 +9,7 @@
 
     "exports": {
         ".": "./dist/index.js",
+	"./alist": "./dist/alist.js",
         "./array": "./dist/array.js",
         "./combinator": "./dist/combinator.js",
         "./data": "./dist/data.js",
