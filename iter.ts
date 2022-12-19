@@ -380,13 +380,57 @@ export function partition<T>(f: Unary<T, boolean>): (xs: T[]) => [T[], T[]] {
 }
 
 /** search a collection for the first item for which a function returns true */
-export function find<T>(f: Unary<T, boolean>): (x: Iterable<T>) => Option<T> {
-	return function(xs) {
+export function find<T>(f: Unary<T, boolean>) {
+	return function(xs: Iterable<T>): Option<T> {
 		for (const x of xs)
 			if (f(x))
 				return x
 		return undefined
 	}
+}
+
+/** given several functions, return the first item for which each function returns true */
+export function multifind<T> (
+    a: Unary<T, boolean>,
+    b: Unary<T, boolean>,
+): (xs: Iterable<T>) => [Option<T>, Option<T>];
+export function multifind<T> (
+    a: Unary<T, boolean>,
+    b: Unary<T, boolean>,
+    c: Unary<T, boolean>,
+): (xs: Iterable<T>) => [Option<T>, Option<T>, Option<T>];
+export function multifind<T> (
+    a: Unary<T, boolean>,
+    b: Unary<T, boolean>,
+    c: Unary<T, boolean>,
+    d: Unary<T, boolean>,
+): (xs: Iterable<T>) => [Option<T>, Option<T>, Option<T>, Option<T>];
+export function multifind<T> (
+    a: Unary<T, boolean>,
+    b: Unary<T, boolean>,
+    c: Unary<T, boolean>,
+    d: Unary<T, boolean>,
+    e: Unary<T, boolean>,
+): (xs: Iterable<T>) => [Option<T>, Option<T>, Option<T>, Option<T>, Option<T>];
+export function multifind<T>(...fs: Array<Unary<T, boolean>>) {
+    return function (xs: Iterable<T>): Array<Option<T>> {
+        const res: Array<Option<T>> = fs.map(() => undefined)
+        let remaining = res.length
+        for (const x of xs) {
+            for (let i = 0; i < fs.length; i++) {
+                if (res[i] !== undefined)
+                    continue;
+                const f = fs[i]!
+                if (f(x)) {
+                    res[i] = x
+                    remaining--
+                }
+            }
+            if (remaining === 0)
+                return res
+        }
+        return res
+    }
 }
 
 /** search a collection for the index of first item for which a function returns true */
