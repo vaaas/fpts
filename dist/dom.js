@@ -7,7 +7,7 @@ const qss = (q) => (x) => x.querySelectorAll(q);
 exports.qss = qss;
 const $ = (q) => document.querySelector(q);
 exports.$ = $;
-const $$ = (q) => document.querySelectorAll(q);
+const $$ = (q) => Array.from(document.querySelectorAll(q));
 exports.$$ = $$;
 const does_not_have_class = (c) => (x) => !x.classList.contains(c);
 exports.does_not_have_class = does_not_have_class;
