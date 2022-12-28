@@ -539,3 +539,13 @@ export function batch(n: number) {
             yield group
     };
 }
+
+export function count<T>(xs: Iterable<T>): Map<T, number> {
+    const m = new Map<T, number>()
+    for (const x of xs)
+        if (m.has(x))
+            m.set(x, m.get(x)! + 1)
+        else
+            m.set(x, 1)
+    return m
+}

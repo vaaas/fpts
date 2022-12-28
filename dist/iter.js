@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.batch = exports.flatten = exports.all = exports.any = exports.optimumBy = exports.optimum = exports.findIndex = exports.multifind = exports.find = exports.partition = exports.each = exports.zipWith = exports.enumerate = exports.repeat = exports.limit = exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.scanr = exports.scanl = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.iter = void 0;
+exports.count = exports.batch = exports.flatten = exports.all = exports.any = exports.optimumBy = exports.optimum = exports.findIndex = exports.multifind = exports.find = exports.partition = exports.each = exports.zipWith = exports.enumerate = exports.repeat = exports.limit = exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.scanr = exports.scanl = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.iter = void 0;
 const combinator_1 = require("./combinator");
 const maths_1 = require("./maths");
 const string_1 = require("./string");
@@ -521,3 +521,13 @@ function batch(n) {
     };
 }
 exports.batch = batch;
+function count(xs) {
+    const m = new Map();
+    for (const x of xs)
+        if (m.has(x))
+            m.set(x, m.get(x) + 1);
+        else
+            m.set(x, 1);
+    return m;
+}
+exports.count = count;
