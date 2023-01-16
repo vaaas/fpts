@@ -79,3 +79,5 @@ export const proximate =
 	(a: number) =>
 	(b: number): boolean =>
 	Math.abs(a - b) <= e
+
+export const is = <T>(a: T) => (b: unknown): b is T => a === b
