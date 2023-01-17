@@ -264,7 +264,7 @@ export const join = foldl(concat, '')
 export const joinWith = (d: string) => foldl1(concatWith(d), '')
 
 /** test if every member of collection **XS** passes the testing function **F** */
-export function every<T>(f: Unary<T, boolean>): (xs: Iterable<T>) => Boolean {
+export function every<T>(f: Unary<T, boolean>): (xs: Iterable<T>) => boolean {
 	return function(xs) {
 		for (const x of xs)
 			if (!f(x))
@@ -274,7 +274,7 @@ export function every<T>(f: Unary<T, boolean>): (xs: Iterable<T>) => Boolean {
 }
 
 /** test if at least one member of collection **XS** passes the testing function **F** */
-export function some<T>(f: Unary<T, boolean>): (xs: Iterable<T>) => Boolean {
+export function some<T>(f: Unary<T, boolean>): (xs: Iterable<T>) => boolean {
 	return function(xs) {
 		for (const x of xs)
 			if (f(x))
@@ -284,7 +284,7 @@ export function some<T>(f: Unary<T, boolean>): (xs: Iterable<T>) => Boolean {
 }
 
 /** test if an argument **X** passes all the functions **FS** */
-export function and<T>(...fs: Unary<T, boolean>[]): (x: T) => Boolean {
+export function and<T>(...fs: Unary<T, boolean>[]): (x: T) => boolean {
 	return function(x) {
 		for (const f of fs)
 			if (!f(x))
@@ -294,7 +294,7 @@ export function and<T>(...fs: Unary<T, boolean>[]): (x: T) => Boolean {
 }
 
 /** test if an argument **X** passes at least one function of **FS** */
-export function or<T>(...fs: Unary<T, boolean>[]): (x: T) => Boolean {
+export function or<T>(...fs: Unary<T, boolean>[]): (x: T) => boolean {
 	return function(x) {
 		for (const f of fs)
 			if (f(x))
