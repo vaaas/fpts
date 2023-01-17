@@ -3,12 +3,22 @@ import { Unary, UnaryP, Binary } from './data'
 import { add } from './maths'
 import { concat, concatWith } from './string'
 import { Option } from './option'
+import { duad } from './duad'
+
+export const StopIteration = Symbol()
 
 /** get the iterator of any iterable
  * like python's iter
  */
 export function iter<T>(x: Iterable<T>) {
 	return x[Symbol.iterator]()
+}
+
+export function next<T>(x: Iterator<T, any, any>): T | typeof StopIteration {
+    const n = x.next()
+    return n.done
+        ? StopIteration
+        : n.value
 }
 
 /** test if **X** is iterable */
@@ -332,18 +342,19 @@ export function* enumerate<T>(xs: Iterable<T>): Iterable<[number, T]> {
 export function zipWith<A, B, C>(f: Binary<A, B, C>): (as: Iterable<A>) => (bs: Iterable<B>) => Iterable<C> {
 	return function (as) {
 		return function* (bs) {
-			const ai = iter(as)
-			const bi = iter(bs)
-			while (true) {
-				const av = ai.next()
-				const bv = bi.next()
-				if (av.done || bv.done)
-					break
-				else yield f(av.value)(bv.value)
-			}
+            const ai = iter(as)
+            const bi = iter(bs)
+            for (
+                let a = next(ai), b = next(bi);
+                a !== StopIteration && b !== StopIteration;
+                a = next(ai), b = next(bi)
+            )
+                yield f(a)(b)
 		}
 	}
 }
+
+export const zip = zipWith(duad) as <A, B>(as: Iterable<A>) => (bs: Iterable<B>) => Iterable<[A, B]>
 
 /** execute a function on each member of a collection
  *

@@ -1,9 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.count = exports.batch = exports.flatten = exports.all = exports.any = exports.optimumBy = exports.optimum = exports.findIndex = exports.multifind = exports.find = exports.partition = exports.each = exports.zipWith = exports.enumerate = exports.repeat = exports.limit = exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.scanr = exports.scanl = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.iter = void 0;
+exports.count = exports.batch = exports.flatten = exports.all = exports.any = exports.optimumBy = exports.optimum = exports.findIndex = exports.multifind = exports.find = exports.partition = exports.each = exports.zip = exports.zipWith = exports.enumerate = exports.repeat = exports.limit = exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.scanr = exports.scanl = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.next = exports.iter = exports.StopIteration = void 0;
 const combinator_1 = require("./combinator");
 const maths_1 = require("./maths");
 const string_1 = require("./string");
+const duad_1 = require("./duad");
+exports.StopIteration = Symbol();
 /** get the iterator of any iterable
  * like python's iter
  */
@@ -11,6 +13,13 @@ function iter(x) {
     return x[Symbol.iterator]();
 }
 exports.iter = iter;
+function next(x) {
+    const n = x.next();
+    return n.done
+        ? exports.StopIteration
+        : n.value;
+}
+exports.next = next;
 /** test if **X** is iterable */
 function is(x) {
     if (x === null || x === undefined)
@@ -342,18 +351,13 @@ function zipWith(f) {
         return function* (bs) {
             const ai = iter(as);
             const bi = iter(bs);
-            while (true) {
-                const av = ai.next();
-                const bv = bi.next();
-                if (av.done || bv.done)
-                    break;
-                else
-                    yield f(av.value)(bv.value);
-            }
+            for (let a = next(ai), b = next(bi); a !== exports.StopIteration && b !== exports.StopIteration; a = next(ai), b = next(bi))
+                yield f(a)(b);
         };
     };
 }
 exports.zipWith = zipWith;
+exports.zip = zipWith(duad_1.duad);
 /** execute a function on each member of a collection
  *
  * - `f` — the function to execute
