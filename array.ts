@@ -90,3 +90,7 @@ export function* pairs<A, B>(as: A[], bs: B[]): Iterable<[A, B]> {
 }
 
 export const inside = <T>(xs: T[]) => (x: T): boolean => xs.includes(x)
+
+export function pick<T extends Array<any> | ReadonlyArray<any>>(xs: T): T[number] {
+    return xs[Math.floor(Math.random() * xs.length)]
+}

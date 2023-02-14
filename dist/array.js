@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.inside = exports.pairs = exports.reverseI = exports.dup = exports.joinWith = exports.head = exports.tail = exports.uniqueBy = exports.unique = exports.bind = exports.filter = exports.map = exports.of = exports.middle = exports.last = exports.first = void 0;
+exports.pick = exports.inside = exports.pairs = exports.reverseI = exports.dup = exports.joinWith = exports.head = exports.tail = exports.uniqueBy = exports.unique = exports.bind = exports.filter = exports.map = exports.of = exports.middle = exports.last = exports.first = void 0;
 const duad_1 = require("./duad");
 const iter_1 = require("./iter");
 const map_1 = require("./map");
@@ -92,3 +92,7 @@ function* pairs(as, bs) {
 exports.pairs = pairs;
 const inside = (xs) => (x) => xs.includes(x);
 exports.inside = inside;
+function pick(xs) {
+    return xs[Math.floor(Math.random() * xs.length)];
+}
+exports.pick = pick;
