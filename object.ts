@@ -226,3 +226,9 @@ export function ofKV<T, K extends string>(f: Unary<T, K>) {
 		}
 	}
 }
+
+export const assoc =
+    <K extends string>(k: K) =>
+    <V>(v: V) =>
+    <O extends Record<any, any>>(o: O): O & Record<K, V> =>
+    ({ ...o, [k]: v })
