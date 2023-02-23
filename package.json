@@ -1,14 +1,15 @@
 {
     "name": "fpts",
-    "version": "1.0.84",
+    "version": "1.0.85",
     "license": "MIT",
     "scripts": {
-        "build": "tsc",
+        "build": "tsc --declaration",
         "test": "node --test"
     },
+    "types": "./dist",
     "exports": {
         ".": "./dist/index.js",
-	"./alist": "./dist/alist.js",
+        "./alist": "./dist/alist.js",
         "./array": "./dist/array.js",
         "./combinator": "./dist/combinator.js",
         "./data": "./dist/data.js",
