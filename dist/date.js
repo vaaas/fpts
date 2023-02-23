@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.timestamp = exports.mapDay = exports.mapYear = exports.mapMonth = void 0;
+exports.before = exports.after = exports.timestamp = exports.mapDay = exports.mapYear = exports.mapMonth = void 0;
 const mapMonth = (f) => (x) => {
     const y = new Date(x);
     y.setMonth(f(y.getMonth()));
@@ -21,3 +21,7 @@ const mapDay = (f) => (x) => {
 exports.mapDay = mapDay;
 const timestamp = (x) => x.getTime();
 exports.timestamp = timestamp;
+const after = (a) => (b) => b.getTime() > a.getTime();
+exports.after = after;
+const before = (a) => (b) => b.getTime() < a.getTime();
+exports.before = before;

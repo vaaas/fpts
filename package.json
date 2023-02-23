@@ -1,9 +1,10 @@
 {
     "name": "fpts",
-    "version": "1.0.86",
+    "version": "1.0.87",
     "license": "MIT",
     "scripts": {
-        "build": "tsc --declaration --outDir ./dist",
+        "clean": "rm dist/*",
+        "build": "npm run clean; tsc --declaration --outDir ./dist",
         "test": "node --test"
     },
     "types": "./dist",

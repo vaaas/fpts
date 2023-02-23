@@ -19,3 +19,7 @@ export const mapDay = (f: Unary<number, number>) => (x: Date): Date => {
 }
 
 export const timestamp = (x: Date): number => x.getTime()
+
+export const after = (a: Date) => (b: Date) => b.getTime() > a.getTime()
+
+export const before = (a: Date) => (b: Date) => b.getTime() < a.getTime()
