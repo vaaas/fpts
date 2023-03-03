@@ -14,3 +14,5 @@ export declare const str: (x: any) => string;
 export declare const startsWith: (p: string) => (x: string) => boolean;
 /** return a string that repeats `part` `n` times */
 export declare const rep: (part: string) => (n: number) => string;
+export declare const inside: (a: string) => (b: string) => boolean;
+export declare const outside: (a: string) => (b: string) => boolean;

@@ -23,3 +23,7 @@ export const rep = (part: string) => (n: number): string => {
         s += part
     return s
 }
+
+export const inside = (a: string) => (b: string) => a.includes(b)
+
+export const outside = (a: string) => (b: string) => !a.includes(b)

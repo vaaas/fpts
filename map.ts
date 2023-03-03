@@ -239,13 +239,13 @@ export function mapKeys<A, B>(f: Unary<A, B>) {
 
 export const inside =
 	<K, V>(xs: Map<K, V>) =>
-	(x: K): boolean =>
-	xs.has(x)
+	<U>(x: U | K): x is K =>
+	xs.has(x as K)
 
 export const outside =
 	<K, V>(xs: Map<K, V>) =>
-	(x: K): boolean =>
-	!xs.has(x)
+	<U>(x: U | K): x is U =>
+	!xs.has(x as K)
 
 export function copy<K, V>(xs: Map<K, V>): Map<K, V> {
     const ys = new Map<K, V>()

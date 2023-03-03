@@ -28,5 +28,6 @@ export declare function joinWith(s: string): (xs: Array<string>) => string;
 export declare function dup<T>(x: T): [T, T];
 export declare function reverseI<T>(xs: T[]): Iterable<T>;
 export declare function pairs<A, B>(as: A[], bs: B[]): Iterable<[A, B]>;
-export declare const inside: <T>(xs: T[]) => (x: T) => boolean;
+export declare const inside: <T>(xs: T[]) => <U>(x: T | U) => x is T;
+export declare const outside: <T>(xs: T[]) => <U>(x: T | U) => x is U;
 export declare function pick<T extends Array<any> | ReadonlyArray<any>>(xs: T): T[number];

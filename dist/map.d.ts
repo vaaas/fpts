@@ -70,7 +70,7 @@ export declare function groupByN<V, K1, K2, K3, K4, K5>(f: Unary<V, K1>, g: Unar
 export declare function map<A, B>(f: Unary<A, B>): <K>(xs: Map<K, A>) => Map<K, B>;
 export declare function map2<K1, K2>(f: Unary<K1, K2>): <V1, V2>(g: Unary<V1, V2>) => (xs: Map<K1, V1>) => Map<K2, V2>;
 export declare function mapKeys<A, B>(f: Unary<A, B>): <V>(xs: Map<A, V>) => Map<B, V>;
-export declare const inside: <K, V>(xs: Map<K, V>) => (x: K) => boolean;
-export declare const outside: <K, V>(xs: Map<K, V>) => (x: K) => boolean;
+export declare const inside: <K, V>(xs: Map<K, V>) => <U>(x: K | U) => x is K;
+export declare const outside: <K, V>(xs: Map<K, V>) => <U>(x: K | U) => x is U;
 export declare function copy<K, V>(xs: Map<K, V>): Map<K, V>;
 export declare function concat_ip<A, B>(xs: Map<A, B>): (ys: Map<A, B>) => Map<A, B>;

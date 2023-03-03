@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.rep = exports.startsWith = exports.str = exports.concatWith = exports.concat = void 0;
+exports.outside = exports.inside = exports.rep = exports.startsWith = exports.str = exports.concatWith = exports.concat = void 0;
 /** join two strings into a single string */
 const concat = (a) => (b) => a + b;
 exports.concat = concat;
@@ -27,3 +27,7 @@ const rep = (part) => (n) => {
     return s;
 };
 exports.rep = rep;
+const inside = (a) => (b) => a.includes(b);
+exports.inside = inside;
+const outside = (a) => (b) => !a.includes(b);
+exports.outside = outside;

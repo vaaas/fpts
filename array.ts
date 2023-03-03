@@ -89,7 +89,9 @@ export function* pairs<A, B>(as: A[], bs: B[]): Iterable<[A, B]> {
             yield [a, b]
 }
 
-export const inside = <T>(xs: T[]) => (x: T): boolean => xs.includes(x)
+export const inside = <T>(xs: T[]) => <U>(x: U | T): x is T => xs.includes(x as T)
+
+export const outside = <T>(xs: T[]) => <U>(x: U | T): x is U => !xs.includes(x as T)
 
 export function pick<T extends Array<any> | ReadonlyArray<any>>(xs: T): T[number] {
     return xs[Math.floor(Math.random() * xs.length)]
