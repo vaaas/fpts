@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.filter = exports.diff = exports.map = exports.outside = exports.inside = exports.of = void 0;
+exports.same = exports.filter = exports.diff = exports.map = exports.outside = exports.inside = exports.of = void 0;
 const of = (x) => new Set(x);
 exports.of = of;
 const inside = (xs) => (x) => xs.has(x);
@@ -30,3 +30,13 @@ const filter = (f) => (xs) => {
     return ys;
 };
 exports.filter = filter;
+/** returns whether set A and set B have the same contents */
+const same = (a) => (b) => {
+    if (a.size !== b.size)
+        return false;
+    for (const x of a)
+        if (!b.has(x))
+            return false;
+    return true;
+};
+exports.same = same;

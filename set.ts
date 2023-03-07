@@ -28,3 +28,13 @@ export const filter = <T>(f: Unary<T, boolean>) => (xs: Set<T>): Set<T> => {
             ys.add(x)
     return ys
 }
+
+/** returns whether set A and set B have the same contents */
+export const same = <T>(a: Set<T>) => (b: Set<T>): boolean => {
+    if (a.size !== b.size)
+        return false
+    for (const x of a)
+        if (!b.has(x))
+            return false
+    return true
+}
