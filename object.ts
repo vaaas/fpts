@@ -162,6 +162,14 @@ export function defaults<T extends object>(x: Partial<T>): (d: T) => T {
 	}
 }
 
+export function clone_into<T extends object>(source: T) {
+    return function (dest: T | Partial<T>): T {
+        for (const [k, v] of entries(source))
+            dest[k] = v;
+        return dest as T;
+    }
+}
+
 export function into<R extends Record<string|number|symbol, any>>(o: R): <K extends keyof R>(k: K) => (x: R[K]) => typeof o {
 	return function (k) {
 		return function (x) {

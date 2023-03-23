@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.assoc = exports.ofKV = exports.ofV = exports.ofK = exports.len = exports.merge = exports.get = exports.defined = exports.into = exports.defaults = exports.foldrWithKeys = exports.foldr = exports.foldlWithKeys = exports.foldl = exports.filterWithKeys = exports.filter = exports.eachWithKeys = exports.mapKeys = exports.map2 = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
+exports.assoc = exports.ofKV = exports.ofV = exports.ofK = exports.len = exports.merge = exports.get = exports.defined = exports.into = exports.clone_into = exports.defaults = exports.foldrWithKeys = exports.foldr = exports.foldlWithKeys = exports.foldl = exports.filterWithKeys = exports.filter = exports.eachWithKeys = exports.mapKeys = exports.map2 = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
 /** return the entries of an object */
 function entries(o) {
     return Object.entries(o);
@@ -158,6 +158,14 @@ function defaults(x) {
     };
 }
 exports.defaults = defaults;
+function clone_into(source) {
+    return function (dest) {
+        for (const [k, v] of entries(source))
+            dest[k] = v;
+        return dest;
+    };
+}
+exports.clone_into = clone_into;
 function into(o) {
     return function (k) {
         return function (x) {
