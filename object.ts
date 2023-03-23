@@ -162,11 +162,12 @@ export function defaults<T extends object>(x: Partial<T>): (d: T) => T {
 	}
 }
 
-export function fill_with<T extends object>(source: T) {
-    return function (dest: T | Partial<T>): T {
+export function update_with<A extends object>(source: A) {
+    return function <B extends A>(dest: B): B {
         for (const [k, v] of entries(source))
+            // @ts-ignore
             dest[k] = v;
-        return dest as T;
+        return dest;
     }
 }
 

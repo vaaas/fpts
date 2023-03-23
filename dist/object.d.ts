@@ -60,7 +60,7 @@ export declare function foldrWithKeys<A, B, K extends string>(f: Ternary<K, A, B
  * returns the mutated object
  */
 export declare function defaults<T extends object>(x: Partial<T>): (d: T) => T;
-export declare function fill_with<T extends object>(source: T): (dest: T | Partial<T>) => T;
+export declare function update_with<A extends object>(source: A): <B extends A>(dest: B) => B;
 export declare function into<R extends Record<string | number | symbol, any>>(o: R): <K extends keyof R>(k: K) => (x: R[K]) => typeof o;
 /** filter out keys of an object whose values are undefined */
 export declare function defined<T extends Record<any, any>>(x: T): Partial<T>;
