@@ -19,6 +19,7 @@ export declare function apply<A>(x: Result<A>): <B>(f: Result<Unary<A, B>>) => R
  * if the result is an error, instead pass it through the error handler, also returning **B**.
  */
 export declare function fold<A, B>(handler: Unary<Error, B>, f: Unary<A, B>): (x: Result<A>) => B;
+export declare function handle<A>(f: Unary<Error, A>): (x: Result<A>) => A;
 /** checks if the result is an error */
 export declare function isError<T>(x: Result<T>): x is Error;
 /** checks if the result is an actual value (not an error) */

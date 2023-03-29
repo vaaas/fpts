@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.pipe = exports.every = exports.lift2 = exports.unwrap = exports.isNothing = exports.isError = exports.fold = exports.apply = exports.bind = exports.map = void 0;
+exports.pipe = exports.every = exports.lift2 = exports.unwrap = exports.isNothing = exports.isError = exports.handle = exports.fold = exports.apply = exports.bind = exports.map = void 0;
 /** given a transformation **A** → **B**
  * apply it to a result **A** only if it isn't an error
  * such that it becomes a result of **B**
@@ -51,6 +51,15 @@ function fold(handler, f) {
     };
 }
 exports.fold = fold;
+function handle(f) {
+    return function (x) {
+        if (x instanceof Error)
+            return f(x);
+        else
+            return x;
+    };
+}
+exports.handle = handle;
 /** checks if the result is an error */
 function isError(x) {
     return x instanceof Error;

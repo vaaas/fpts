@@ -47,12 +47,21 @@ export function apply<A>(x: Result<A>): <B>(f: Result<Unary<A, B>>) => Result<B>
 /** apply a transformation **A** → **B** to a result **A**, returning **B**.
  * if the result is an error, instead pass it through the error handler, also returning **B**.
  */
-export function fold<A, B>(handler: Unary<Error, B>, f: Unary<A, B>): (x: Result<A>) => B {
-    return function (x) {
+export function fold<A, B>(handler: Unary<Error, B>, f: Unary<A, B>) {
+    return function (x: Result<A>): B {
         if (x instanceof Error)
             return handler(x)
         else
             return f(x)
+    }
+}
+
+export function handle<A>(f: Unary<Error, A>) {
+    return function (x: Result<A>): A {
+        if (x instanceof Error)
+            return f(x)
+        else
+            return x
     }
 }
 
