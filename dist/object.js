@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.assoc = exports.ofKV = exports.ofV = exports.ofK = exports.len = exports.merge = exports.get = exports.defined = exports.into = exports.update_with = exports.defaults = exports.foldrWithKeys = exports.foldr = exports.foldlWithKeys = exports.foldl = exports.filterWithKeys = exports.filter = exports.eachWithKeys = exports.mapKeys = exports.map2 = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
+exports.awaited = exports.assoc = exports.ofKV = exports.ofV = exports.ofK = exports.len = exports.merge = exports.get = exports.defined = exports.into = exports.update_with = exports.defaults = exports.foldrWithKeys = exports.foldr = exports.foldlWithKeys = exports.foldl = exports.filterWithKeys = exports.filter = exports.eachWithKeys = exports.mapKeys = exports.map2 = exports.map = exports.values = exports.fromEntries = exports.entries = void 0;
 /** return the entries of an object */
 function entries(o) {
     return Object.entries(o);
@@ -234,3 +234,10 @@ function ofKV(f) {
 exports.ofKV = ofKV;
 const assoc = (k) => (v) => (o) => ({ ...o, [k]: v });
 exports.assoc = assoc;
+async function awaited(xs) {
+    const o = {};
+    for (const [k, v] of entries(xs))
+        o[k] = await v;
+    return o;
+}
+exports.awaited = awaited;

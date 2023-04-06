@@ -73,3 +73,6 @@ export declare function ofK<K extends string, V>(f: Unary<K, V>): (xs: Iterable<
 export declare function ofV<K extends string, V>(f: Unary<V, K>): (xs: Iterable<V>) => Record<K, V>;
 export declare function ofKV<T, K extends string>(f: Unary<T, K>): <V>(g: Unary<T, V>) => (xs: Iterable<T>) => Record<K, V>;
 export declare const assoc: <K extends string>(k: K) => <V>(v: V) => <O extends Record<any, any>>(o: O) => O & Record<K, V>;
+export declare function awaited<T extends Record<any, Promise<any>>>(xs: T): Promise<{
+    [K in keyof T]: Awaited<T[K]>;
+}>;

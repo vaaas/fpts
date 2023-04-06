@@ -241,3 +241,10 @@ export const assoc =
     <V>(v: V) =>
     <O extends Record<any, any>>(o: O): O & Record<K, V> =>
     ({ ...o, [k]: v })
+
+export async function awaited<T extends Record<any, Promise<any>>>(xs: T): Promise<{[K in keyof T]: Awaited<T[K]>}> {
+    const o: Partial<{[K in keyof T]: Awaited<T[K]>}> = {}
+    for (const [k, v] of entries(xs))
+        o[k] = await v
+    return o as any
+}
