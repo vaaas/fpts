@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.pick = exports.outside = exports.inside = exports.pairs = exports.reverseI = exports.dup = exports.joinWith = exports.head = exports.tail = exports.uniqueBy = exports.unique = exports.bind = exports.filter = exports.map = exports.of = exports.middle = exports.last = exports.first = void 0;
+exports.pick = exports.outside = exports.inside = exports.pairs = exports.reverseI = exports.dup = exports.joinWith = exports.iter_slice = exports.head = exports.tail = exports.uniqueBy = exports.unique = exports.bind = exports.filter = exports.map = exports.of = exports.middle = exports.last = exports.first = void 0;
 const duad_1 = require("./duad");
 const iter_1 = require("./iter");
 const map_1 = require("./map");
@@ -68,6 +68,12 @@ function head(xs) {
     return xs.slice(0, -1);
 }
 exports.head = head;
+const iter_slice = (start, end) => function* (xs) {
+    const actual_end = Math.min(end, xs.length);
+    for (let i = start; i < actual_end; i++)
+        yield xs[i];
+};
+exports.iter_slice = iter_slice;
 /** join all elements of an array into a string, separated by a delimitter */
 function joinWith(s) {
     return function (xs) {

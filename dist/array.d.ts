@@ -23,6 +23,7 @@ export declare function uniqueBy<A, B>(f: Unary<A, B>): (xs: Iterable<A>) => Arr
 export declare function tail<T>(xs: T[]): T[];
 /** return every element of an array excepd the last */
 export declare function head<T>(xs: T[]): T[];
+export declare const iter_slice: (start: number, end: number) => <T>(xs: T[]) => Iterable<T>;
 /** join all elements of an array into a string, separated by a delimitter */
 export declare function joinWith(s: string): (xs: Array<string>) => string;
 export declare function dup<T>(x: T): [T, T];

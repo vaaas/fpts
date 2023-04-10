@@ -560,3 +560,9 @@ export function count<T>(xs: Iterable<T>): Map<T, number> {
             m.set(x, 1)
     return m
 }
+
+/** generate integers from `start` until `end`, inclusive */
+export function* seq(start: number, end: number) {
+    for (let i = start; i <= end; i++)
+        yield i
+}

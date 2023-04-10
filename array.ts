@@ -67,6 +67,12 @@ export function head<T>(xs: T[]): T[] {
 	return xs.slice(0, -1);
 }
 
+export const iter_slice = (start: number, end: number) => function* <T>(xs: T[]): Iterable<T> {
+    const actual_end = Math.min(end, xs.length);
+    for (let i = start; i < actual_end; i++)
+        yield xs[i]!;
+}
+
 /** join all elements of an array into a string, separated by a delimitter */
 export function joinWith(s: string): (xs: Array<string>) => string {
 	return function (xs) {

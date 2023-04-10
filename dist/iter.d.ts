@@ -205,3 +205,5 @@ export declare function all(xs: Iterable<any>): boolean;
 export declare function flatten<T>(xs: Iterable<Iterable<T>>): Iterable<T>;
 export declare function batch(n: number): <T>(xs: Iterable<T>) => Iterable<T[]>;
 export declare function count<T>(xs: Iterable<T>): Map<T, number>;
+/** generate integers from `start` until `end`, inclusive */
+export declare function seq(start: number, end: number): Generator<number, void, unknown>;
