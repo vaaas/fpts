@@ -7,3 +7,5 @@ export declare const diff: <T>(as: Set<T>) => (bs: Set<T>) => Set<T>;
 export declare const filter: <T>(f: Unary<T, boolean>) => (xs: Set<T>) => Set<T>;
 /** returns whether set A and set B have the same contents */
 export declare const same: <T>(a: Set<T>) => (b: Set<T>) => boolean;
+export declare const superset: <A>(superset: Set<A>) => (subset: Set<A>) => boolean;
+export declare const subset: <A>(b: Set<A>) => (c: Set<A>) => boolean;

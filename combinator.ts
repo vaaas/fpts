@@ -63,15 +63,21 @@ export function D<A, B, C, D, E>(a: Binary<A, B, C>): (b: Unary<D, A>) => (c: Un
  *
  * in other words, applies the filter on only the second argument
  */
-export function D1<A, B, C>(a: Binary<A, B, C>): <D>(b: Unary<D, B>) => (c: A) => (d: D) => C {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return a(c)(b(d))
-			}
-		}
-	}
-}
+export const D1 = <A, B, C>(a: Binary<A, B, C>) =>
+    <D>(b: Unary<D, B>) =>
+    (c: A) =>
+    (d: D) =>
+    a(c)(b(d))
+
+/** inverse Dove combinator
+ *
+ * like Dove, but applies a filter only on the first argument
+ */
+export const D2 = <A, B, C>(a: Binary<A, B, C>) =>
+    <D>(b: Unary<D, A>) =>
+    (d: D) =>
+    (c: B) =>
+    a(b(d))(c)
 
 /** Lifting combinator.
  *

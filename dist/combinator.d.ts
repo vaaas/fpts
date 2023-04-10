@@ -28,7 +28,12 @@ export declare function D<A, B, C, D, E>(a: Binary<A, B, C>): (b: Unary<D, A>) =
  *
  * in other words, applies the filter on only the second argument
  */
-export declare function D1<A, B, C>(a: Binary<A, B, C>): <D>(b: Unary<D, B>) => (c: A) => (d: D) => C;
+export declare const D1: <A, B, C>(a: Binary<A, B, C>) => <D>(b: Unary<D, B>) => (c: A) => (d: D) => C;
+/** inverse Dove combinator
+ *
+ * like Dove, but applies a filter only on the first argument
+ */
+export declare const D2: <A, B, C>(a: Binary<A, B, C>) => <D>(b: Unary<D, A>) => (d: D) => (c: B) => C;
 /** Lifting combinator.
  *
  * Transform a binary function from A to B so that it is a binary function of C to B.

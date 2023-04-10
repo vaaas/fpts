@@ -1,4 +1,6 @@
 import { Unary } from './data'
+import { every } from './iter'
+import { C } from './combinator'
 
 export const of = <T>(x: Iterable<T>): Set<T> => new Set(x)
 
@@ -31,10 +33,11 @@ export const filter = <T>(f: Unary<T, boolean>) => (xs: Set<T>): Set<T> => {
 
 /** returns whether set A and set B have the same contents */
 export const same = <T>(a: Set<T>) => (b: Set<T>): boolean => {
-    if (a.size !== b.size)
-        return false
-    for (const x of a)
-        if (!b.has(x))
-            return false
-    return true
+    if (a.size !== b.size) return false
+    else return every(inside(b))(a)
 }
+
+export const superset = <A>(superset: Set<A>) => (subset: Set<A>): boolean =>
+    every(inside(superset))(subset)
+
+export const subset = C(superset)

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.spread = exports.Wu = exports.W = exports.V = exports.S = exports.T = exports.KI = exports.K = exports.I = exports.L = exports.D1 = exports.D = exports.C = exports.B1 = exports.B = void 0;
+exports.spread = exports.Wu = exports.W = exports.V = exports.S = exports.T = exports.KI = exports.K = exports.I = exports.L = exports.D2 = exports.D1 = exports.D = exports.C = exports.B1 = exports.B = void 0;
 /** Bluebird Combinator
  *
  * Pass an argument C to a unary function B. Before returning the result, pass it through a final filter, A.
@@ -64,16 +64,14 @@ exports.D = D;
  *
  * in other words, applies the filter on only the second argument
  */
-function D1(a) {
-    return function (b) {
-        return function (c) {
-            return function (d) {
-                return a(c)(b(d));
-            };
-        };
-    };
-}
+const D1 = (a) => (b) => (c) => (d) => a(c)(b(d));
 exports.D1 = D1;
+/** inverse Dove combinator
+ *
+ * like Dove, but applies a filter only on the first argument
+ */
+const D2 = (a) => (b) => (d) => (c) => a(b(d))(c);
+exports.D2 = D2;
 /** Lifting combinator.
  *
  * Transform a binary function from A to B so that it is a binary function of C to B.
