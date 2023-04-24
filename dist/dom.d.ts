@@ -6,3 +6,4 @@ export declare const does_not_have_class: (c: string) => (x: HTMLElement) => boo
 export declare const has_class: (c: string) => (x: HTMLElement) => boolean;
 export declare const set_class: (e: HTMLElement, c: string, b: boolean) => HTMLElement;
 export declare const byId: (c: string) => HTMLElement | null;
+export declare const on_transition_end: (e: HTMLElement) => Promise<TransitionEvent>;

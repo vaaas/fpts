@@ -16,3 +16,5 @@ export const set_class = (e: HTMLElement, c: string, b: boolean) => {
 }
 
 export const byId = (c: string) => document.getElementById(c)
+
+export const on_transition_end = (e: HTMLElement) => new Promise<TransitionEvent>(f => e.addEventListener('transitionend', f, { once: true }))

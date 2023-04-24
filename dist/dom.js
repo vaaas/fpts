@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.byId = exports.set_class = exports.has_class = exports.does_not_have_class = exports.$$ = exports.$ = exports.qss = exports.qs = void 0;
+exports.on_transition_end = exports.byId = exports.set_class = exports.has_class = exports.does_not_have_class = exports.$$ = exports.$ = exports.qss = exports.qs = void 0;
 const qs = (q) => (x) => x.querySelector(q);
 exports.qs = qs;
 const qss = (q) => (x) => x.querySelectorAll(q);
@@ -23,3 +23,5 @@ const set_class = (e, c, b) => {
 exports.set_class = set_class;
 const byId = (c) => document.getElementById(c);
 exports.byId = byId;
+const on_transition_end = (e) => new Promise(f => e.addEventListener('transitionend', f, { once: true }));
+exports.on_transition_end = on_transition_end;
