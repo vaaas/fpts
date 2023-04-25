@@ -207,3 +207,5 @@ export declare function batch(n: number): <T>(xs: Iterable<T>) => Iterable<T[]>;
 export declare function count<T>(xs: Iterable<T>): Map<T, number>;
 /** generate integers from `start` until `end`, inclusive */
 export declare function seq(start: number, end: number): Generator<number, void, unknown>;
+/** yields all possible combinations of pairs between two iterables, **As** and **Bs** */
+export declare function combinations<A>(as: Iterable<A>): <B>(bs: Iterable<B>) => Iterable<[A, B]>;

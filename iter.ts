@@ -566,3 +566,14 @@ export function* seq(start: number, end: number) {
     for (let i = start; i <= end; i++)
         yield i
 }
+
+/** yields all possible combinations of pairs between two iterables, **As** and **Bs** */
+// TODO: optimise memory further by using lazy array
+export function combinations<A>(as: Iterable<A>) {
+    return function* <B>(bs: Iterable<B>): Iterable<[A, B]> {
+        const frozen_b = Array.from(bs)
+        for (const a of as)
+            for (const b of frozen_b)
+                yield [a, b]
+    }
+}
