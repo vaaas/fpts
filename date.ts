@@ -18,6 +18,12 @@ export const mapDay = (f: Unary<number, number>) => (x: Date): Date => {
     return y
 }
 
+export const mapSeconds = (f: Unary<number, number>) => (x: Date) => {
+    const y = new Date(x)
+    y.setSeconds(f(y.getSeconds()))
+    return y
+}
+
 export const timestamp = (x: Date): number => x.getTime()
 
 export const after = (a: Date) => (b: Date) => b.getTime() > a.getTime()
