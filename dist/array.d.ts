@@ -8,6 +8,14 @@ export declare function middle<T>(xs: Array<T>): T | undefined;
 export declare function of<T>(xs: Iterable<T>): Array<T>;
 /** map implementation for arrays */
 export declare function map<A, B>(f: Unary<A, B>): Unary<Array<A>, Array<B>>;
+/** transform every element **A** of an array of **As** into an element **B**
+ * using the provided function `f` **A** -> **B**
+ *
+ * returns an array of **Bs**
+ *
+ * this transformation happens *in place*, mutating the array
+ */
+export declare function map_ip<A, B>(f: Unary<A, B>): (xs: Array<A>) => Array<B>;
 /** filter implentation for arrays */
 export declare function filter<A>(f: Unary<A, boolean>): Unary<Array<A>, Array<A>>;
 /** bind / flatMap implentation for arrays */

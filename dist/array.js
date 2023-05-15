@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.pick = exports.outside = exports.inside = exports.pairs = exports.reverseI = exports.dup = exports.joinWith = exports.iter_slice = exports.head = exports.tail = exports.uniqueBy = exports.unique = exports.bind = exports.filter = exports.map = exports.of = exports.middle = exports.last = exports.first = void 0;
+exports.pick = exports.outside = exports.inside = exports.pairs = exports.reverseI = exports.dup = exports.joinWith = exports.iter_slice = exports.head = exports.tail = exports.uniqueBy = exports.unique = exports.bind = exports.filter = exports.map_ip = exports.map = exports.of = exports.middle = exports.last = exports.first = void 0;
 const duad_1 = require("./duad");
 const iter_1 = require("./iter");
 const map_1 = require("./map");
@@ -31,6 +31,23 @@ function map(f) {
     };
 }
 exports.map = map;
+/** transform every element **A** of an array of **As** into an element **B**
+ * using the provided function `f` **A** -> **B**
+ *
+ * returns an array of **Bs**
+ *
+ * this transformation happens *in place*, mutating the array
+ */
+function map_ip(f) {
+    return function (xs) {
+        for (let i = 0; i < xs.length; i++)
+            // @ts-expect-error
+            xs[i] = f(xs[i]);
+        // @ts-expect-error
+        return xs;
+    };
+}
+exports.map_ip = map_ip;
 /** filter implentation for arrays */
 function filter(f) {
     return function (xs) {

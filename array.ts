@@ -30,6 +30,23 @@ export function map<A, B>(f: Unary<A, B>): Unary<Array<A>, Array<B>> {
 	}
 }
 
+/** transform every element **A** of an array of **As** into an element **B**
+ * using the provided function `f` **A** -> **B**
+ *
+ * returns an array of **Bs**
+ *
+ * this transformation happens *in place*, mutating the array
+ */
+export function map_ip<A, B>(f: Unary<A, B>) {
+    return function(xs: Array<A>): Array<B> {
+        for (let i = 0; i < xs.length; i++)
+            // @ts-expect-error
+            xs[i] = f(xs[i]);
+        // @ts-expect-error
+        return xs;
+    }
+}
+
 /** filter implentation for arrays */
 export function filter<A>(f: Unary<A, boolean>): Unary<Array<A>, Array<A>> {
 	return function(xs) {
