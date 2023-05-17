@@ -577,3 +577,31 @@ export function combinations<A>(as: Iterable<A>) {
                 yield [a, b]
     }
 }
+
+/** composition of two left folds
+ *
+ * this is primarily useful for computing composite accumulators, such as an average
+ *
+ * fold a collection of **Xs** into an accumulated value **A** using the binary function **f**: **A** → **X** → **A**
+ *
+ * fold the same collection into an accumulated value **B** using the binary function **g**: **B** → **X** → **B**
+ *
+ * combine **A** and **B** into **C** using the binary function **h**: **A** → **B** → **C**
+ */
+export function double_foldl<A, B, X, C>(
+    f: Binary<A, X, A>,
+    i: A,
+    g: Binary<B, X, B>,
+    j: B,
+    h: Binary<A, B, C>,
+) {
+    return function (xs: Iterable<X>): C {
+        let a = i
+        let b = j
+        for (const x of xs) {
+            a = f(a)(x)
+            b = g(b)(x)
+        }
+        return h(a)(b)
+    }
+}

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.combinations = exports.seq = exports.count = exports.batch = exports.flatten = exports.all = exports.any = exports.optimumBy = exports.optimum = exports.findIndex = exports.multifind = exports.find = exports.partition = exports.each = exports.zip = exports.zipWith = exports.enumerate = exports.repeat = exports.limit = exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.scanr = exports.scanl = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.next = exports.iter = exports.StopIteration = void 0;
+exports.double_foldl = exports.combinations = exports.seq = exports.count = exports.batch = exports.flatten = exports.all = exports.any = exports.optimumBy = exports.optimum = exports.findIndex = exports.multifind = exports.find = exports.partition = exports.each = exports.zip = exports.zipWith = exports.enumerate = exports.repeat = exports.limit = exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.scanr = exports.scanl = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.next = exports.iter = exports.StopIteration = void 0;
 const combinator_1 = require("./combinator");
 const maths_1 = require("./maths");
 const string_1 = require("./string");
@@ -552,3 +552,25 @@ function combinations(as) {
     };
 }
 exports.combinations = combinations;
+/** composition of two left folds
+ *
+ * this is primarily useful for computing composite accumulators, such as an average
+ *
+ * fold a collection of **Xs** into an accumulated value **A** using the binary function **f**: **A** → **X** → **A**
+ *
+ * fold the same collection into an accumulated value **B** using the binary function **g**: **B** → **X** → **B**
+ *
+ * combine **A** and **B** into **C** using the binary function **h**: **A** → **B** → **C**
+ */
+function double_foldl(f, i, g, j, h) {
+    return function (xs) {
+        let a = i;
+        let b = j;
+        for (const x of xs) {
+            a = f(a)(x);
+            b = g(b)(x);
+        }
+        return h(a)(b);
+    };
+}
+exports.double_foldl = double_foldl;

@@ -209,3 +209,14 @@ export declare function count<T>(xs: Iterable<T>): Map<T, number>;
 export declare function seq(start: number, end: number): Generator<number, void, unknown>;
 /** yields all possible combinations of pairs between two iterables, **As** and **Bs** */
 export declare function combinations<A>(as: Iterable<A>): <B>(bs: Iterable<B>) => Iterable<[A, B]>;
+/** composition of two left folds
+ *
+ * this is primarily useful for computing composite accumulators, such as an average
+ *
+ * fold a collection of **Xs** into an accumulated value **A** using the binary function **f**: **A** → **X** → **A**
+ *
+ * fold the same collection into an accumulated value **B** using the binary function **g**: **B** → **X** → **B**
+ *
+ * combine **A** and **B** into **C** using the binary function **h**: **A** → **B** → **C**
+ */
+export declare function double_foldl<A, B, X, C>(f: Binary<A, X, A>, i: A, g: Binary<B, X, B>, j: B, h: Binary<A, B, C>): (xs: Iterable<X>) => C;
