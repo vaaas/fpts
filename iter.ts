@@ -605,3 +605,22 @@ export function double_foldl<A, B, X, C>(
         return h(a)(b)
     }
 }
+
+/** skip **n** elements of an iterable */
+export const skip = (n: number) => function* <T>(xs: Iterable<T>): Iterable<T> {
+    const it = iter(xs)
+    {
+        let v: IteratorResult<T> | undefined = undefined
+        let i = 0
+        while (i < n && !v?.done) {
+            i++
+            v = it.next()
+        }
+    }
+
+    for (let v = it.next(); !v.done; v = it.next())
+        yield v.value
+}
+
+/** get the tail of an iterable (all items except for the first) */
+export const tail = skip(1);

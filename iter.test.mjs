@@ -510,4 +510,43 @@ describe('iter', () => {
             )
         })
     })
+
+    describe('tail', () => {
+        it('should get the last elements of an iterable', () => {
+            assert.deepEqual(
+                Array.from(iter.tail([1,2,3])),
+                [2,3],
+            )
+        })
+
+        it('should return empty iterable when iterable is empty', () => {
+            assert.deepEqual(
+                Array.from(iter.tail([])),
+                []
+            )
+        })
+    })
+
+    describe('skip', () => {
+        it('should skip 1 element', () => {
+            assert.deepEqual(
+                Array.from(iter.skip(1)([1,2,3])),
+                [2,3]
+            )
+        })
+
+        it('should make no changes when skipping 0 elements', () => {
+            assert.deepEqual(
+                Array.from(iter.skip(0)([1,2,3])),
+                [1,2,3]
+            )
+        })
+
+        it('should return empty when skipping too many elements', () => {
+            assert.deepEqual(
+                Array.from(iter.skip(1e5)([1,2,3])),
+                []
+            )
+        })
+    })
 })

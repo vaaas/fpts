@@ -220,3 +220,7 @@ export declare function combinations<A>(as: Iterable<A>): <B>(bs: Iterable<B>) =
  * combine **A** and **B** into **C** using the binary function **h**: **A** → **B** → **C**
  */
 export declare function double_foldl<A, B, X, C>(f: Binary<A, X, A>, i: A, g: Binary<B, X, B>, j: B, h: Binary<A, B, C>): (xs: Iterable<X>) => C;
+/** skip **n** elements of an iterable */
+export declare const skip: (n: number) => <T>(xs: Iterable<T>) => Iterable<T>;
+/** get the tail of an iterable (all items except for the first) */
+export declare const tail: <T>(xs: Iterable<T>) => Iterable<T>;
