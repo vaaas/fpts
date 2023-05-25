@@ -261,4 +261,16 @@ describe('map', () => {
             )
         })
     })
+
+    describe('empty', () => {
+        it('should empty a map', () => {
+            const xs = new Map([
+                [1, '1'],
+                [2, '2'],
+            ])
+            assert.equal(xs.size, 2)
+            map.empty(xs)
+            assert.equal(xs.size, 0)
+        })
+    })
 })

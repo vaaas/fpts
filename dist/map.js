@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.concat_ip = exports.copy = exports.outside = exports.inside = exports.mapKeys = exports.map2 = exports.map = exports.groupByN = exports.groupBy = exports.update = exports.unsafeGetFrom = exports.unsafeGet = exports.get = exports.keys = exports.values = exports.invert = exports.ofKV = exports.ofK = exports.ofVN = exports.ofV = exports.of = exports.set = exports.pop = void 0;
+exports.empty = exports.concat_ip = exports.concat = exports.copy = exports.outside = exports.inside = exports.mapKeys = exports.map2 = exports.map = exports.groupByN = exports.groupBy = exports.update = exports.unsafeGetFrom = exports.unsafeGet = exports.get = exports.keys = exports.values = exports.invert = exports.ofKV = exports.ofK = exports.ofVN = exports.ofV = exports.of = exports.set = exports.pop = void 0;
 const array_1 = require("./array");
 /** UNSAFE!
  *
@@ -196,6 +196,7 @@ const inside = (xs) => (x) => xs.has(x);
 exports.inside = inside;
 const outside = (xs) => (x) => !xs.has(x);
 exports.outside = outside;
+/** create a copy of a map */
 function copy(xs) {
     const ys = new Map();
     for (const pair of xs)
@@ -203,11 +204,25 @@ function copy(xs) {
     return ys;
 }
 exports.copy = copy;
-function concat_ip(xs) {
-    return function (ys) {
-        for (const [k, v] of xs.entries())
-            ys.set(k, v);
-        return ys;
-    };
-}
+/** combine two maps, returning a new map containing all the entries of the first map, plus the entries of the second map */
+const concat = (xs) => (ys) => {
+    const zs = new Map(xs.entries());
+    for (const [a, b] of ys.entries())
+        zs.set(a, b);
+    return zs;
+};
+exports.concat = concat;
+/** combine two maps in place, putting all the entries of the first map into the second map */
+const concat_ip = (xs) => (ys) => {
+    for (const [k, v] of xs.entries())
+        ys.set(k, v);
+    return ys;
+};
 exports.concat_ip = concat_ip;
+/** delete all entries of a map in place */
+function empty(xs) {
+    for (const k of xs.keys())
+        xs.delete(k);
+    return xs;
+}
+exports.empty = empty;

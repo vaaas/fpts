@@ -72,5 +72,11 @@ export declare function map2<K1, K2>(f: Unary<K1, K2>): <V1, V2>(g: Unary<V1, V2
 export declare function mapKeys<A, B>(f: Unary<A, B>): <V>(xs: Map<A, V>) => Map<B, V>;
 export declare const inside: <K, V>(xs: Map<K, V>) => <U>(x: K | U) => x is K;
 export declare const outside: <K, V>(xs: Map<K, V>) => <U>(x: K | U) => x is U;
+/** create a copy of a map */
 export declare function copy<K, V>(xs: Map<K, V>): Map<K, V>;
-export declare function concat_ip<A, B>(xs: Map<A, B>): (ys: Map<A, B>) => Map<A, B>;
+/** combine two maps, returning a new map containing all the entries of the first map, plus the entries of the second map */
+export declare const concat: <A, B>(xs: Map<A, B>) => (ys: Map<A, B>) => Map<A, B>;
+/** combine two maps in place, putting all the entries of the first map into the second map */
+export declare const concat_ip: <A, B>(xs: Map<A, B>) => (ys: Map<A, B>) => Map<A, B>;
+/** delete all entries of a map in place */
+export declare function empty<T extends Map<any, any>>(xs: T): T;

@@ -247,6 +247,7 @@ export const outside =
 	<U>(x: U | K): x is U =>
 	!xs.has(x as K)
 
+/** create a copy of a map */
 export function copy<K, V>(xs: Map<K, V>): Map<K, V> {
     const ys = new Map<K, V>()
     for (const pair of xs)
@@ -254,10 +255,25 @@ export function copy<K, V>(xs: Map<K, V>): Map<K, V> {
     return ys
 }
 
-export function concat_ip<A, B>(xs: Map<A, B>) {
-    return function (ys: Map<A, B>) {
-        for (const [k, v] of xs.entries())
-            ys.set(k, v)
-        return ys
-    }
+/** combine two maps, returning a new map containing all the entries of the first map, plus the entries of the second map */
+export const concat = <A, B>(xs: Map<A, B>) => (ys: Map<A, B>): Map<A, B> => {
+    const zs = new Map(xs.entries())
+    for (const [a, b] of ys.entries())
+        zs.set(a, b)
+    return zs
+}
+
+/** combine two maps in place, putting all the entries of the first map into the second map */
+export const concat_ip = <A, B>(xs: Map<A, B>) => (ys: Map<A, B>) => {
+    for (const [k, v] of xs.entries())
+        ys.set(k, v)
+    return ys
+
+}
+
+/** delete all entries of a map in place */
+export function empty<T extends Map<any, any>>(xs: T): T {
+    for (const k of xs.keys())
+        xs.delete(k)
+    return xs
 }
