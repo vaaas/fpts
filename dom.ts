@@ -21,7 +21,7 @@ export const on_transition_end = (e: HTMLElement) => new Promise<TransitionEvent
 
 export const by_tag_name = (t: string) => Array.from(document.getElementsByTagName(t));
 
-export function E(name: string, props?: undefined | Record<string, number | string | Function>, children?: undefined | Array<string | Text | HTMLElement>) {
+export function E(name: string, props?: undefined | Record<string, number | string | boolean | Function>, children?: undefined | Array<string | Text | HTMLElement>) {
     const elem = document.createElement(name);
     if (props)
         for (const [k, v] of Object.entries(props))
