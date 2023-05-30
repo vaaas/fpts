@@ -18,3 +18,26 @@ export const set_class = (e: HTMLElement, c: string, b: boolean) => {
 export const byId = (c: string) => document.getElementById(c)
 
 export const on_transition_end = (e: HTMLElement) => new Promise<TransitionEvent>(f => e.addEventListener('transitionend', f, { once: true }))
+
+export const by_tag_name = (t: string) => Array.from(document.getElementsByTagName(t));
+
+export function E(name: string, props?: undefined | Record<string, number | string | Function>, children?: undefined | Array<string | Text | HTMLElement>) {
+    const elem = document.createElement(name);
+    if (props)
+        for (const [k, v] of Object.entries(props))
+            // @ts-ignore
+            elem[k] = v;
+    if (children)
+        for (const x of children) {
+            if (x instanceof Text || x instanceof HTMLElement)
+                elem.appendChild(x)
+            else
+                elem.appendChild(document.createTextNode(x));
+        }
+    return elem;
+}
+
+export const insert_before = (successor: HTMLElement) => (predecessor: HTMLElement) => {
+    successor.parentElement!.insertBefore(predecessor, successor);
+    return predecessor;
+}

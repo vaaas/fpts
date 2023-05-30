@@ -7,3 +7,6 @@ export declare const has_class: (c: string) => (x: HTMLElement) => boolean;
 export declare const set_class: (e: HTMLElement, c: string, b: boolean) => HTMLElement;
 export declare const byId: (c: string) => HTMLElement | null;
 export declare const on_transition_end: (e: HTMLElement) => Promise<TransitionEvent>;
+export declare const by_tag_name: (t: string) => Element[];
+export declare function E(name: string, props?: undefined | Record<string, number | string | Function>, children?: undefined | Array<string | Text | HTMLElement>): HTMLElement;
+export declare const insert_before: (successor: HTMLElement) => (predecessor: HTMLElement) => HTMLElement;
