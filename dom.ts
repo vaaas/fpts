@@ -19,7 +19,7 @@ export const byId = (c: string) => document.getElementById(c)
 
 export const on_transition_end = (e: HTMLElement) => new Promise<TransitionEvent>(f => e.addEventListener('transitionend', f, { once: true }))
 
-export const by_tag_name = (t: string) => Array.from(document.getElementsByTagName(t));
+export const by_tag_name = (t: string) => Array.from(document.getElementsByTagName(t)) as HTMLElement[];
 
 export function E(name: string, props?: undefined | Record<string, number | string | boolean | Function>, children?: undefined | Array<string | Text | HTMLElement>) {
     const elem = document.createElement(name);
