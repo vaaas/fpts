@@ -26,3 +26,7 @@ export declare const lte: (a: number) => (b: number) => boolean;
 export declare const eq: (a: any) => (b: any) => boolean;
 export declare const proximate: (e: number) => (a: number) => (b: number) => boolean;
 export declare const is: <T>(a: T) => (b: unknown) => b is T;
+/** increment for cyclical numbers */
+export declare const cyclical_increment: (start: number, end: number) => (x: number) => number;
+/** decrement for cyclical numbers */
+export declare const cyclical_decrement: (start: number, end: number) => (x: number) => number;

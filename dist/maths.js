@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.is = exports.proximate = exports.eq = exports.lte = exports.lt = exports.gte = exports.gt = exports.seq = exports.clamp = exports.Grandi = exports.Integers = exports.Naturals = exports.div = exports.mult = exports.add = exports.sign = exports.neg = exports.randint = void 0;
+exports.cyclical_decrement = exports.cyclical_increment = exports.is = exports.proximate = exports.eq = exports.lte = exports.lt = exports.gte = exports.gt = exports.seq = exports.clamp = exports.Grandi = exports.Integers = exports.Naturals = exports.div = exports.mult = exports.add = exports.sign = exports.neg = exports.randint = void 0;
 /** return a random integer in the range [a, b) */
 function randint(a, b) {
     return a + Math.floor(Math.random() * (b - a));
@@ -89,3 +89,19 @@ const proximate = (e) => (a) => (b) => Math.abs(a - b) <= e;
 exports.proximate = proximate;
 const is = (a) => (b) => a === b;
 exports.is = is;
+/** increment for cyclical numbers */
+const cyclical_increment = (start, end) => (x) => {
+    if (x >= end)
+        return start;
+    else
+        return x + 1;
+};
+exports.cyclical_increment = cyclical_increment;
+/** decrement for cyclical numbers */
+const cyclical_decrement = (start, end) => (x) => {
+    if (x <= start)
+        return end;
+    else
+        return x - 1;
+};
+exports.cyclical_decrement = cyclical_decrement;

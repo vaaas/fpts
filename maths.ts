@@ -81,3 +81,19 @@ export const proximate =
 	Math.abs(a - b) <= e
 
 export const is = <T>(a: T) => (b: unknown): b is T => a === b
+
+/** increment for cyclical numbers */
+export const cyclical_increment = (start: number, end: number) => (x: number) => {
+    if (x >= end)
+        return start
+    else
+        return x + 1
+}
+
+/** decrement for cyclical numbers */
+export const cyclical_decrement = (start: number, end: number) => (x: number) => {
+    if (x <= start)
+        return end
+    else
+        return x - 1
+}
