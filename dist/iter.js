@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.tail = exports.skip = exports.double_foldl = exports.combinations = exports.seq = exports.count = exports.batch = exports.flatten = exports.all = exports.any = exports.optimumBy = exports.optimum = exports.findIndex = exports.multifind = exports.find = exports.partition = exports.each = exports.zip = exports.zipWith = exports.enumerate = exports.repeat = exports.limit = exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.scanr = exports.scanl = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.next = exports.iter = exports.StopIteration = void 0;
+exports.repeatedly = exports.tail = exports.skip = exports.double_foldl = exports.combinations = exports.seq = exports.count = exports.batch = exports.flatten = exports.all = exports.any = exports.optimumBy = exports.optimum = exports.findIndex = exports.multifind = exports.find = exports.partition = exports.each = exports.zip = exports.zipWith = exports.enumerate = exports.repeat = exports.limit = exports.or = exports.and = exports.some = exports.every = exports.joinWith = exports.join = exports.last = exports.first = exports.by = exports.sumBy = exports.sum = exports.alphabetically = exports.sort = exports.scanr = exports.scanl = exports.foldr1 = exports.foldl1 = exports.foldr = exports.foldl = exports.filter = exports.bind = exports.map = exports.is = exports.next = exports.iter = exports.StopIteration = void 0;
 const combinator_1 = require("./combinator");
 const maths_1 = require("./maths");
 const string_1 = require("./string");
@@ -591,3 +591,12 @@ const skip = (n) => function* (xs) {
 exports.skip = skip;
 /** get the tail of an iterable (all items except for the first) */
 exports.tail = (0, exports.skip)(1);
+/** repeatedly apply a function until it returns `undefined` */
+const repeatedly = (f) => function* (x) {
+    let a = x;
+    while (a !== undefined) {
+        yield a;
+        a = f(a);
+    }
+};
+exports.repeatedly = repeatedly;

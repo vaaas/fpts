@@ -224,3 +224,5 @@ export declare function double_foldl<A, B, X, C>(f: Binary<A, X, A>, i: A, g: Bi
 export declare const skip: (n: number) => <T>(xs: Iterable<T>) => Iterable<T>;
 /** get the tail of an iterable (all items except for the first) */
 export declare const tail: <T>(xs: Iterable<T>) => Iterable<T>;
+/** repeatedly apply a function until it returns `undefined` */
+export declare const repeatedly: <T>(f: Unary<T, Option<T>>) => (x: T) => Iterable<T>;

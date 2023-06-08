@@ -624,3 +624,12 @@ export const skip = (n: number) => function* <T>(xs: Iterable<T>): Iterable<T> {
 
 /** get the tail of an iterable (all items except for the first) */
 export const tail = skip(1);
+
+/** repeatedly apply a function until it returns `undefined` */
+export const repeatedly = <T>(f: Unary<T, Option<T>>) => function* (x: T): Iterable<T> {
+    let a: Option<T> = x;
+    while (a !== undefined) {
+        yield a;
+        a = f(a);
+    }
+}
