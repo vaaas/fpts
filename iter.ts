@@ -63,7 +63,7 @@ export function filter<A, B extends A>(f: UnaryP<A, B> | Unary<A, boolean>) {
 	return function* (xs: Iterable<A>): Iterable<B> {
 		for (const x of xs)
 			if (f(x))
-				yield x
+				yield x as B
 	}
 }
 
