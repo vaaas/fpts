@@ -173,7 +173,7 @@ export declare function multifind<T>(a: Unary<T, boolean>, b: Unary<T, boolean>,
 export declare function multifind<T>(a: Unary<T, boolean>, b: Unary<T, boolean>, c: Unary<T, boolean>, d: Unary<T, boolean>): (xs: Iterable<T>) => [Option<T>, Option<T>, Option<T>, Option<T>];
 export declare function multifind<T>(a: Unary<T, boolean>, b: Unary<T, boolean>, c: Unary<T, boolean>, d: Unary<T, boolean>, e: Unary<T, boolean>): (xs: Iterable<T>) => [Option<T>, Option<T>, Option<T>, Option<T>, Option<T>];
 /** search a collection for the index of first item for which a function returns true */
-export declare function findIndex<T>(f: Unary<T, boolean>): (x: Iterable<T>) => Option<number>;
+export declare function findIndex<T>(f: Unary<T, boolean>): (xs: Iterable<T>) => Option<number>;
 /** find the optimal value in an iterable (typically minimum or maximum)
  *
  * the definition of optimality is defermined by repeated application of a comparison function.

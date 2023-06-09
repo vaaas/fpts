@@ -32,8 +32,8 @@ export function is(x: any): x is Iterable<any> {
  * given a mapping function **A** → **B**
  * turn a collection of **As** into a collection of **Bs**
  */
-export function map<A, B>(f: Unary<A, B>): (xs: Iterable<A>) => Iterable<B> {
-	return function* (xs) {
+export function map<A, B>(f: Unary<A, B>) {
+	return function* (xs: Iterable<A>): Iterable<B> {
 		for (const x of xs)
 			yield f(x)
 	}
@@ -46,8 +46,8 @@ export function map<A, B>(f: Unary<A, B>): (xs: Iterable<A>) => Iterable<B> {
  *
  * in other words, it maps and then flattens the iterable
  */
-export function bind<A, B>(f: Unary<A, Iterable<B>>): (xs: Iterable<A>) => Iterable<B> {
-	return function* (xs) {
+export function bind<A, B>(f: Unary<A, Iterable<B>>) {
+	return function* (xs: Iterable<A>): Iterable<B> {
 		for (const x of xs)
 			yield* f(x)
 	}
@@ -59,8 +59,8 @@ export function bind<A, B>(f: Unary<A, Iterable<B>>): (xs: Iterable<A>) => Itera
  * generate a new collection of **As** that only contains the elements
  * for which the testing function returns *true*
  */
-export function filter<A, B extends A>(f: UnaryP<A, B> | Unary<A, boolean>): (xs: Iterable<A>) => Iterable<B> {
-	return function* (xs) {
+export function filter<A, B extends A>(f: UnaryP<A, B> | Unary<A, boolean>) {
+	return function* (xs: Iterable<A>): Iterable<B> {
 		for (const x of xs)
 			if (f(x))
 				yield x
@@ -76,8 +76,8 @@ export function filter<A, B extends A>(f: UnaryP<A, B> | Unary<A, boolean>): (xs
  *
  * the initial value is given by **i**
  */
-export function foldl<A, B>(f: Binary<A, B, A>, i: A): (xs: Iterable<B>) => A {
-	return function (xs) {
+export function foldl<A, B>(f: Binary<A, B, A>, i: A) {
+	return function (xs: Iterable<B>): A {
 		let a = i
 		for (const x of xs)
 			a = f(a)(x)
@@ -94,8 +94,8 @@ export function foldl<A, B>(f: Binary<A, B, A>, i: A): (xs: Iterable<B>) => A {
  *
  * the initial value is given by **i**
  */
-export function foldr<A, B>(f: Binary<B, A, A>, i: A): (xs: Iterable<B>) => A {
-	return function (xs) {
+export function foldr<A, B>(f: Binary<B, A, A>, i: A) {
+	return function (xs: Iterable<B>): A {
 		let a = i
 		for (const x of xs)
 			a = f(x)(a)
@@ -114,8 +114,8 @@ export function foldr<A, B>(f: Binary<B, A, A>, i: A): (xs: Iterable<B>) => A {
  *
  * **i** represents the default value returned in case of an empty iterable
  */
-export function foldl1<A>(f: Binary<A, A, A>, i: A): (xs: Iterable<A>) => A {
-	return function (xs) {
+export function foldl1<A>(f: Binary<A, A, A>, i: A) {
+	return function (xs: Iterable<A>): A {
 		const it = iter(xs)
 		let a = i
 		let v = it.next()
@@ -141,8 +141,8 @@ export function foldl1<A>(f: Binary<A, A, A>, i: A): (xs: Iterable<A>) => A {
  *
  * **i** represents the default value returned in case of an empty iterable
  */
-export function foldr1<A>(f: Binary<A, A, A>, i: A): (xs: Iterable<A>) => A {
-	return function (xs) {
+export function foldr1<A>(f: Binary<A, A, A>, i: A) {
+	return function (xs: Iterable<A>): A {
 		const it = iter(xs)
 		let a = i
 		let v = it.next()
@@ -167,8 +167,8 @@ export function foldr1<A>(f: Binary<A, A, A>, i: A): (xs: Iterable<A>) => A {
  *
  * the initial value is given by **i**
  */
-export function scanl<A, B>(f: Binary<A, B, A>, i: A): (xs: Iterable<B>) => Iterable<A> {
-	return function* (xs) {
+export function scanl<A, B>(f: Binary<A, B, A>, i: A) {
+	return function* (xs: Iterable<B>): Iterable<A> {
 		let a = i
 		yield a
 		for (const x of xs)
@@ -186,8 +186,8 @@ export function scanl<A, B>(f: Binary<A, B, A>, i: A): (xs: Iterable<B>) => Iter
  *
  * the initial value is given by **i**
  */
- export function scanr<A, B>(f: Binary<B, A, A>, i: A): (xs: Iterable<B>) => Iterable<A> {
-	return function* (xs) {
+ export function scanr<A, B>(f: Binary<B, A, A>, i: A) {
+	return function* (xs: Iterable<B>): Iterable<A> {
 		let a = i
 		yield a
 		for (const x of xs)
@@ -202,8 +202,8 @@ export function scanl<A, B>(f: Binary<A, B, A>, i: A): (xs: Iterable<B>) => Iter
  * positive if *prev* should be after *next*
  * and zero if there should be no change
  */
-export function sort<T>(f: (a: T, b: T) => number): (xs: Iterable<T>) => Array<T> {
-	return function (xs) {
+export function sort<T>(f: (a: T, b: T) => number) {
+	return function (xs: Iterable<T>): Array<T> {
 		return Array.from(xs).sort(f)
 	}
 }
@@ -224,8 +224,8 @@ export const sum = foldl(add, 0)
 export const sumBy = <T>(f: Unary<T, number>) => foldl(D1(add)(f), 0)
 
 /** sort an iterable *by* some property, similar to python's key function */
-export function by<A>(f: Unary<A, number|string>): (a: A, b: A) => -1|0|1 {
-	return function(a, b) {
+export function by<A>(f: Unary<A, number|string>) {
+	return function(a: A, b: A): -1 | 0 | 1 {
 		const fa = f(a)
 		const fb = f(b)
 		if (fa < fb) return -1
@@ -264,8 +264,8 @@ export const join = foldl(concat, '')
 export const joinWith = (d: string) => foldl1(concatWith(d), '')
 
 /** test if every member of collection **XS** passes the testing function **F** */
-export function every<T>(f: Unary<T, boolean>): (xs: Iterable<T>) => boolean {
-	return function(xs) {
+export function every<T>(f: Unary<T, boolean>) {
+	return function(xs: Iterable<T>): boolean {
 		for (const x of xs)
 			if (!f(x))
 				return false
@@ -274,8 +274,8 @@ export function every<T>(f: Unary<T, boolean>): (xs: Iterable<T>) => boolean {
 }
 
 /** test if at least one member of collection **XS** passes the testing function **F** */
-export function some<T>(f: Unary<T, boolean>): (xs: Iterable<T>) => boolean {
-	return function(xs) {
+export function some<T>(f: Unary<T, boolean>) {
+	return function(xs: Iterable<T>): boolean {
 		for (const x of xs)
 			if (f(x))
 				return true
@@ -284,8 +284,8 @@ export function some<T>(f: Unary<T, boolean>): (xs: Iterable<T>) => boolean {
 }
 
 /** test if an argument **X** passes all the functions **FS** */
-export function and<T>(...fs: Unary<T, boolean>[]): (x: T) => boolean {
-	return function(x) {
+export function and<T>(...fs: Unary<T, boolean>[]) {
+	return function(x: T): boolean {
 		for (const f of fs)
 			if (!f(x))
 				return false
@@ -294,8 +294,8 @@ export function and<T>(...fs: Unary<T, boolean>[]): (x: T) => boolean {
 }
 
 /** test if an argument **X** passes at least one function of **FS** */
-export function or<T>(...fs: Unary<T, boolean>[]): (x: T) => boolean {
-	return function(x) {
+export function or<T>(...fs: Unary<T, boolean>[]) {
+	return function(x: T): boolean {
 		for (const f of fs)
 			if (f(x))
 				return true
@@ -304,8 +304,8 @@ export function or<T>(...fs: Unary<T, boolean>[]): (x: T) => boolean {
 }
 
 /** limit iterable to N members */
-export function limit(n: number): <T>(xs: Iterable<T>) => Iterable<T> {
-	return function* (xs) {
+export function limit(n: number) {
+	return function* <T>(xs: Iterable<T>): Iterable<T> {
 		let i = 0
 		for (const x of xs)
 			if (i < n) {
@@ -339,9 +339,9 @@ export function* enumerate<T>(xs: Iterable<T>): Iterable<[number, T]> {
  *
  * If one iterable is longer, elements will be discarded from the longer iterable.
  */
-export function zipWith<A, B, C>(f: Binary<A, B, C>): (as: Iterable<A>) => (bs: Iterable<B>) => Iterable<C> {
-	return function (as) {
-		return function* (bs) {
+export function zipWith<A, B, C>(f: Binary<A, B, C>) {
+	return function (as: Iterable<A>) {
+		return function* (bs: Iterable<B>): Iterable<C> {
             const ai = iter(as)
             const bi = iter(bs)
             for (
@@ -361,8 +361,8 @@ export const zip = zipWith(duad) as <A, B>(as: Iterable<A>) => (bs: Iterable<B>)
  * - `f` — the function to execute
  * - `xs` — the collection
  */
-export function each<T>(f: (x: T) => void): (xs: Iterable<T>) => void {
-	return function(xs) {
+export function each<T>(f: (x: T) => void) {
+	return function(xs: Iterable<T>): void {
 		for (const x of xs)
 			f(x)
 	}
@@ -445,8 +445,8 @@ export function multifind<T>(...fs: Array<Unary<T, boolean>>) {
 }
 
 /** search a collection for the index of first item for which a function returns true */
-export function findIndex<T>(f: Unary<T, boolean>): (x: Iterable<T>) => Option<number> {
-	return function(xs) {
+export function findIndex<T>(f: Unary<T, boolean>) {
+	return function(xs: Iterable<T>): Option<number> {
 		let i = 0
 		for (const x of xs)
 			if (f(x)) return i
@@ -464,8 +464,8 @@ export function findIndex<T>(f: Unary<T, boolean>): (x: Iterable<T>) => Option<n
  * - `f` — the comparison function. use `maths/gt` for maximum, and `maths/lt` for minimum
  * - `xs` — the iterable
  */
-export function optimum<A>(f: Binary<A, A, boolean>): (xs: Iterable<A>) => Option<A> {
-	return function (xs) {
+export function optimum<A>(f: Binary<A, A, boolean>) {
+	return function (xs: Iterable<A>): Option<A> {
 		const it = iter(xs)
 		let v = it.next()
 		if (v.done) return undefined
