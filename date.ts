@@ -29,3 +29,9 @@ export const timestamp = (x: Date): number => x.getTime()
 export const after = (a: Date) => (b: Date) => b.getTime() > a.getTime()
 
 export const before = (a: Date) => (b: Date) => b.getTime() < a.getTime()
+
+export const max = (a: Date) => (b: Date) =>
+    a.getTime() > b.getTime() ? a : b;
+
+export const min = (a: Date) => (b: Date) =>
+    a.getTime() > b.getTime() ? b : a;

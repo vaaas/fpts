@@ -6,3 +6,5 @@ export declare const mapSeconds: (f: Unary<number, number>) => (x: Date) => Date
 export declare const timestamp: (x: Date) => number;
 export declare const after: (a: Date) => (b: Date) => boolean;
 export declare const before: (a: Date) => (b: Date) => boolean;
+export declare const max: (a: Date) => (b: Date) => Date;
+export declare const min: (a: Date) => (b: Date) => Date;
