@@ -54,6 +54,35 @@ export function filter<A>(f: Unary<A, boolean>): Unary<Array<A>, Array<A>> {
 	}
 }
 
+/** in-place implementation of filter
+ *
+ * iterates over an array, passing each element to a predicate function
+ *
+ * if the function returns false, the item is removed from the array **in place, modifying the original array**
+ *
+ * - `f` — the predicate function, returning true or false
+ * - `xs` — the array to operate on
+ */
+export function filter_ip<A>(f: Unary<A, boolean>) {
+    return function(xs: Array<A>): Array<A> {
+        /** index of our current position */
+        let i = 0
+        /** known good length */
+        let j = 0
+        const len = xs.length
+        while (i < len) {
+            const x = xs[i]!
+            if (f(x)) {
+                xs[j] = x
+                j++
+            }
+            i++
+        }
+        xs.length = j
+        return xs
+    }
+}
+
 /** bind / flatMap implentation for arrays */
 export function bind<A, B>(f: Unary<A, Array<B>>): Unary<Array<A>, Array<B>> {
 	return function(xs) {

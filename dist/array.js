@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.pick = exports.outside = exports.inside = exports.pairs = exports.reverseI = exports.dup = exports.joinWith = exports.iter_slice = exports.head = exports.tail = exports.uniqueBy = exports.unique = exports.bind = exports.filter = exports.map_ip = exports.map = exports.of = exports.middle = exports.last = exports.first = void 0;
+exports.pick = exports.outside = exports.inside = exports.pairs = exports.reverseI = exports.dup = exports.joinWith = exports.iter_slice = exports.head = exports.tail = exports.uniqueBy = exports.unique = exports.bind = exports.filter_ip = exports.filter = exports.map_ip = exports.map = exports.of = exports.middle = exports.last = exports.first = void 0;
 const duad_1 = require("./duad");
 const iter_1 = require("./iter");
 const map_1 = require("./map");
@@ -55,6 +55,35 @@ function filter(f) {
     };
 }
 exports.filter = filter;
+/** in-place implementation of filter
+ *
+ * iterates over an array, passing each element to a predicate function
+ *
+ * if the function returns false, the item is removed from the array **in place, modifying the original array**
+ *
+ * - `f` — the predicate function, returning true or false
+ * - `xs` — the array to operate on
+ */
+function filter_ip(f) {
+    return function (xs) {
+        /** index of our current position */
+        let i = 0;
+        /** known good length */
+        let j = 0;
+        const len = xs.length;
+        while (i < len) {
+            const x = xs[i];
+            if (f(x)) {
+                xs[j] = x;
+                j++;
+            }
+            i++;
+        }
+        xs.length = j;
+        return xs;
+    };
+}
+exports.filter_ip = filter_ip;
 /** bind / flatMap implentation for arrays */
 function bind(f) {
     return function (xs) {
