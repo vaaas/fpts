@@ -82,6 +82,8 @@ export const proximate =
 
 export const is = <T>(a: T) => (b: unknown): b is T => a === b
 
+export const isnt = <A>(a: A) => <B>(b: A | B): b is B => a !== b
+
 /** increment for cyclical numbers */
 export const cyclical_increment = (start: number, end: number) => (x: number) => {
     if (x >= end)
