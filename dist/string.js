@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.outside = exports.inside = exports.rep = exports.startsWith = exports.str = exports.concatWith = exports.concat = void 0;
+exports.to_upper_case = exports.trim = exports.outside = exports.inside = exports.rep = exports.startsWith = exports.str = exports.concatWith = exports.concat = void 0;
 /** join two strings into a single string */
 const concat = (a) => (b) => a + b;
 exports.concat = concat;
@@ -31,3 +31,7 @@ const inside = (a) => (b) => a.includes(b);
 exports.inside = inside;
 const outside = (a) => (b) => !a.includes(b);
 exports.outside = outside;
+const trim = (x) => x.trim();
+exports.trim = trim;
+const to_upper_case = (x) => x.toUpperCase();
+exports.to_upper_case = to_upper_case;

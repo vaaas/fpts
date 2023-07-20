@@ -27,3 +27,7 @@ export const rep = (part: string) => (n: number): string => {
 export const inside = (a: string) => (b: string) => a.includes(b)
 
 export const outside = (a: string) => (b: string) => !a.includes(b)
+
+export const trim = (x: string) => x.trim();
+
+export const to_upper_case = (x: string) => x.toUpperCase();

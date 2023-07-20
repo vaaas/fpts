@@ -16,3 +16,5 @@ export declare const startsWith: (p: string) => (x: string) => boolean;
 export declare const rep: (part: string) => (n: number) => string;
 export declare const inside: (a: string) => (b: string) => boolean;
 export declare const outside: (a: string) => (b: string) => boolean;
+export declare const trim: (x: string) => string;
+export declare const to_upper_case: (x: string) => string;
