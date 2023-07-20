@@ -3,6 +3,7 @@ import { prefix } from './duad'
 import { map as imap } from './iter'
 import { of as mof, values } from './map'
 import { compose } from './function'
+import { Option } from './option'
 
 /** return the first element of an array */
 export function first<T>(xs: Array<T>): T|undefined {
@@ -17,6 +18,8 @@ export function last<T>(xs: Array<T>): T|undefined {
 export function middle<T>(xs: Array<T>): T|undefined {
     return xs[xs.length >> 1];
 }
+
+export const get = (x: number) => <T>(xs: T[]): Option<T> => xs[x]
 
 /** creates a new array from an iterable */
 export function of<T>(xs: Iterable<T>): Array<T> {

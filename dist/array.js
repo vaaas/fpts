@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.pick = exports.outside = exports.inside = exports.pairs = exports.reverseI = exports.dup = exports.joinWith = exports.iter_slice = exports.head = exports.tail = exports.uniqueBy = exports.unique = exports.bind = exports.filter_ip = exports.filter = exports.map_ip = exports.map = exports.of = exports.middle = exports.last = exports.first = void 0;
+exports.pick = exports.outside = exports.inside = exports.pairs = exports.reverseI = exports.dup = exports.joinWith = exports.iter_slice = exports.head = exports.tail = exports.uniqueBy = exports.unique = exports.bind = exports.filter_ip = exports.filter = exports.map_ip = exports.map = exports.of = exports.get = exports.middle = exports.last = exports.first = void 0;
 const duad_1 = require("./duad");
 const iter_1 = require("./iter");
 const map_1 = require("./map");
@@ -19,6 +19,8 @@ function middle(xs) {
     return xs[xs.length >> 1];
 }
 exports.middle = middle;
+const get = (x) => (xs) => xs[x];
+exports.get = get;
 /** creates a new array from an iterable */
 function of(xs) {
     return Array.from(xs);

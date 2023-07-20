@@ -1,9 +1,11 @@
 import { Unary } from './data';
+import { Option } from './option';
 /** return the first element of an array */
 export declare function first<T>(xs: Array<T>): T | undefined;
 /** return the last element of an array */
 export declare function last<T>(xs: Array<T>): T | undefined;
 export declare function middle<T>(xs: Array<T>): T | undefined;
+export declare const get: (x: number) => <T>(xs: T[]) => Option<T>;
 /** creates a new array from an iterable */
 export declare function of<T>(xs: Iterable<T>): Array<T>;
 /** map implementation for arrays */
