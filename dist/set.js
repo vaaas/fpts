@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.subset = exports.superset = exports.same = exports.filter = exports.diff = exports.map = exports.outside = exports.inside = exports.of = void 0;
+exports.intersect = exports.subset = exports.superset = exports.same = exports.filter = exports.diff = exports.map = exports.outside = exports.inside = exports.of = void 0;
 const iter_1 = require("./iter");
 const combinator_1 = require("./combinator");
 const of = (x) => new Set(x);
@@ -43,3 +43,13 @@ exports.same = same;
 const superset = (superset) => (subset) => (0, iter_1.every)((0, exports.inside)(superset))(subset);
 exports.superset = superset;
 exports.subset = (0, combinator_1.C)(exports.superset);
+const intersect = (a) => (b) => {
+    const c = new Set();
+    if (a.size === 0 || b.size === 0)
+        return c;
+    for (const x of a)
+        if (b.has(x))
+            c.add(x);
+    return c;
+};
+exports.intersect = intersect;

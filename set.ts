@@ -1,5 +1,5 @@
 import { Unary } from './data'
-import { every } from './iter'
+import { every, foldl, foldl1 } from './iter'
 import { C } from './combinator'
 
 export const of = <T>(x: Iterable<T>): Set<T> => new Set(x)
@@ -41,3 +41,13 @@ export const superset = <A>(superset: Set<A>) => (subset: Set<A>): boolean =>
     every(inside(superset))(subset)
 
 export const subset = C(superset)
+
+export const intersect = <A>(a: Set<A>) => <B>(b: Set<B | A>): Set<A> => {
+    const c = new Set<A>()
+    if (a.size === 0 || b.size === 0)
+        return c;
+    for (const x of a)
+        if (b.has(x))
+            c.add(x);
+    return c;
+}
