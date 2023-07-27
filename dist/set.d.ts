@@ -9,4 +9,4 @@ export declare const filter: <T>(f: Unary<T, boolean>) => (xs: Set<T>) => Set<T>
 export declare const same: <T>(a: Set<T>) => (b: Set<T>) => boolean;
 export declare const superset: <A>(superset: Set<A>) => (subset: Set<A>) => boolean;
 export declare const subset: <A>(b: Set<A>) => (c: Set<A>) => boolean;
-export declare const intersect: <A>(a: Set<A>) => <B>(b: Set<A | B>) => Set<A>;
+export declare const intersect: <A>(a: Set<A>) => <B>(b: Set<B>) => Set<A & B>;
