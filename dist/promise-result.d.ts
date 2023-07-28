@@ -1,9 +1,11 @@
 import { Unary } from './data';
 import { Result } from './result';
+import { Right as RRight } from './result';
 export type PromiseResult<T> = Promise<Result<T>>;
 type Acceptable<T> = PromiseResult<T> | Promise<T> | Result<T> | T;
-export declare function compose<A, B, C>(a: Unary<A, Acceptable<B>>, b: Unary<B, Acceptable<C>>): Unary<A, PromiseResult<C>>;
-export declare function compose<A, B, C, D>(a: Unary<A, Acceptable<B>>, b: Unary<B, Acceptable<C>>, c: Unary<C, Acceptable<D>>): Unary<A, PromiseResult<D>>;
-export declare function compose<A, B, C, D, E>(a: Unary<A, Acceptable<B>>, b: Unary<B, Acceptable<C>>, c: Unary<C, Acceptable<D>>, d: Unary<D, Acceptable<E>>): Unary<A, PromiseResult<E>>;
-export declare function compose<A, B, C, D, E, F>(a: Unary<A, Acceptable<B>>, b: Unary<B, Acceptable<C>>, c: Unary<C, Acceptable<D>>, d: Unary<D, Acceptable<E>>, e: Unary<E, Acceptable<F>>): Unary<A, PromiseResult<F>>;
+type Right<T> = RRight<Awaited<T>>;
+export declare function compose<A, B, C>(a: Unary<A, Acceptable<B>>, b: Unary<Right<B>, Acceptable<C>>): Unary<A, PromiseResult<C>>;
+export declare function compose<A, B, C, D>(a: Unary<A, Acceptable<B>>, b: Unary<Right<B>, Acceptable<C>>, c: Unary<Right<C>, Acceptable<D>>): Unary<A, PromiseResult<D>>;
+export declare function compose<A, B, C, D, E>(a: Unary<A, Acceptable<B>>, b: Unary<Right<B>, Acceptable<C>>, c: Unary<Right<C>, Acceptable<D>>, d: Unary<Right<D>, Acceptable<E>>): Unary<A, PromiseResult<E>>;
+export declare function compose<A, B, C, D, E, F>(a: Unary<A, Acceptable<B>>, b: Unary<Right<B>, Acceptable<C>>, c: Unary<Right<C>, Acceptable<D>>, d: Unary<Right<D>, Acceptable<E>>, e: Unary<Right<E>, Acceptable<F>>): Unary<A, PromiseResult<F>>;
 export {};
