@@ -3,7 +3,11 @@ import { Result } from './result'
 
 export type PromiseResult<T> = Promise<Result<T>>
 
-type Acceptable<T> = T | Result<T> | Promise<T> | PromiseResult<T>
+type Acceptable<T> =
+    PromiseResult<T>
+    | Promise<T>
+    | Result<T>
+    | T
 
 export function compose<A, B, C>
     (
