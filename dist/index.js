@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.timing = exports.string = exports.set = exports.result = exports.promise = exports.option = exports.object = exports.maths = exports.map = exports.logging = exports.iter = exports.either = exports.function = exports.duad = exports.dom = exports.date = exports.data = exports.combinator = exports.array = exports.alist = void 0;
+exports.timing = exports.string = exports.set = exports.result = exports.promise_result = exports.promise = exports.option = exports.object = exports.maths = exports.map = exports.logging = exports.iter = exports.either = exports.function = exports.duad = exports.dom = exports.date = exports.data = exports.combinator = exports.array = exports.alist = void 0;
 exports.alist = require("./alist");
 exports.array = require("./array");
 exports.combinator = require("./combinator");
@@ -17,6 +17,7 @@ exports.maths = require("./maths");
 exports.object = require("./object");
 exports.option = require("./option");
 exports.promise = require("./promise");
+exports.promise_result = require("./promise-result");
 exports.result = require("./result");
 exports.set = require("./set");
 exports.string = require("./string");

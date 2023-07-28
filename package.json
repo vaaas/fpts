@@ -1,6 +1,6 @@
 {
     "name": "fpts",
-    "version": "1.0.109",
+    "version": "1.0.110",
     "license": "MIT",
     "scripts": {
         "clean": "rm dist/*",
@@ -26,6 +26,7 @@
         "./object": "./dist/object.js",
         "./option": "./dist/option.js",
         "./promise": "./dist/promise.js",
+        "./promise-result": "./dist/promise-result.js",
         "./result": "./dist/result.js",
         "./set": "./dist/set.js",
         "./string": "./dist/string.js",

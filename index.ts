@@ -14,6 +14,7 @@ export * as maths from './maths'
 export * as object from './object'
 export * as option from './option'
 export * as promise from './promise'
+export * as promise_result from './promise-result';
 export * as result from './result'
 export * as set from './set'
 export * as string from './string'
