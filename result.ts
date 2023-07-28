@@ -5,6 +5,7 @@ import { Unary, Binary } from './data'
  */
 export type Result<T> = Error | T
 
+export type Right<T> = Exclude<T, Error>
 
 /** given a transformation **A** → **B**
  * apply it to a result **A** only if it isn't an error
