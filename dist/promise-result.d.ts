@@ -8,11 +8,11 @@ type Right<T> = RRight<Awaited<T>>;
  *
  * for ease of use, functions that return plain values, plain Promises, and plain Results (not `Promise<Result<any>>`) are also accepted
  *
- * - `fs` — array of several functions that map any `x` to any `y`, where `y` can be any of the following: `any | Promise<any> | Result<any> | Promise<Result<any>>`
- * - `x` — the initial argument accepted by the very first function in `fs`
+ * if most arguments are unwrapped, you may want to use other variants of `compose` for performance reasons
  *
- * @returns A new function from the argument of the very first function in `fs` to the result of the last function in `fs`. Functions are unwrapped between executions, and if an error is encountered, execution immediately stops and the error is returned.
+ * @param fs array of several functions that map any `x` to any `y`, where `y` can be any of the following: `any | Promise<any> | Result<any> | Promise<Result<any>>`
  *
+ * @returns A new function from the argument of the very first function in `fs` to the result of the last function in `fs`, passing through each function in succession. Functions are unwrapped between executions, and if an error is encountered, execution immediately stops and the error is returned.
  *
  * @example
  * declare const fetch_user: (id: number) => Promise<object | Error>
