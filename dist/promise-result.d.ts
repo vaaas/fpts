@@ -4,6 +4,31 @@ import { Right as RRight } from './result';
 export type PromiseResult<T> = Promise<Result<T>>;
 type Acceptable<T> = PromiseResult<T> | Promise<T> | Result<T> | T;
 type Right<T> = RRight<Awaited<T>>;
+/** function composition from left to right for functions that return `Promise<Result<any>>`
+ *
+ * for ease of use, functions that return plain values, plain Promises, and plain Results (not `Promise<Result<any>>`) are also accepted
+ *
+ * - `fs` — array of several functions that map any `x` to any `y`, where `y` can be any of the following: `any | Promise<any> | Result<any> | Promise<Result<any>>`
+ * - `x` — the initial argument accepted by the very first function in `fs`
+ *
+ * @returns A new function from the argument of the very first function in `fs` to the result of the last function in `fs`. Functions are unwrapped between executions, and if an error is encountered, execution immediately stops and the error is returned.
+ *
+ *
+ * @example
+ * declare const fetch_user: (id: number) => Promise<object | Error>
+ *
+ * const print_user_if_exists = compose(
+ *   (x: unknown) => typeof x === 'number' ? x : new Error(),
+ *   (x: number) => fetch_user(x),
+ *   (x: object) => console.log(x),
+ * )
+ *
+ * // attempts to fetch, and if successful prints
+ * print_user_if_exists(1)
+ *
+ * // returns an error since argument is not a number
+ * print_user_if_exists('1')
+ */
 export declare function compose<A, B, C>(a: Unary<A, Acceptable<B>>, b: Unary<Right<B>, Acceptable<C>>): Unary<A, PromiseResult<C>>;
 export declare function compose<A, B, C, D>(a: Unary<A, Acceptable<B>>, b: Unary<Right<B>, Acceptable<C>>, c: Unary<Right<C>, Acceptable<D>>): Unary<A, PromiseResult<D>>;
 export declare function compose<A, B, C, D, E>(a: Unary<A, Acceptable<B>>, b: Unary<Right<B>, Acceptable<C>>, c: Unary<Right<C>, Acceptable<D>>, d: Unary<Right<D>, Acceptable<E>>): Unary<A, PromiseResult<E>>;
