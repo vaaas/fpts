@@ -207,3 +207,19 @@ export function pipe(x: any, ...fs: Array<Unary<any, Result<any>>>): any {
 	}
 	return a
 }
+
+export function compose<A, B, C>(
+    a: Unary<A, Result<B>>,
+    b: Unary<B, Result<C>>,
+): Unary<A, Result<C>>
+export function compose(...fs: Array<Unary<any, Result<any>>>) {
+    return function (x: any) {
+        let a = x
+        for (const f of fs) {
+            a = f(a)
+            if (a instanceof Error)
+                return a
+        }
+        return a
+    }
+}
