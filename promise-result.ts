@@ -10,7 +10,7 @@ type Acceptable<T> =
     | Result<T>
     | T
 
-type Right<T> = RRight<Awaited<T>>
+export type Right<T> = RRight<Awaited<T>>
 
 /** function composition from left to right for functions that return `Promise<Result<any>>`
  *

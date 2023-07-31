@@ -3,7 +3,7 @@ import { Result } from './result';
 import { Right as RRight } from './result';
 export type PromiseResult<T> = Promise<Result<T>>;
 type Acceptable<T> = PromiseResult<T> | Promise<T> | Result<T> | T;
-type Right<T> = RRight<Awaited<T>>;
+export type Right<T> = RRight<Awaited<T>>;
 /** function composition from left to right for functions that return `Promise<Result<any>>`
  *
  * for ease of use, functions that return plain values, plain Promises, and plain Results (not `Promise<Result<any>>`) are also accepted
