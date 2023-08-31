@@ -277,3 +277,15 @@ export function empty<T extends Map<any, any>>(xs: T): T {
         xs.delete(k)
     return xs
 }
+
+/** transform a map of promises into a promise of a map of awaited values
+ *
+ * @param xs map of promises
+ * @returns a map with identical keys, but its promises are resolved
+ */
+export async function awaited<K, V>(xs: Map<K, Promise<V> | V>): Promise<Map<K, Awaited<V>>> {
+    const ys = new Map<K, Awaited<V>>();
+    for (const [k, v] of xs)
+        ys.set(k, await v)
+    return ys;
+}

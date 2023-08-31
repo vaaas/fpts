@@ -80,3 +80,9 @@ export declare const concat: <A, B>(xs: Map<A, B>) => (ys: Map<A, B>) => Map<A, 
 export declare const concat_ip: <A, B>(xs: Map<A, B>) => (ys: Map<A, B>) => Map<A, B>;
 /** delete all entries of a map in place */
 export declare function empty<T extends Map<any, any>>(xs: T): T;
+/** transform a map of promises into a promise of a map of awaited values
+ *
+ * @param xs map of promises
+ * @returns a map with identical keys, but its promises are resolved
+ */
+export declare function awaited<K, V>(xs: Map<K, Promise<V> | V>): Promise<Map<K, Awaited<V>>>;
