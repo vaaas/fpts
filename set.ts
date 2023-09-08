@@ -15,10 +15,14 @@ export const map = <A, B>(f: Unary<A, B>) => (xs: Set<A>): Set<B> => {
 	return n
 }
 
+/** create a new set that contains all the elements of `bs` minus the elements of `as`
+ *
+ * IOW, calculate a set difference between `bs` and `as`
+ */
 export const diff = <T>(as: Set<T>) => (bs: Set<T>): Set<T> => {
 	const n = new Set<T>()
-	for (const x of as)
-		if (!bs.has(x))
+	for (const x of bs)
+		if (!as.has(x))
 			n.add(x)
 	return n
 }

@@ -16,10 +16,14 @@ const map = (f) => (xs) => {
     return n;
 };
 exports.map = map;
+/** create a new set that contains all the elements of `bs` minus the elements of `as`
+ *
+ * IOW, calculate a set difference between `bs` and `as`
+ */
 const diff = (as) => (bs) => {
     const n = new Set();
-    for (const x of as)
-        if (!bs.has(x))
+    for (const x of bs)
+        if (!as.has(x))
             n.add(x);
     return n;
 };
