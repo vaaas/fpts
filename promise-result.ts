@@ -41,20 +41,20 @@ export function compose<A, B, C>
     (
         a: Unary<A, Acceptable<B>>,
         b: Unary<Right<B>, Acceptable<C>>,
-    ): Unary<A, PromiseResult<C>>;
+    ): Unary<A, PromiseResult<Right<C>>>;
 export function compose<A, B, C, D>
     (
         a: Unary<A, Acceptable<B>>,
         b: Unary<Right<B>, Acceptable<C>>,
         c: Unary<Right<C>, Acceptable<D>>,
-    ): Unary<A, PromiseResult<D>>;
+    ): Unary<A, PromiseResult<Right<D>>>;
 export function compose<A, B, C, D, E>
     (
         a: Unary<A, Acceptable<B>>,
         b: Unary<Right<B>, Acceptable<C>>,
         c: Unary<Right<C>, Acceptable<D>>,
         d: Unary<Right<D>, Acceptable<E>>,
-    ): Unary<A, PromiseResult<E>>;
+    ): Unary<A, PromiseResult<Right<E>>>;
 export function compose<A, B, C, D, E, F>
     (
         a: Unary<A, Acceptable<B>>,
@@ -62,7 +62,7 @@ export function compose<A, B, C, D, E, F>
         c: Unary<Right<C>, Acceptable<D>>,
         d: Unary<Right<D>, Acceptable<E>>,
         e: Unary<Right<E>, Acceptable<F>>,
-    ): Unary<A, PromiseResult<F>>;
+    ): Unary<A, PromiseResult<Right<F>>>;
 export function compose(...fs: Array<Unary<any, Acceptable<any>>>) {
     return async function (x: any) {
         let a = x

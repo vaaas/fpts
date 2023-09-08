@@ -29,8 +29,8 @@ export type Right<T> = RRight<Awaited<T>>;
  * // returns an error since argument is not a number
  * print_user_if_exists('1')
  */
-export declare function compose<A, B, C>(a: Unary<A, Acceptable<B>>, b: Unary<Right<B>, Acceptable<C>>): Unary<A, PromiseResult<C>>;
-export declare function compose<A, B, C, D>(a: Unary<A, Acceptable<B>>, b: Unary<Right<B>, Acceptable<C>>, c: Unary<Right<C>, Acceptable<D>>): Unary<A, PromiseResult<D>>;
-export declare function compose<A, B, C, D, E>(a: Unary<A, Acceptable<B>>, b: Unary<Right<B>, Acceptable<C>>, c: Unary<Right<C>, Acceptable<D>>, d: Unary<Right<D>, Acceptable<E>>): Unary<A, PromiseResult<E>>;
-export declare function compose<A, B, C, D, E, F>(a: Unary<A, Acceptable<B>>, b: Unary<Right<B>, Acceptable<C>>, c: Unary<Right<C>, Acceptable<D>>, d: Unary<Right<D>, Acceptable<E>>, e: Unary<Right<E>, Acceptable<F>>): Unary<A, PromiseResult<F>>;
+export declare function compose<A, B, C>(a: Unary<A, Acceptable<B>>, b: Unary<Right<B>, Acceptable<C>>): Unary<A, PromiseResult<Right<C>>>;
+export declare function compose<A, B, C, D>(a: Unary<A, Acceptable<B>>, b: Unary<Right<B>, Acceptable<C>>, c: Unary<Right<C>, Acceptable<D>>): Unary<A, PromiseResult<Right<D>>>;
+export declare function compose<A, B, C, D, E>(a: Unary<A, Acceptable<B>>, b: Unary<Right<B>, Acceptable<C>>, c: Unary<Right<C>, Acceptable<D>>, d: Unary<Right<D>, Acceptable<E>>): Unary<A, PromiseResult<Right<E>>>;
+export declare function compose<A, B, C, D, E, F>(a: Unary<A, Acceptable<B>>, b: Unary<Right<B>, Acceptable<C>>, c: Unary<Right<C>, Acceptable<D>>, d: Unary<Right<D>, Acceptable<E>>, e: Unary<Right<E>, Acceptable<F>>): Unary<A, PromiseResult<Right<F>>>;
 export {};
