@@ -551,6 +551,12 @@ export function batch(n: number) {
     };
 }
 
+/** count how many times each distinct `X` occurs in an iterable of `XS`
+ *
+ * @argument xs - any iterable collection
+ *
+ * @returns a map from each distinct `X` to a number
+ */
 export function count<T>(xs: Iterable<T>): Map<T, number> {
     const m = new Map<T, number>()
     for (const x of xs)

@@ -204,6 +204,12 @@ export declare function all(xs: Iterable<any>): boolean;
 /** flattens an iterable of iterables into a continuous iterable */
 export declare function flatten<T>(xs: Iterable<Iterable<T>>): Iterable<T>;
 export declare function batch(n: number): <T>(xs: Iterable<T>) => Iterable<T[]>;
+/** count how many times each distinct `X` occurs in an iterable of `XS`
+ *
+ * @argument xs - any iterable collection
+ *
+ * @returns a map from each distinct `X` to a number
+ */
 export declare function count<T>(xs: Iterable<T>): Map<T, number>;
 /** generate integers from `start` until `end`, inclusive */
 export declare function seq(start: number, end: number): Generator<number, void, unknown>;

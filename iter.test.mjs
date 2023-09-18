@@ -549,4 +549,34 @@ describe('iter', () => {
             )
         })
     })
+
+    describe('count', () => {
+        it('should return an empty map when given an empty iterable', () => {
+            assert.deepEqual(
+                new Map([]),
+                iter.count([]),
+            )
+        })
+
+        it('should return a map of 1s when given an iterable of only unique elements', () => {
+            assert.deepEqual(
+                new Map([
+                    [1, 1],
+                    [2, 1],
+                    [3, 1],
+                ]),
+                iter.count([1, 2, 3]),
+            )
+        })
+
+        it('should collapse multiples to a single key and increment their counter', () => {
+            assert.deepEqual(
+                new Map([
+                    [1, 1],
+                    ['yo', 2],
+                ]),
+                iter.count(['yo', 1, 'yo']),
+            )
+        })
+    })
 })

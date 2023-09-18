@@ -525,6 +525,12 @@ function batch(n) {
     };
 }
 exports.batch = batch;
+/** count how many times each distinct `X` occurs in an iterable of `XS`
+ *
+ * @argument xs - any iterable collection
+ *
+ * @returns a map from each distinct `X` to a number
+ */
 function count(xs) {
     const m = new Map();
     for (const x of xs)
