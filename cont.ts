@@ -2,9 +2,9 @@ import { Unary } from './data'
 
 /** continuation type, a type of suspended computation
  *
- * runs some kind of computation, and when it is done, perhaps asynchronously, passes it to a callback function
+ * runs some kind of computation, and when it is done, perhaps asynchronously, passes the result to a callback function
  */
-export type Cont<T> = (k: (x: T) => void) => void
+export type Cont<T> = Unary<Unary<T, void>, void>
 
 /** given a mapping **A** -> **B** and a **Cont A**, return a **Cont B** */
 export const map = <A, B>(f: Unary<A, B>) => (x: Cont<A>): Cont<B> => k => x(x => k(f(x)))

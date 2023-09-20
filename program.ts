@@ -6,7 +6,7 @@ import type { Unary } from './data'
  *
  * given an interpreter that receives commands, run the commands and return the results as a continuation
  */
-export type Program<I, O> = (interpreter: I) => Cont<O>
+export type Program<I, O> = Unary<I, Cont<O>>
 
 /** runs a program, outputing nothing */
 export const run = <I>(i: I) => <O>(x: Program<I, O>) => x(i)(() => undefined)
