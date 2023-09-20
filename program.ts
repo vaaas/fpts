@@ -1,4 +1,3 @@
-import { I } from './combinator'
 import type { Cont } from './cont'
 import type { Unary } from './data'
 
