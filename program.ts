@@ -9,13 +9,7 @@ import type { Unary } from './data'
 export type Program<I, O> = Unary<I, Cont<O>>
 
 /** runs a program, outputing nothing */
-export const run = <I>(i: I) => <O>(x: Program<I, O>) => x(i)(() => undefined)
-
-/** runs a program and logs its result */
-export const run_logging = <I>(i: I) => <O>(x: Program<I, O>) => x(i)(console.log)
-
-/** runs a program and returns its result */
-export const run_returning = <I>(i: I) => <O>(x: Program<I, O>) => x(i)(I)
+export const run = <I, O>(i: I, f: Unary<O, void> = () => undefined) => (x: Program<I, O>) => x(i)(f)
 
 /** given a mapping **A** -> **B** and any **Program A**, create a **Program B** */
 export const map = <A, B>(f: Unary<A, B>) => <I>(x: Program<I, A>): Program<I, B> =>

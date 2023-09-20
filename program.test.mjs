@@ -1,6 +1,7 @@
 import { describe, it } from 'node:test'
 import * as assert from 'node:assert'
 import * as program from './dist/program.js'
+import { I } from './dist/combinator.js'
 
 describe('program', () => {
 	const Interpreters = {
@@ -19,7 +20,7 @@ describe('program', () => {
 
 	const str_raw = x => x + ''
 
-	const run = program.run_returning(Interpreters)
+	const run = program.run(Interpreters, I)
 
 	describe('map', () => {
 		it('should transform programs', () => {
