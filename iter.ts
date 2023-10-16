@@ -1,5 +1,5 @@
 import { D1 } from './combinator'
-import { Unary, UnaryP, Binary } from './data'
+import type { Unary, UnaryP, Binary } from './data'
 import { add } from './maths'
 import { concat, concatWith } from './string'
 import { Option } from './option'

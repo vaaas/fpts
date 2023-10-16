@@ -1,4 +1,4 @@
-import { Unary } from './data'
+import type { Unary } from './data'
 import { every } from './iter'
 import { C } from './combinator'
 

@@ -1,32 +1,39 @@
-import * as iter from './dist/iter.js'
+import * as iter from './iter'
 import { describe, it } from 'node:test'
 import * as assert from 'assert'
-import { spy } from './dist/function.js'
-import { gt } from './dist/maths.js'
+import { spy } from './function'
+import { gt } from './maths'
+import { Binary, Unary } from './data'
 
-const str = x => x + ''
+const str: Unary<any, string> = x => x + ''
 
-const even = x => x % 2 === 0
+const even: Unary<number, boolean> = x => x % 2 === 0
 
-const triple = x => [x,x,x]
+const triple = <T>(x: T): [T, T, T] => [x,x,x]
 
-const concat = a => b => a + b
+const concat: Binary<string, string, string> = a => b => a + b
 
-const concatWith = d => a => b => a + d + b
+const concatWith = (d: string) => (a: string) => (b: string): string => a + d + b
 
-function* test() {
-    yield 1;
-    yield 2;
-    yield 3;
+function* test(): Iterable<number> {
+    yield 1
+    yield 2
+    yield 3
+}
+
+function* test_str(): Iterable<string> {
+    yield '1'
+    yield '2'
+    yield '3'
 }
 
 describe('iter', () => {
     describe('iter', () => {
         it('should return the iterator of any iterable', () => {
-            const iterables = [
+            const iterables: Array<Iterable<any>> = [
                 '123',
-                [1,2,3],
-                new Set([1,2,3]),
+                [1, 2, 3],
+                new Set([1, 2, 3]),
                 new Map([['1', 1]]),
                 (function* test() { yield 1; yield 2; yield 3; })(),
             ]
@@ -127,7 +134,7 @@ describe('iter', () => {
     describe('foldl1', () => {
         it('should fold left but the initial value is from the iterable', () => {
             assert.equal(
-                iter.foldl1(concatWith('-'), '')(test()),
+                iter.foldl1(concatWith('-'), '')(test_str()),
                 '1-2-3'
             )
         })
@@ -143,7 +150,7 @@ describe('iter', () => {
     describe('foldr1', () => {
         it('should fold right but the initial value is from the iterable', () => {
             assert.equal(
-                iter.foldr1(concatWith('-'), '')(test()),
+                iter.foldr1(concatWith('-'), '')(test_str()),
                 '3-2-1'
             )
         })
@@ -159,7 +166,7 @@ describe('iter', () => {
     describe('scanl', () => {
         it('should scan from the left', () => {
             assert.deepEqual(
-                Array.from(iter.scanl(concat, '')(test())),
+                Array.from(iter.scanl(concat, '')(test_str())),
                 ['', '1', '12', '123']
             )
         })
@@ -175,7 +182,7 @@ describe('iter', () => {
     describe('scanr', () => {
         it('should scan from the right', () => {
             assert.deepEqual(
-                Array.from(iter.scanr(concat, '')(test())),
+                Array.from(iter.scanr(concat, '')(test_str())),
                 ['', '1', '21', '321']
             )
         })
@@ -191,14 +198,14 @@ describe('iter', () => {
     describe('sort', () => {
         it('should sort any iterable', () => {
             assert.deepEqual(
-                iter.sort((a, b) => a > b ? -1 : 1)(test()),
+                iter.sort((a: number, b: number) => a > b ? -1 : 1)(test()),
                 [3,2,1]
             )
         })
 
         it('should leave empty iterables as is', () => {
             assert.deepEqual(
-                iter.sort((a, b) => a < b ? -1 : 1)([]),
+                iter.sort((a: number, b: number) => a < b ? -1 : 1)([]),
                 [],
             )
         })
@@ -227,17 +234,19 @@ describe('iter', () => {
     })
 
     describe('sumBy', () => {
+        const getvalue = (x: { value: number }) => x.value
+
         it('should sum iterables', () => {
             const xs = [1, 2, 3].map(x => ({ value: x }))
             assert.equal(
-                iter.sumBy(x => x.value)(xs),
+                iter.sumBy(getvalue)(xs),
                 6
             )
         })
 
         it('should return zero on empty iterables', () => {
             assert.equal(
-                iter.sumBy(x => x.value)(new Set()),
+                iter.sumBy(getvalue)(new Set()),
                 0
             )
         })
@@ -275,7 +284,7 @@ describe('iter', () => {
     describe('join', () => {
         it('should join iterables into strings', () => {
             assert.equal(
-                iter.join(test()),
+                iter.join(test_str()),
                 '123'
             )
         })
@@ -290,7 +299,7 @@ describe('iter', () => {
 
     describe('joinWith', () => {
         it('should join iterables into string, with delimitter', () => {
-            assert.equal(iter.joinWith('-')(test()), '1-2-3')
+            assert.equal(iter.joinWith('-')(test_str()), '1-2-3')
         })
 
         it('should join empty iterables into an empty string', () => {
@@ -301,7 +310,7 @@ describe('iter', () => {
     describe('every', () => {
         it('should return true if every member passes the check', () => {
             assert.equal(
-                iter.every(x => x > 0)(test()),
+                iter.every(gt(0))(test()),
                 true,
             )
         })
@@ -324,7 +333,7 @@ describe('iter', () => {
 
         it('should return false if no members pass the check', () => {
             assert.equal(
-                iter.some(x => x > 3)(test()),
+                iter.some(gt(3))(test()),
                 false,
             )
         })
@@ -333,14 +342,14 @@ describe('iter', () => {
     describe('and', () => {
         it('should return true if an argument passes all functions', () => {
             assert.equal(
-                iter.and(x => x > 0, x => x > 1, x => x > 2)(3),
+                iter.and(gt(0), gt(1), gt(2))(3),
                 true
             )
         })
 
         it('should return false if an argument fails to pass any function', () => {
             assert.equal(
-                iter.and(x => x > 0, x => x > 1, x => x > 2)(2),
+                iter.and(gt(0), gt(1), gt(2))(2),
                 false
             )
         })
@@ -349,14 +358,14 @@ describe('iter', () => {
     describe('or', () => {
         it('should return true if an argument passes any function', () => {
             assert.equal(
-                iter.or(x => x > 0, x => x > 1, x => x > 2)(1),
+                iter.or(gt(0), gt(1), gt(2))(1),
                 true
             )
         })
 
         it('should return false if an argument fails to pass every function', () => {
             assert.equal(
-                iter.or(x => x > 0, x => x > 1, x => x > 2)(0),
+                iter.or(gt(0), gt(1), gt(2))(0),
                 false
             )
         })
@@ -418,9 +427,11 @@ describe('iter', () => {
     })
 
     describe('zipWith', () => {
+        const concat: Binary<any, any, any> = a => b => a + b
+
         it('should combine two iterables with a function', () => {
             assert.deepEqual(
-                Array.from(iter.zipWith(a => b => a + b)([1,2,3])(['1','2','3'])),
+                Array.from(iter.zipWith(concat)([1,2,3])(['1','2','3'])),
                 ['11', '22', '33']
 
             )
@@ -428,7 +439,7 @@ describe('iter', () => {
 
         it('should end early if the first iterable is shorter', () => {
             assert.deepEqual(
-                Array.from(iter.zipWith(a => b => a + b)([1])(['1','2','3'])),
+                Array.from(iter.zipWith(concat)([1])(['1','2','3'])),
                 ['11']
 
             )
@@ -436,7 +447,7 @@ describe('iter', () => {
 
         it('should end early if the second iterable is shorter', () => {
             assert.deepEqual(
-                Array.from(iter.zipWith(a => b => a + b)([1,2,3])(['1'])),
+                Array.from(iter.zipWith(concat)([1,2,3])(['1'])),
                 ['11']
             )
         })
@@ -453,7 +464,7 @@ describe('iter', () => {
     describe('partition', () => {
         it('should split iterable in two based on predicate function', () => {
             assert.deepEqual(
-                iter.partition(x => x % 2 == 0)([0,1,2,3]),
+                iter.partition(even)([0,1,2,3]),
                 [[1, 3], [0, 2]]
             )
         })
@@ -492,9 +503,11 @@ describe('iter', () => {
     })
 
     describe('optimumBy', () => {
+        const getx = (x: { x: number }) => x.x
+
         it('should find the optimal value', () => {
             assert.deepEqual(
-                iter.optimumBy(x => x.x)(gt)([
+                iter.optimumBy(getx)(gt)([
                     { x: 1 },
                     { x: 2 },
                     { x: 3 },
@@ -505,7 +518,7 @@ describe('iter', () => {
 
         it('should returned undefined on empty collection', () => {
             assert.equal(
-                iter.optimumBy(x => x.x)(gt)([]),
+                iter.optimumBy(getx)(gt)([]),
                 undefined,
             )
         })
@@ -571,7 +584,7 @@ describe('iter', () => {
 
         it('should collapse multiples to a single key and increment their counter', () => {
             assert.deepEqual(
-                new Map([
+                new Map<any, any>([
                     [1, 1],
                     ['yo', 2],
                 ]),

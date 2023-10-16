@@ -1,24 +1,28 @@
 import { describe, it } from 'node:test'
 import * as assert from 'node:assert'
-import * as program from './dist/program.js'
-import { I } from './dist/combinator.js'
+import * as program from './program'
+import { I } from './combinator'
+import { Cont } from './cont'
+import { Unary } from './data'
 
 describe('program', () => {
 	const Interpreters = {
 		Maths: {
-			inc: x => k => k(x + 1)
+			inc: (x: number): Cont<number> => k => k(x + 1)
 		},
 
 		String: {
-			str: x => k => k(x + '')
+			str: (x: any): Cont<string> => k => k(x + '')
 		}
 	}
 
-	const inc = x => i => i.Maths.inc(x)
+    type IInterpreters = typeof Interpreters
 
-	const str = x => i => i.String.str(x)
+	const inc = (x: number) => (i: IInterpreters) => i.Maths.inc(x)
 
-	const str_raw = x => x + ''
+	const str = (x: any) => (i: IInterpreters) => i.String.str(x)
+
+	const str_raw: Unary<any, string> = x => x + ''
 
 	const run = program.run(Interpreters, I)
 

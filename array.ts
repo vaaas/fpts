@@ -1,4 +1,4 @@
-import { Unary } from './data'
+import type { Unary } from './data'
 import { prefix } from './duad'
 import { map as imap } from './iter'
 import { of as mof, values } from './map'

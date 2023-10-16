@@ -1,6 +1,6 @@
-import * as array from './dist/array.js'
+import * as array from './array'
 import { describe, it } from 'node:test'
-import * as assert from 'assert'
+import * as assert from 'node:assert'
 
 describe('array', () => {
     describe('first', () => {
@@ -15,7 +15,7 @@ describe('array', () => {
 
     describe('last', () => {
         it('should fetch the last element of arrays', () => {
-            assert.equal(array.last([1,2,3]), 3)
+            assert.equal(array.last([1, 2, 3]), 3)
         })
 
         it('should return undefined on empty arrays', () => {
@@ -49,7 +49,7 @@ describe('array', () => {
                 [1, '1'],
                 [2, '2'],
                 [3, '3']
-            ]
+            ] as const
             assert.deepEqual(
                 array.of(new Map(xs)),
                 xs
@@ -89,8 +89,9 @@ describe('array', () => {
     })
 
     describe('map', () => {
+        const str = (x: unknown): string => ''+x
+
         it('should transform arrays from As to Bs', () => {
-            function str(x) { return ''+x }
             assert.deepEqual(
                 array.map(str)([1,2,3]),
                 ['1','2','3']
@@ -98,7 +99,6 @@ describe('array', () => {
         })
 
         it('should do nothing on empty arrays', () => {
-            function str(x) { return ''+x }
             assert.deepEqual(
                 array.map(str)([]),
                 [],
@@ -107,8 +107,9 @@ describe('array', () => {
     })
 
     describe('filter', () => {
+        const even = (x: number) => x % 2 === 0
+
         it('should remove not matching elements', () => {
-            function even(x) { return x % 2 === 0 }
             assert.deepEqual(
                 array.filter(even)([1,2,3]),
                 [2]
@@ -116,7 +117,6 @@ describe('array', () => {
         })
 
         it('should do nothing on empty arrays', () => {
-            function even(x) { return x % 2 === 0 }
             assert.deepEqual(
                 array.filter(even)([]),
                 []
@@ -151,8 +151,8 @@ describe('array', () => {
 
     describe('uniqueBy', () => {
         it('should remove duplicates by key', () => {
-            const xs = [1,2,3,4,1].map((x, i) => ({x, i}))
-            const result = array.uniqueBy(x => x.x)(xs)
+            const xs = [1, 2, 3, 4, 1].map((x, i) => ({x, i}))
+            const result = array.uniqueBy((x: { x: number }) => x.x)(xs)
             assert.equal(result.length, 4)
             assert.deepEqual(
                 result,
@@ -169,8 +169,8 @@ describe('array', () => {
     describe('tail', () => {
         it('should remove the last items of an array', () => {
             assert.deepEqual(
-                array.tail([1,2,3]),
-                [2,3]
+                array.tail([1, 2, 3]),
+                [2, 3]
             )
         })
 
@@ -192,14 +192,14 @@ describe('array', () => {
     describe('joinWith', () => {
         it('should join all items with delimitter', () => {
             assert.equal(
-                array.joinWith('-')([1,2,3]),
+                array.joinWith('-')(['1' ,'2', '3']),
                 '1-2-3'
             )
         })
 
         it('should join singletons without delimitter', () => {
             assert.equal(
-                array.joinWith('-')([1]),
+                array.joinWith('-')(['1']),
                 '1'
             )
         })

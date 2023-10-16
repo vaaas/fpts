@@ -1,9 +1,11 @@
-import * as object from './dist/object.js'
+import * as object from './object'
 import { describe, it } from 'node:test'
 import * as assert from 'assert'
+import { Binary } from './data'
+import { gt } from './maths'
 
-const str = x => x + ''
-const concat = a => b => a + b
+const str = (x: any): string => x + ''
+const concat: Binary<string, string, string> = a => b => a + b
 
 describe('object', () => {
     describe('entries', () => {
@@ -73,14 +75,14 @@ describe('object', () => {
     describe('filter', () => {
         it('should remove keys and values', () => {
             assert.deepEqual(
-                object.filter(x => x > 0)({ a: 1, b: -1 }),
+                object.filter(gt(0))({ a: 1, b: -1 }),
                 {a: 1}
             )
         })
 
         it('should do nothing on empty objects', () => {
             assert.deepEqual(
-                object.filter(x => x > 0)({}),
+                object.filter(gt(0))({}),
                 {}
             )
         })
@@ -154,7 +156,7 @@ describe('object', () => {
     describe('into', () => {
         it('should update a single object key/value', () => {
             assert.deepEqual(
-                object.into({})('test')(1),
+                object.into({} as any)('test')(1),
                 {
                     test: 1,
                 }

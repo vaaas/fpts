@@ -1,4 +1,4 @@
-import { Binary, Unary, Nullary } from './data'
+import type { Binary, Unary, Nullary } from './data'
 
 /** an optional value is a union of undefined or a value.
  *

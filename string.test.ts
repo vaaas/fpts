@@ -1,4 +1,4 @@
-import * as string from './dist/string.js'
+import * as string from './string'
 import { describe, it } from 'node:test'
 import * as assert from 'assert'
 

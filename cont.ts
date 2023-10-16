@@ -1,4 +1,4 @@
-import { Unary } from './data'
+import type { Unary } from './data'
 
 /** continuation type, a type of suspended computation
  *

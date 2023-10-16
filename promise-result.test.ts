@@ -1,18 +1,20 @@
-import * as promise_result from './dist/promise-result.js'
+import * as promise_result from './promise-result'
 import { describe, it } from 'node:test'
-import { spy } from './dist/function.js'
+import { spy } from './function'
 import * as assert from 'node:assert'
+import { Binary } from './data'
 
 describe('promise-result', () => {
     describe('compose', () => {
-        const add = a => b => a + b
-        const mult = a => b => a * b
-        const add_later = a => b => Promise.resolve(a + b)
-        const mult_later = a => b => Promise.resolve(a * b)
+        const add: Binary<number, number, number> = a => b => a + b
+        const mult: Binary<number, number, number> = a => b => a * b
+        const add_later: Binary<number, number, Promise<number>> = a => b => Promise.resolve(a + b)
+        const mult_later: Binary<number, number, Promise<number>> = a => b => Promise.resolve(a * b)
         const just_an_error = () => new Error('I am an Error')
         const just_an_error_later = () => Promise.resolve(just_an_error())
 
         it('should return promises', () => {
+            // @ts-ignore
             const result = promise_result.compose()(1)
             assert.equal(
                 result instanceof Promise,

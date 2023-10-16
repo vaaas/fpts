@@ -1,4 +1,4 @@
-import * as map from './dist/map.js'
+import * as map from './map'
 import { describe, it } from 'node:test'
 import * as assert from 'assert'
 
@@ -58,6 +58,11 @@ describe('map', () => {
 
     describe('ofVN', () => {
         it('should create recursive maps', () => {
+            type Entry = {
+                test: number;
+                best: string;
+                rest: boolean;
+            }
             const xs = [
                 { test: 1, best: 'a', rest: true },
                 { test: 1, best: 'a', rest: false },
@@ -68,7 +73,7 @@ describe('map', () => {
                 { test: 2, best: 'b', rest: true },
                 { test: 2, best: 'b', rest: false },
             ];
-            const result = map.ofVN(x => x.test, x => x.best, x => x.rest)(xs);
+            const result = map.ofVN((x: Entry) => x.test, (x: Entry) => x.best, (x: Entry) => x.rest)(xs);
             assert.deepEqual(Array.from(result).map(x => [x[0], Array.from(x[1]).map(x => [x[0], Array.from(x[1])])]), [
                 [1, [
                     ['a', [
@@ -103,7 +108,7 @@ describe('map', () => {
                 { test: 2, best: 'b' },
             ]
 
-            const result = map.groupBy(x => x.test)(xs)
+            const result = map.groupBy((x: { test: number }) => x.test)(xs)
             assert.deepEqual(Array.from(result), [
                 [1, [
                     { test: 1, best: 'a' },
@@ -119,6 +124,12 @@ describe('map', () => {
 
     describe('groupByN', () => {
         it('should recursively group values', () => {
+            type Entry = {
+                test: number;
+                best: string;
+                rest: boolean;
+            }
+
             const xs = [
                 { test: 1, best: 'a', rest: true },
                 { test: 1, best: 'a', rest: false },
@@ -130,7 +141,7 @@ describe('map', () => {
                 { test: 2, best: 'b', rest: false },
             ]
 
-            const result = map.groupByN(x => x.test, x => x.best)(xs)
+            const result = map.groupByN((x: Entry) => x.test, (x: Entry) => x.best)(xs)
             assert.deepEqual(Array.from(result).map(x => [x[0], Array.from(x[1])]), [
                 [1, [
                     ['a', [
@@ -169,7 +180,7 @@ describe('map', () => {
 
     describe('ofKV', () => {
         it('should create map of keys, with keys and values by function', () => {
-            const result = map.ofKV(x => x+'')(x => x+1)([1,2,3])
+            const result = map.ofKV((x: number) => x+'')((x: number) => x + 1)([1,2,3])
             assert.equal(result.constructor, Map)
             assert.equal(result.size, 3)
             assert.equal(result.get('1'), 2)

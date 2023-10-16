@@ -1,4 +1,4 @@
-import { Unary, Binary } from './data'
+import type { Unary, Binary } from './data'
 
 /** the result type is either a value or an error.
  * in other words, it defines the Either monad as a type union.

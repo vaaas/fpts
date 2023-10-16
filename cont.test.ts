@@ -1,19 +1,19 @@
 import { describe, it } from 'node:test'
 import * as assert from 'node:assert'
-import * as cont from './dist/cont.js'
-import { I } from './dist/combinator.js'
+import { Cont, map, bind } from './cont'
+import { I } from './combinator'
 
 describe('cont', () => {
-	const inc_cont = x => f => f(x + 1)
+	const inc_cont = (x: number): Cont<number> => f => f(x + 1)
 
-	const str_cont = x => f => f(x + '')
+	const str_cont = (x: any): Cont<string> => f => f(x + '')
 
-	const str = x => x + ''
+	const str = (x: any) => x + ''
 
 	describe('map', () => {
 		it('should transform continuations', () => {
 			assert.equal(
-				cont.map(str)(inc_cont(1))(I),
+				map(str)(inc_cont(1))(I),
 				'2'
 			)
 		})
@@ -22,7 +22,7 @@ describe('cont', () => {
 	describe('bind', () => {
 		it('should chain continuations', () => {
 			assert.equal(
-				cont.bind(str_cont)(inc_cont(1))(I),
+				bind(str_cont)(inc_cont(1))(I),
 				'2'
 			)
 		})

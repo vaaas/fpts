@@ -1,4 +1,4 @@
-import { Unary, Binary } from './data'
+import type { Unary, Binary } from './data'
 
 /** Bluebird Combinator
  *

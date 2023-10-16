@@ -1,9 +1,10 @@
-import * as fn from './dist/function.js'
+import * as fn from './function'
 import { describe, it } from 'node:test'
 import * as assert from 'assert'
+import { Binary, Unary } from './data'
 
-const add = a => b => a + b
-const str = x => x + ''
+const add: Binary<number, number, number> = a => b => a + b
+const str: Unary<any, string> = x => x + ''
 
 describe('function', () => {
     describe('pipe', () => {
@@ -22,6 +23,7 @@ describe('function', () => {
 
         it('should do nothing without functions', () => {
             assert.equal(
+                // @ts-ignore
                 fn.pipe(1),
                 1
             )
@@ -42,6 +44,7 @@ describe('function', () => {
 
         it('should create the id function without arguments', () => {
             assert.equal(
+                // @ts-ignore
                 fn.compose()(1),
                 1
             )

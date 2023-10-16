@@ -1,4 +1,4 @@
-import { Unary } from './data'
+import type { Unary } from './data'
 
 /** pipeline functions
  *
@@ -190,11 +190,11 @@ export function compose(...fs: Array<Unary<any, any>>): (x: any) => any {
  *
  * calls can be accessed through the `.calls` property
  */
-export function spy(f: Function): Function & { calls: any[] } {
+export function spy<A extends any[], B>(f: (...xs: A) => B): ((...xs: A) => B) & { calls: any[] } {
     const calls: any[] = [];
     function wrapped() {
         calls.push([...arguments]);
-        return f(...arguments);
+        return f(...arguments as any as A);
     }
     wrapped.calls = calls;
     return wrapped;

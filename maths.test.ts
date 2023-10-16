@@ -1,7 +1,7 @@
-import * as maths from './dist/maths.js'
+import * as maths from './maths'
 import { describe, it } from 'node:test'
 import * as assert from 'assert'
-import { limit } from './dist/iter.js'
+import { limit } from './iter'
 
 describe('maths', () => {
     describe('neg', () => {

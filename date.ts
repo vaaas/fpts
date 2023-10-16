@@ -1,4 +1,4 @@
-import { Unary } from './data'
+import type { Unary } from './data'
 
 export const mapMonth = (f: Unary<number, number>) => (x: Date): Date => {
     const y = new Date(x)

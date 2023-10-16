@@ -1,6 +1,6 @@
-import { Unary } from './data'
-import { Result } from './result'
-import { Right as RRight } from './result'
+import type { Unary } from './data'
+import type { Result } from './result'
+import type { Right as RRight } from './result'
 
 export type PromiseResult<T> = Promise<Result<T>>
 

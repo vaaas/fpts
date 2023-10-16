@@ -1,6 +1,6 @@
-import { describe, it } from 'node:test';
-import * as assert from 'node:assert';
-import * as duad from './dist/duad.js';
+import { describe, it } from 'node:test'
+import * as assert from 'node:assert'
+import * as duad from './duad'
 
 describe('duad', () => {
     describe('of', () => {
@@ -21,7 +21,7 @@ describe('duad', () => {
     describe('prefix', () => {
         it('should provide prefix to a value, producing a duad', () => {
             assert.deepEqual(
-                duad.prefix(x => x.test)({ test: 'test' }),
+                duad.prefix((x: { test: string }) => x.test)({ test: 'test' }),
                 ['test', { test: 'test' }]
             )
         })
@@ -30,7 +30,7 @@ describe('duad', () => {
     describe('suffix', () => {
         it('should provide prefix to a value, producing a duad', () => {
             assert.deepEqual(
-                duad.suffix(x => x.test)({ test: 'test' }),
+                duad.suffix((x: { test: string }) => x.test)({ test: 'test' }),
                 [{ test: 'test' }, 'test']
             )
         })

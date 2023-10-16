@@ -1,35 +1,17 @@
 {
     "name": "fpts",
-    "version": "1.0.116",
+    "version": "2.0.0",
+    "type": "module",
     "license": "MIT",
     "scripts": {
         "clean": "rm dist/*",
-        "build": "npm run clean; tsc --declaration --outDir ./dist",
-        "test": "node --test"
+        "test": "node --test --loader ts-node/esm"
     },
-    "types": "./dist",
     "exports": {
-        ".": "./dist/index.js",
-        "./alist": "./dist/alist.js",
-        "./array": "./dist/array.js",
-        "./combinator": "./dist/combinator.js",
-        "./data": "./dist/data.js",
-        "./date": "./dist/date.js",
-        "./dom": "./dist/dom.js",
-        "./duad": "./dist/duad.js",
-        "./function": "./dist/function.js",
-        "./either": "./dist/either.js",
-        "./iter": "./dist/iter.js",
-        "./logging": "./dist/logging.js",
-        "./map": "./dist/map.js",
-        "./maths": "./dist/maths.js",
-        "./object": "./dist/object.js",
-        "./option": "./dist/option.js",
-        "./promise": "./dist/promise.js",
-        "./promise-result": "./dist/promise-result.js",
-        "./result": "./dist/result.js",
-        "./set": "./dist/set.js",
-        "./string": "./dist/string.js",
-        "./timing": "./dist/timing.js"
+        ".": "./index.ts",
+        "./*" : "./*.ts"
+    },
+    "devDependencies": {
+        "ts-node": "^10.9.0"
     }
 }
