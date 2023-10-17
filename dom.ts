@@ -1,3 +1,5 @@
+import { Unary } from './data'
+
 export const qs = (q: string) => (x: HTMLElement) => x.querySelector(q)
 export const qss = (q: string) => (x: HTMLElement) => x.querySelectorAll(q)
 export const $ = (q: string) => document.querySelector(q)
@@ -41,3 +43,14 @@ export const insert_before = (successor: HTMLElement) => (predecessor: HTMLEleme
     successor.parentElement!.insertBefore(predecessor, successor);
     return predecessor;
 }
+
+/** enhance an event handler so that it stops an event's propagation and default handling after executing
+ *
+ * @param f the handler
+ * @returns a new handler that stops event propagation and prevents its default handling
+ */
+export const absorbed = <T extends Event>(f: Unary<T, void>) => (e: T) => {
+    f(e);
+    e.stopPropagation();
+    e.preventDefault();
+};
