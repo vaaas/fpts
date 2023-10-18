@@ -27,6 +27,52 @@ describe('array', () => {
         })
     })
 
+    describe('middle', () => {
+        it('should fetch the middle element of an odd array', () => {
+            assert.equal(
+                2,
+                array.middle([1, 2, 3])
+            )
+        })
+
+        it('should fetch the middle element of an even array', () => {
+            assert.equal(
+                10,
+                array.middle([1, 2, 10, 4])
+            )
+        })
+
+        it('should return the first element in a unary array', () => {
+            assert.equal(
+                'test',
+                array.middle(['test'])
+            )
+        })
+
+        it('should return undefined in empty arrays', () => {
+            assert.equal(
+                undefined,
+                array.middle([])
+            )
+        })
+    })
+
+    describe('get', () => {
+        it('should get an item at the given position', () => {
+            assert.equal(
+                1,
+                array.get(0)([1, 2, 3])
+            )
+        })
+
+        it('should return undefined if it is out of bounds', () => {
+            assert.equal(
+                undefined,
+                array.get(10)([1, 2, 3])
+            )
+        })
+    })
+
     describe('of', () => {
         it('should create arrays from arrays', () => {
             const xs = [1,2,3]
