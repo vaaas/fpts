@@ -152,6 +152,22 @@ describe('array', () => {
         })
     })
 
+    describe('map_ip', () => {
+        const str = (x: unknown): string => ''+x
+
+        it('should transform arrays in place', () => {
+            const xs = [1, 2, 3]
+            assert.deepEqual(
+                ['1', '2', '3'],
+                array.map_ip(str)(xs)
+            )
+            assert.deepEqual(
+                ['1', '2', '3'],
+                xs
+            )
+        })
+    })
+
     describe('filter', () => {
         const even = (x: number) => x % 2 === 0
 
@@ -167,6 +183,20 @@ describe('array', () => {
                 array.filter(even)([]),
                 []
             )
+        })
+    })
+
+    describe('filter_ip', () => {
+        const even = (x: number) => x % 2 === 0
+
+        it('should remove elements in place', () => {
+            const xs = [1, 2, 3]
+            const ys = array.filter_ip(even)(xs)
+            assert.deepEqual(
+                [2],
+                ys
+            )
+            assert.equal(xs, ys)
         })
     })
 
@@ -235,6 +265,55 @@ describe('array', () => {
         })
     })
 
+    describe('head', () => {
+        it('should remove the last element', () => {
+            assert.deepEqual(
+                [1, 2],
+                array.head([1, 2, 3])
+            )
+        })
+
+        it('should return an empty array if the array has only one item', () => {
+            const xs = array.head([1])
+            assert.equal(0, xs.length)
+        })
+
+        it('should return an empty array if the array is empty', () => {
+            const xs = array.head([])
+            assert.equal(0, xs.length)
+        })
+    })
+
+    describe('islice', () => {
+        it('should slice the array', () => {
+            assert.deepEqual(
+                [2, 3],
+                Array.from(array.islice(1, 3)([1, 2, 3, 4]))
+            )
+        })
+
+        it('should return an empty array if the start is out of bounds', () => {
+            assert.deepEqual(
+                [],
+                Array.from(array.islice(10, 15)([1, 2, 3]))
+            )
+        })
+
+        it('should not slice past the end', () => {
+            assert.deepEqual(
+                [2, 3],
+                Array.from(array.islice(1, 10)([1, 2, 3]))
+            )
+        })
+
+        it('should return an empty array if the source is an empty array', () => {
+            assert.deepEqual(
+                [],
+                Array.from(array.islice(0, 10)([]))
+            )
+        })
+    })
+
     describe('joinWith', () => {
         it('should join all items with delimitter', () => {
             assert.equal(
@@ -255,6 +334,73 @@ describe('array', () => {
                 array.joinWith('-')([]),
                 ''
             )
+        })
+    })
+
+    describe('dup', () => {
+        it('should duplicate elements', () => {
+            assert.deepEqual(
+                [1, 1],
+                array.dup(1),
+            )
+        })
+    })
+
+    describe('ireverse', () => {
+        it('should return a reversed iterable', () => {
+            assert.deepEqual(
+                [3, 2, 1],
+                Array.from(array.ireverse([1, 2, 3]))
+            )
+        })
+    })
+
+    describe('pairs', () => {
+        it('should pair up array elements', () => {
+            assert.deepEqual(
+                [
+                    [1, 'a'],
+                    [1, 'b'],
+                    [2, 'a'],
+                    [2, 'b'],
+                ],
+                Array.from(array.pairs([1, 2], ['a', 'b']))
+            )
+        })
+
+        it('should yield nothing if one of the arrays is empty', () => {
+            assert.deepEqual(
+                [],
+                Array.from(array.pairs([], [1, 2]))
+            )
+            assert.deepEqual(
+                [],
+                Array.from(array.pairs([1, 2], []))
+            )
+        })
+    })
+
+    describe('inside', () => {
+        const xs = [1, 2, 3]
+
+        it('should return true if the element is inside an array', () => {
+            assert.equal(true, array.inside(xs)(1))
+        })
+
+        it('should return false if the element is outside an array', () => {
+            assert.equal(false, array.inside(xs)(4))
+        })
+    })
+
+    describe('outside', () => {
+        const xs = [1, 2, 3]
+
+        it('should return true if the element is outside an array', () => {
+            assert.equal(true, array.outside(xs)(4))
+        })
+
+        it('should return false if the element is inside an array', () => {
+            assert.equal(false, array.outside(xs)(1))
         })
     })
 })
