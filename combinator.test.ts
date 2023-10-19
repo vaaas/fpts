@@ -79,4 +79,11 @@ describe('combinator', () => {
             I(1),
         )
     })
+
+    it('should implement the kestrel combinator', () => {
+        assert.equal(
+            1,
+            K(1)(2)
+        )
+    })
 })
