@@ -100,4 +100,15 @@ describe('combinator', () => {
             T(1)(inc),
         )
     })
+
+    it('should implement the starling combinator', () => {
+        type Entry = {
+            a: number;
+            b: number;
+        }
+        assert.equal(
+            3,
+            S(add)((x: Entry) => x.a)((x: Entry) => x.b)({ a: 1, b: 2 })
+        )
+    })
 })
