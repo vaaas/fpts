@@ -1,8 +1,8 @@
-import * as object from './object.js'
+import * as object from './object.ts'
 import { describe, it } from 'node:test'
 import * as assert from 'assert'
-import { Binary } from './data.js'
-import { gt } from './maths.js'
+import { Binary } from './data.ts'
+import { gt } from './maths.ts'
 
 const str = (x: any): string => x + ''
 const concat: Binary<string, string, string> = a => b => a + b

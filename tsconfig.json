@@ -4,7 +4,9 @@
         "module": "esnext",
         "moduleResolution": "Node",
         "strict": true,
-        "noUncheckedIndexedAccess": true
+        "noUncheckedIndexedAccess": true,
+        "noEmit": true,
+        "allowImportingTsExtensions": true
     },
     "ts-node": {
         "transpileOnly": true,

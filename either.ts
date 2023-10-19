@@ -1,4 +1,4 @@
-import { Unary, Binary, NoValue } from './data.js'
+import { Unary, Binary, NoValue } from './data.ts'
 
 /** represents the left type */
 type Left<X> = [X, typeof NoValue]

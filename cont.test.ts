@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test'
 import * as assert from 'node:assert'
-import { Cont, map, bind } from './cont.js'
-import { I } from './combinator.js'
+import { Cont, map, bind } from './cont.ts'
+import { I } from './combinator.ts'
 
 describe('cont', () => {
 	const inc_cont = (x: number): Cont<number> => f => f(x + 1)

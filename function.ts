@@ -1,4 +1,4 @@
-import type { Unary } from './data.js'
+import type { Unary } from './data.ts'
 
 /** pipeline functions
  *

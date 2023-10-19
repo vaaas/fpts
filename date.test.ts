@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test'
 import * as assert from 'node:assert'
-import * as date from './date.js'
+import * as date from './date.ts'
 
 const inc = (x: number) => x + 1
 

@@ -1,4 +1,4 @@
-import { NoValue } from './data.js'
+import { NoValue } from './data.ts'
 
 export function next_tick(f: () => any) {
 	return setTimeout(f, 0)

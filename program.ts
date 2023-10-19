@@ -1,5 +1,5 @@
-import type { Cont } from './cont.js'
-import type { Unary } from './data.js'
+import type { Cont } from './cont.ts'
+import type { Unary } from './data.ts'
 
 /** program monad, modelling any abstract program
  *

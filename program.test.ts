@@ -1,9 +1,9 @@
 import { describe, it } from 'node:test'
 import * as assert from 'node:assert'
-import * as program from './program.js'
-import { I } from './combinator.js'
-import { Cont } from './cont.js'
-import { Unary } from './data.js'
+import * as program from './program.ts'
+import { I } from './combinator.ts'
+import { Cont } from './cont.ts'
+import { Unary } from './data.ts'
 
 describe('program', () => {
 	const Interpreters = {

@@ -1,4 +1,4 @@
-import type { Unary, Binary } from './data.js'
+import type { Unary, Binary } from './data.ts'
 
 /** the result type is either a value or an error.
  * in other words, it defines the Either monad as a type union.

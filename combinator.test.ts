@@ -16,7 +16,7 @@ import {
     V,
     W,
     spread,
-} from './combinator.js'
+} from './combinator.ts'
 
 describe('combinator', () => {
     const str = (x: any): string => x + ''

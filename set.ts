@@ -1,6 +1,6 @@
-import type { Unary } from './data.js'
-import { every } from './iter.js'
-import { C } from './combinator.js'
+import type { Unary } from './data.ts'
+import { every } from './iter.ts'
+import { C } from './combinator.ts'
 
 export const of = <T>(x: Iterable<T>): Set<T> => new Set(x)
 

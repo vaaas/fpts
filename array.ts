@@ -1,6 +1,6 @@
-import type { Unary } from './data.js'
-import type { Option } from './option.js'
-import { ofV, values } from './map.js'
+import type { Unary } from './data.ts'
+import type { Option } from './option.ts'
+import { ofV, values } from './map.ts'
 
 /** return the first element of an array */
 export const first = <T>(xs: Array<T>): T|undefined => xs[0]

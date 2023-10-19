@@ -1,4 +1,4 @@
-import * as string from './string.js'
+import * as string from './string.ts'
 import { describe, it } from 'node:test'
 import * as assert from 'assert'
 

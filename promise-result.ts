@@ -1,6 +1,6 @@
-import type { Unary } from './data.js'
-import type { Result } from './result.js'
-import type { Right as RRight } from './result.js'
+import type { Unary } from './data.ts'
+import type { Result } from './result.ts'
+import type { Right as RRight } from './result.ts'
 
 export type PromiseResult<T> = Promise<Result<T>>
 

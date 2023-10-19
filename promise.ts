@@ -1,4 +1,4 @@
-import type { Unary } from './data.js'
+import type { Unary } from './data.ts'
 
 export function next_frame(): Promise<void> {
     return new Promise((yes) => {

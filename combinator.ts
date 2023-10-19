@@ -1,4 +1,4 @@
-import type { Unary, Binary } from './data.js'
+import type { Unary, Binary } from './data.ts'
 
 /** Bluebird Combinator
  *

@@ -1,4 +1,4 @@
-import type { Unary } from './data.js'
+import type { Unary } from './data.ts'
 
 export const of = <A, B>(a: A, b: B): [A, B] => [a, b]
 

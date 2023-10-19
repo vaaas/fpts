@@ -1,9 +1,9 @@
-import type { Unary, UnaryP, Binary } from './data.js'
-import { D1 } from './combinator.js'
-import { add } from './maths.js'
-import { concat, concatWith } from './string.js'
-import { Option } from './option.js'
-import { duad } from './duad.js'
+import type { Unary, UnaryP, Binary } from './data.ts'
+import { D1 } from './combinator.ts'
+import { add } from './maths.ts'
+import { concat, concatWith } from './string.ts'
+import { Option } from './option.ts'
+import { duad } from './duad.ts'
 
 export const StopIteration = Symbol()
 

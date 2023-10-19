@@ -1,4 +1,4 @@
-import type { Binary, Unary, Nullary } from './data.js'
+import type { Binary, Unary, Nullary } from './data.ts'
 
 /** an optional value is a union of undefined or a value.
  *
