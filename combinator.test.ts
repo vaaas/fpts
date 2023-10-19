@@ -51,4 +51,18 @@ describe('combinator', () => {
             D(add)((x: string): number => parseFloat(x))((x: { x: number }) => x.x)('1')({ x: 2 })
         )
     })
+
+    it('should implement the dove combinator', () => {
+        assert.equal(
+            3,
+            D1(add)(parseFloat)(1)('2')
+        )
+    })
+
+    it('should implemenet the reverse dove combinator', () => {
+        assert.equal(
+            3,
+            D2(add)(parseFloat)('1')(2)
+        )
+    })
 })
