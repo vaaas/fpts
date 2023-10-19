@@ -22,6 +22,7 @@ describe('combinator', () => {
     const str = (x: any): string => x + ''
     const inc = (x: number) => x + 1
     const add = (x: number) => (y: number) => x + y
+    const concat = (a: string) => (b: string) => a + b
 
     it('should implement bluebird', () => {
         assert.equal(
@@ -34,6 +35,13 @@ describe('combinator', () => {
         assert.equal(
             '3',
             B1(str)(add)(1)(2)
+        )
+    })
+
+    it('should implement cardinal', () => {
+        assert.equal(
+            'ba',
+            C(concat)('a')('b')
         )
     })
 })
