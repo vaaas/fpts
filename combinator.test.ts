@@ -111,4 +111,11 @@ describe('combinator', () => {
             S(add)((x: Entry) => x.a)((x: Entry) => x.b)({ a: 1, b: 2 })
         )
     })
+
+    it('should implement the vireo combinator', () => {
+        assert.equal(
+            3,
+            V(1)(2)(add)
+        )
+    })
 })
