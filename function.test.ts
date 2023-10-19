@@ -1,7 +1,7 @@
-import * as fn from './function'
+import * as fn from './function.js'
 import { describe, it } from 'node:test'
 import * as assert from 'assert'
-import { Binary, Unary } from './data'
+import { Binary, Unary } from './data.js'
 
 const add: Binary<number, number, number> = a => b => a + b
 const str: Unary<any, string> = x => x + ''

@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test'
-import { lefts, rights } from './alist'
 import * as assert from 'node:assert'
+import { lefts, rights } from './alist.js'
 
 describe('alist', () => {
     const a_map = new Map([

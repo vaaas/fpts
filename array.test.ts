@@ -1,4 +1,4 @@
-import * as array from './array'
+import * as array from './array.js'
 import { describe, it } from 'node:test'
 import * as assert from 'node:assert'
 

@@ -1,9 +1,9 @@
-import * as iter from './iter'
+import * as iter from './iter.js'
 import { describe, it } from 'node:test'
 import * as assert from 'assert'
-import { spy } from './function'
-import { gt } from './maths'
-import { Binary, Unary } from './data'
+import { spy } from './function.js'
+import { gt } from './maths.js'
+import { Binary, Unary } from './data.js'
 
 const str: Unary<any, string> = x => x + ''
 

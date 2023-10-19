@@ -1,4 +1,4 @@
-import * as map from './map'
+import * as map from './map.js'
 import { describe, it } from 'node:test'
 import * as assert from 'assert'
 

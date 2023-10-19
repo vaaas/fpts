@@ -1,4 +1,4 @@
-import { Unary } from './data'
+import { Unary } from './data.js'
 
 export const qs = (q: string) => (x: HTMLElement) => x.querySelector(q)
 export const qss = (q: string) => (x: HTMLElement) => x.querySelectorAll(q)

@@ -1,4 +1,4 @@
-import type { Unary, Binary, Ternary } from './data'
+import type { Unary, Binary, Ternary } from './data.js'
 
 export type Entries<T> = Array<{
 	[K in keyof T]: [K, T[K]]

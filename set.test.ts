@@ -1,5 +1,5 @@
-import * as set from './set'
-import * as iter from './iter'
+import * as set from './set.js'
+import * as iter from './iter.js'
 import { describe, it } from 'node:test'
 import * as assert from 'node:assert'
 

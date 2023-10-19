@@ -1,6 +1,6 @@
-import { Unary } from './data';
-import { Option } from './option';
-import { tail } from './array';
+import { Unary } from './data.js';
+import { Option } from './option.js';
+import { tail } from './array.js';
 
 /** UNSAFE!
  *

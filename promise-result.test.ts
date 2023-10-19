@@ -1,8 +1,8 @@
-import * as promise_result from './promise-result'
+import * as promise_result from './promise-result.js'
 import { describe, it } from 'node:test'
-import { spy } from './function'
+import { spy } from './function.js'
 import * as assert from 'node:assert'
-import { Binary } from './data'
+import { Binary } from './data.js'
 
 describe('promise-result', () => {
     describe('compose', () => {

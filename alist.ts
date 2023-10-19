@@ -1,4 +1,4 @@
-import { map } from './iter';
+import { map } from './iter.js';
 
 export const lefts = map(<A, B>(x: [A, B]) => x[0]);
 

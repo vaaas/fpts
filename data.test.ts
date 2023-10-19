@@ -1,4 +1,4 @@
-import { safe_json_parse } from './data'
+import { safe_json_parse } from './data.js'
 import { describe, it } from 'node:test'
 import * as assert from 'assert'
 
