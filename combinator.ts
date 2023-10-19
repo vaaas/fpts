@@ -4,7 +4,7 @@ import type { Unary, Binary } from './data'
  *
  * Pass an argument C to a unary function B. Before returning the result, pass it through a final filter, A.
  */
-export const b =
+export const B =
     <B, C>(a: Unary<B, C>) =>
     <A>(b: Unary<A, B>) =>
     (c: A): C =>
