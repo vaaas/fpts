@@ -65,4 +65,11 @@ describe('combinator', () => {
             D2(add)(parseFloat)('1')(2)
         )
     })
+
+    it('should implement the lifting combinator', () => {
+        assert.equal(
+            3,
+            L(add)(parseFloat)('1')('2')
+        )
+    })
 })
