@@ -1,4 +1,5 @@
 import type { Unary } from './data.ts'
+import type { Result } from './result.ts'
 
 export function next_frame(): Promise<void> {
     return new Promise((yes) => {
@@ -29,7 +30,7 @@ export function bind<A, B>(f: Unary<A, Promise<B>>): (x: Promise<A>) => Promise<
 export function then<A, B>(f: Unary<A, B>): (x: Promise<A>) => Promise<B>
 export function then<A, B>(f: Unary<A, Promise<B>>): (x: Promise<A>) => Promise<B> {
     return function(x) {
-        return x.then(f);
+        return x.then(f)
     }
 }
 
@@ -127,4 +128,19 @@ export async function pipe(x: any, ...fs: Array<Unary<any, Promise<any>>>): Prom
 	for (const f of fs)
 		a = await f(a)
 	return a
+}
+
+export async function retry_exponential_backoff<T>(f: () => Promise<T>, initial = 500, multiplier = 2, max_retries = Infinity): Promise<Result<T>> {
+    let i = 0
+    let t = initial
+    while (i <= max_retries) {
+        const x = await f().catch(e => e instanceof Error ? e : new Error('something went wrong: ' + e));
+        if (x instanceof Error) {
+            await sleep(t)
+            t *= multiplier
+            i++
+        } else
+            return x
+    }
+    return new Error('max retries exceeded')
 }
