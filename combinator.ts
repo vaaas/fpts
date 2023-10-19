@@ -104,8 +104,8 @@ export const KI = <T>(a?: any) => (b: T): T => b
  * Accepts an argument for a unary function, then the function.
  */
 export const T =
-    <A, B>(x: A) =>
-    (f: Unary<A, B>): B =>
+    <A>(x: A) =>
+    <B>(f: Unary<A, B>): B =>
     f(x)
 
 /** Starling prime combinator, AKA phoenix combinator.

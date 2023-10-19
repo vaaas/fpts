@@ -93,4 +93,11 @@ describe('combinator', () => {
             KI(1)(2),
         )
     })
+
+    it('should implement the thrush combinator', () => {
+        assert.equal(
+            2,
+            T(1)(inc),
+        )
+    })
 })
