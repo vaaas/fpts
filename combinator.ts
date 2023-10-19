@@ -14,7 +14,8 @@ export const B =
  *
  * Pass two arguments, C and D, to a binary function B. Before returning the result, pass it through a final filter, A.
  */
-export const B1 = <C, D>(a: Unary<C, D>) =>
+export const B1 =
+    <C, D>(a: Unary<C, D>) =>
     <A, B>(b: Binary<A, B, C>) =>
     (c: A) =>
     (d: B): D =>
@@ -24,7 +25,8 @@ export const B1 = <C, D>(a: Unary<C, D>) =>
  *
  * Pass arguments B and C to a binary function A, in reverse (flipped).
  */
-export const C = <A, B, C>(a: Binary<A, B, C>) =>
+export const C =
+    <A, B, C>(a: Binary<A, B, C>) =>
     (b: B) =>
     (c: A): C =>
     a(c)(b)
@@ -36,9 +38,9 @@ export const C = <A, B, C>(a: Binary<A, B, C>) =>
  * and E through the unary function C.
  */
 export const D =
-    <A, B, C, D, E>(a: Binary<A, B, C>) =>
-    (b: Unary<D, A>) =>
-    (c: Unary<E, B>) =>
+    <A, B, C>(a: Binary<A, B, C>) =>
+    <D>(b: Unary<D, A>) =>
+    <E>(c: Unary<E, B>) =>
     (d: D) =>
     (e: E): C =>
     a(b(d))(c(e))
@@ -115,8 +117,8 @@ export const T =
  * In other words, applies the same argument twice, but through different filters.
  */
 export const S =
-    <A, B, C, D>(a: Binary<A, B, C>) =>
-    (b: Unary<D, A>) =>
+    <A, B, C>(a: Binary<A, B, C>) =>
+    <D>(b: Unary<D, A>) =>
     (c: Unary<D, B>) =>
     (d: D): C =>
     a(b(d))(c(d))
@@ -126,9 +128,9 @@ export const S =
  * Accept two arguments for a binary function, then the binary function.
  */
 export const V =
-    <A, B, C>(a: A) =>
-    (b: B) =>
-    (c: Binary<A, B, C>): C =>
+    <A>(a: A) =>
+    <B>(b: B) =>
+    <C>(c: Binary<A, B, C>): C =>
     c(a)(b)
 
 /** Warbler combinator AKA elementary duplicator

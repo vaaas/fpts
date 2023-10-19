@@ -44,4 +44,11 @@ describe('combinator', () => {
             C(concat)('a')('b')
         )
     })
+
+    it('should implement dovekies', () => {
+        assert.equal(
+            3,
+            D(add)((x: string): number => parseFloat(x))((x: { x: number }) => x.x)('1')({ x: 2 })
+        )
+    })
 })
