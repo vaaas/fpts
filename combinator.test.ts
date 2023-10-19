@@ -86,4 +86,11 @@ describe('combinator', () => {
             K(1)(2)
         )
     })
+
+    it('should implement the kite combinator', () => {
+        assert.equal(
+            2,
+            KI(1)(2),
+        )
+    })
 })
