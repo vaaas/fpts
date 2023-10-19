@@ -125,4 +125,13 @@ describe('combinator', () => {
             W(add)(2)
         )
     })
+
+    it('should implement the spread combinator', () => {
+        function add(a: number, b: number) { return a + b }
+
+        assert.equal(
+            3,
+            spread(add)([1, 2])
+        )
+    })
 })
