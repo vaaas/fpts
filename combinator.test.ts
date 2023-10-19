@@ -72,4 +72,11 @@ describe('combinator', () => {
             L(add)(parseFloat)('1')('2')
         )
     })
+
+    it('should implement the identity combinator', () => {
+        assert.equal(
+            1,
+            I(1),
+        )
+    })
 })
