@@ -31,7 +31,7 @@ export const after = (a: Date) => (b: Date) => b.getTime() > a.getTime()
 export const before = (a: Date) => (b: Date) => b.getTime() < a.getTime()
 
 export const max = (a: Date) => (b: Date) =>
-    a.getTime() > b.getTime() ? a : b;
+    a.getTime() > b.getTime() ? a : b
 
 export const min = (a: Date) => (b: Date) =>
-    a.getTime() > b.getTime() ? b : a;
+    a.getTime() > b.getTime() ? b : a
