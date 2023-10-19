@@ -118,4 +118,11 @@ describe('combinator', () => {
             V(1)(2)(add)
         )
     })
+
+    it('should implement the warbler combinator', () => {
+        assert.equal(
+            4,
+            W(add)(2)
+        )
+    })
 })
