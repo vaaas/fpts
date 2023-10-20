@@ -1,5 +1,14 @@
-import { map } from './iter.ts';
+import type { Unary } from './data.ts'
+import { map } from './iter.ts'
 
-export const lefts = map(<A, B>(x: [A, B]) => x[0]);
+type AList<A, B> = Iterable<[A, B]>
 
-export const rights = map(<A, B>(x: [A, B]) => x[1]);
+export const lefts = map(<A, B>(x: [A, B]) => x[0])
+
+export const rights = map(<A, B>(x: [A, B]) => x[1])
+
+export const mapr = <A, B>(f: Unary<A, B>): <K>(xs: AList<K, A>) => AList<K, B> =>
+    map(x => [x[0], f(x[1])])
+
+export const mapl = <A, B>(f: Unary<A, B>): <V>(xs: AList<A, V>) => AList<B, V> =>
+    map(x => [f(x[0]), x[1]])

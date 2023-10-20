@@ -1,6 +1,6 @@
 import { describe, it } from 'node:test'
 import * as assert from 'node:assert'
-import { lefts, rights } from './alist.ts'
+import { lefts, rights, mapr, mapl } from './alist.ts'
 
 describe('alist', () => {
     const a_map = new Map([
@@ -23,6 +23,40 @@ describe('alist', () => {
             assert.deepEqual(
                 ['1', '2', '3'],
                 Array.from(rights(a_map))
+            )
+        })
+    })
+
+    describe('mapr', () => {
+        it('should change the right values', () => {
+            assert.deepEqual(
+                [
+                    [1, 1],
+                    [2, 2],
+                    [3, 3],
+                ],
+                Array.from(mapr(parseFloat)([
+                    [1, '1'],
+                    [2, '2'],
+                    [3, '3'],
+                ]))
+            )
+        })
+    })
+
+    describe('mapl', () => {
+        it('should change the left values', () => {
+            assert.deepEqual(
+                [
+                    [1, 1],
+                    [2, 2],
+                    [3, 3],
+                ],
+                Array.from(mapl(parseFloat)([
+                    ['1', 1],
+                    ['2', 2],
+                    ['3', 3],
+                ]))
             )
         })
     })
