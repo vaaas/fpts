@@ -3,9 +3,11 @@ import { map } from './iter.ts'
 
 type AList<A, B> = Iterable<[A, B]>
 
-export const lefts = map(<A, B>(x: [A, B]) => x[0])
+export const lefts: <A, B>(x: AList<A, B>) => Iterable<A> =
+    map(x => x[0])
 
-export const rights = map(<A, B>(x: [A, B]) => x[1])
+export const rights: <A, B>(x: AList<A, B>) => Iterable<B> =
+    map(x => x[1])
 
 export const mapr = <A, B>(f: Unary<A, B>): <K>(xs: AList<K, A>) => AList<K, B> =>
     map(x => [x[0], f(x[1])])
