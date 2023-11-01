@@ -55,3 +55,17 @@ export const intersect = <A>(a: Set<A>) => <B>(b: Set<B>): Set<A & B> => {
             c.add(x as any);
     return c;
 }
+
+/** return a new set with an one element added */
+export const add1 = <A>(x: A) => <B>(xs: Set<B>): Set<A | B> => {
+    const ys = new Set<A | B>(xs)
+    ys.add(x)
+    return ys
+}
+
+/** return a new set with one element removed */
+export const remove1 = <A>(x: A) => (xs: Set<A>): Set<A> => {
+    const ys = new Set(xs)
+    ys.delete(x)
+    return ys
+}

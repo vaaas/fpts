@@ -38,4 +38,28 @@ describe('set', () => {
             assert.deepEqual(Array.from(result), [3])
         });
     });
-});
+
+    describe('add1', () => {
+        it('should return a new set with an extra element', () => {
+            const as = new Set([1, 2])
+            const bs = set.add1(3)(as)
+            assert.notEqual(as, bs)
+            assert.deepEqual(
+                Array.from(bs),
+                [ 1, 2, 3 ]
+            )
+        })
+    })
+
+    describe('remove1', () => {
+        it('should return a new set with an element fewer', () => {
+            const as = new Set([1, 2])
+            const bs = set.remove1(2)(as)
+            assert.notEqual(as, bs)
+            assert.deepEqual(
+                Array.from(bs),
+                [ 1 ]
+            )
+        })
+    })
+})
