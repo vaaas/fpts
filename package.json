@@ -1,5 +1,5 @@
 {
-    "name": "fpts",
+    "name": "@vaaas/fpts",
     "version": "2.0.3",
     "type": "module",
     "license": "MIT",
