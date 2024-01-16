@@ -76,3 +76,7 @@ export function compose(...fs: Array<Unary<any, Acceptable<any>>>) {
         return a
     }
 }
+
+export const map = <A, B>(f: Unary<A, B>) => (x: PromiseResult<A>): PromiseResult<B> => x.then(x => x instanceof Error ? x : f(x));
+
+export const bind = <A, B>(f: Unary<A, PromiseResult<B>>) => (x: PromiseResult<A>): PromiseResult<B> => x.then(x => x instanceof Error ? x : f(x));
