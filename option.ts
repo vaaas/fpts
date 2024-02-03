@@ -58,7 +58,7 @@ export function maybe<A, B>(d: B, f: Unary<A, B>): (x: Option<A>) => B {
  *
  * because javascript isn't lazily evaluated, this is useful for cases where the default value is expensive to compute.
  */
-export function maybe_<A, B>(d: Nullary<B>, f: Unary<A, B>): (x: Option<A>) => Option<B> {
+export function maybe_<A, B>(d: Nullary<B>, f: Unary<A, B>): (x: Option<A>) => B {
     return function (x) {
         if (x === undefined)
             return d()
